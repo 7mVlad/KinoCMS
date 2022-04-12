@@ -22,9 +22,10 @@ class CreateFilmsTable extends Migration
                 $table->string('image_'.$i)->nullable();
             }
             $table->text('trailer_link');
-            $table->boolean('type_3d');
-            $table->boolean('type_2d');
-            $table->boolean('type_imax');
+            $table->boolean('type_3d')->default(0);
+            $table->boolean('type_2d')->default(0);
+            $table->boolean('type_imax')->default(0);
+            $table->string('release')->default(0);
             $table->string('seo_url');
             $table->string('seo_title');
             $table->string('seo_keywords');
