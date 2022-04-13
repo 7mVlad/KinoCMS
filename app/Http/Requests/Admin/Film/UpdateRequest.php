@@ -26,12 +26,21 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
-            'main-image' => 'required|file',
-            'image-1' => 'nullable|file',
-            'image-2' => 'nullable|file',
-            'image-3' => 'nullable|file',
-            'image-4' => 'nullable|file',
-            'image-5' => 'nullable|file',
+            'main_image' => 'nullable|file',
+            'image_1' => 'nullable|file',
+            'image_2' => 'nullable|file',
+            'image_3' => 'nullable|file',
+            'image_4' => 'nullable|file',
+            'image_5' => 'nullable|file',
+            'trailer_link' => 'required|string',
+            'type_3d' => 'nullable|boolean',
+            'type_2d' => 'nullable|boolean',
+            'type_imax' => 'nullable|boolean',
+            'release' => 'nullable|boolean',
+            'seo_url' => 'required|string',
+            'seo_title' => 'required|string',
+            'seo_keywords' => 'required|string',
+            'seo_description' => 'required|string',
         ];
     }
 }

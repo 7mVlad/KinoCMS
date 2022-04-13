@@ -13,11 +13,11 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         $data = $request->validated();
-        $data['main_image'] = Storage::put('/', $data['main_image']);
+        $data['main_image'] = Storage::put('/public/images/film', $data['main_image']);
 
         for($i = 1; $i < 6; $i++) {
             if(isset($data['image_'.$i])) {
-                $data['image_'.$i] = Storage::put('/', $data['image_'.$i]);
+                $data['image_'.$i] = Storage::put('/public/images/film', $data['image_'.$i]);
             }
         }
 

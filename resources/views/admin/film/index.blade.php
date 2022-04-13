@@ -13,18 +13,36 @@
                 <a href="{{route('admin.film.create')}}" class="btn btn-block btn-outline-success">Добавить фильм</a>
             </div>
         </div>
+
+        <h2 class="font-weight-bold text-center">Список текущих фильмов</h2>
         <div class="row">
             @foreach ($films as $film)
-            <div class="col-2 text-center m-5" >
-                <img width="250" height="250" src="{{ Storage::url($film->image_1) }}">
-
-                <h3>saff</h3>
+            @if($film->release == 1)
+            <div class="col-2 text-center m-5" style="height: 250px" >
+                <a class="text-dark" href="{{route('admin.film.edit', $film->id )}}">
+                    <img width="100%" height="100%" src="{{ Storage::url($film->main_image) }}">
+                    <h4 class="mt-2"> {{$film->title}} </h4>
+                </a>
             </div>
 
+            @endif
             @endforeach
         </div>
         <!-- /.row -->
 
+        <h2 class="font-weight-bold text-center">Список фильмов которое скоро покажут</h2>
+        <div class="row">
+            @foreach ($films as $film)
+            @if($film->release == 0)
+            <div class="col-2 text-center m-5" style="height: 250px" >
+                <a class="text-dark" href="{{route('admin.film.edit', $film->id )}}">
+                    <img width="100%" height="100%" src="{{ Storage::url($film->main_image) }}">
+                    <h4 class="mt-2"> {{$film->title}} </h4>
+                </a>
+            </div>
+            @endif
+            @endforeach
+        </div>
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

@@ -2,23 +2,6 @@
   @section('content')
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-          <!-- Content Header (Page header) -->
-          <div class="content-header">
-              <div class="container-fluid">
-                  <div class="row mb-2">
-                      <div class="col-sm-6">
-                          <h1 class="m-0">Редактирование категории</h1>
-                      </div><!-- /.col -->
-                      <div class="col-sm-6">
-                          <ol class="breadcrumb float-sm-right">
-                              <li class="breadcrumb-item"><a href="#">Home</a></li>
-                              <li class="breadcrumb-item active">Dashboard v1</li>
-                          </ol>
-                      </div><!-- /.col -->
-                  </div><!-- /.row -->
-              </div><!-- /.container-fluid -->
-          </div>
-          <!-- /.content-header -->
 
           <!-- Main content -->
           <section class="content">
@@ -26,16 +9,153 @@
                   <!-- Small boxes (Stat box) -->
                   <div class="row">
                       <div class="col-12">
-                          <form action="{{route('admin.film.update', $film->id)}}" method="POST" class="w-25">
+                          <form action="{{route('admin.film.update', $film->id)}}" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
                             @csrf
                             @method('PATCH')
-                              <div class="form-group">
-                                  <input type="text" class="form-control" name="title" placeholder="Название категории" value="{{$film->title}}">
-                              </div>
+                              {{-- Поле для названия --}}
+                            <div class="form-group w-25">
+                                <label>Название фильма</label>
+                                <input type="text" class="form-control" name="title" placeholder="Название фильма" value="{{$film->title}}">
+                            </div>
                               @error('title')
                                 <div class="text-danger">Это поле необходимо для заполнения</div>
                               @enderror
-                              <input type="submit" class="btn btn-primary" value="Обновить">
+
+                              {{-- Поле для описания --}}
+                            <div class="form-group w-75">
+                                <label>Описание фильма</label>
+                                <textarea class="form-control" placeholder="Описание фильма" name="content"
+                                    style="resize: none; height:150px">{{$film->content}}</textarea>
+                            </div>
+                            @error('content')
+                                <div class="text-danger">Это поле необходимо для заполнения</div>
+                            @enderror
+
+                            {{-- Поле для главной картинки --}}
+                            <div class="form-group mt-5">
+                                <div class=" d-flex">
+                                    <label >Главная картинка</label>
+
+                                    <div class="form-element ml-5 mb-5">
+                                        <input type="file" id="img-main" accept="image/*" name="main_image">
+                                        <label for="img-main" id="img-main-preview">
+                                            <img src="{{ Storage::url($film->main_image) }}" alt="" style="width: 250px; height: 150px">
+                                            <div class="bg-plus" hidden>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                        {{-- Delete img --}}
+                                        <div class="btn-inner">
+                                            <div class="btn-delete btn-image-main" id="submit-main"
+                                                style="margin-left: 235px;">
+                                                <span>x</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {{-- Поле для картинок --}}
+                            <div class="form-group mt-5">
+                                <div class="d-flex justify-content-between">
+                                    <label  >Галерея картинок <br><br> Размер: 1000 х 190</label>
+                                    @for ($i = 1; $i < 6; $i++)
+                                    @php
+                                        $test = "image_". "$i";
+                                        $imageFilm = $film->$test;
+                                    @endphp
+                                        <div class="form-element mr-5 mb-5">
+                                            <input type="file" id="img-{{ $i }}" accept="image/*"
+                                                name="image_{{ $i }}">
+                                            <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
+                                                @if($film->$test !== null)
+                                                <img src="{{ Storage::url($imageFilm) }}" alt=""
+                                                    style="width: 150px; height: 150px">
+                                                <div class="bg-plus" hidden>
+                                                    <span>+</span>
+                                                </div>
+                                                @else
+                                                <img src="https://bit.ly/3ubuq5o" alt=""
+                                                    style="width: 150px; height: 150px">
+                                                <div class="bg-plus">
+                                                    <span>+</span>
+                                                </div>
+                                                @endif
+
+                                            </label>
+                                            {{-- Delete img --}}
+                                            <div class="btn-inner">
+                                                <div class="btn-delete btn-image" id="submit-{{ $i }}">
+                                                    <span>x</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    @endfor
+                                </div>
+                            </div>
+
+                            {{-- Поле ссылки youtube --}}
+                            <div class="form-group w-50 mb-5">
+                                <label>Ссылка на трейлер</label>
+                                <input type="text" class="form-control" name="trailer_link" placeholder="Ссылка на видео в youtube" value="{{$film->trailer_link}}">
+                            </div>
+
+
+                            {{-- Поле для выбора типа кино --}}
+                            <div class="form-group mt-3">
+                                <label class="mr-5">Тип кино</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="type_3d" value="1">
+                                    <label class="form-check-label">3D</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="type_2d" value="1">
+                                    <label class="form-check-label">2D</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="type_imax" value="1">
+                                    <label class="form-check-label">IMAX</label>
+                                </div>
+                            </div>
+
+                            {{-- Поле для выбора выхода фильма --}}
+                            <div class="form-group mt-3">
+                                <label class="mr-5">Релиз фильма</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="release" value="1">
+                                    <label class="form-check-label mr-4">В кино</label>
+                                    <input class="form-check-input" type="radio" name="release" value="0" checked>
+                                    <label class="form-check-label">Скоро</label>
+                                  </div>
+                            </div>
+
+                            {{-- SEO блок --}}
+                            <div class="form-group w-50 ">
+                                <label class=" d-block">SEO блок:</label>
+                                    <label>URL:</label>
+                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" value="{{$film->seo_url}}">
+                                    <label>Title:</label>
+                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" value="{{$film->seo_title}}">
+                                    <label>Keywords:</label>
+                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" value="{{$film->seo_keywords}}">
+                                    <label>Description:</label>
+                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" value="{{$film->seo_description}}">
+
+                            </div>
+
+                            <div class="form-group d-flex justify-content-center">
+                                <input type="submit" class="btn btn-primary font-weight-bolder mr-3" value="Изменить">
+                                <form action="{{route('admin.film.delete', $film->id)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-danger font-weight-bolder" value="Удалить">
+                                </form>
+                            </div>
+
+
                           </form>
                       </div>
                   </div>
