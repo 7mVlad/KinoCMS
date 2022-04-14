@@ -24,7 +24,7 @@ function deleteImage(id) {
 }
 
 
-for (let i = 1; i < 6; i++) {
+for (let i = 0; i < 5; i++) {
     previewBeforeUpload("img-"+i);
     deleteImage(i);
 }

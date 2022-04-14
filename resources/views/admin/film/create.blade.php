@@ -62,10 +62,10 @@
                                 <div class="d-flex justify-content-between">
                                     <label  >Галерея картинок <br><br> Размер: 1000 х 190</label>
 
-                                    @for ($i = 1; $i < 6; $i++)
+                                    @for ($i = 0; $i < 5; $i++)
                                         <div class="form-element mr-5 mb-5">
                                             <input type="file" id="img-{{ $i }}" accept="image/*"
-                                                name="image_{{ $i }}">
+                                                name="images[]">
                                             <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
                                                 <img src="https://bit.ly/3ubuq5o" alt=""
                                                     style="width: 150px; height: 150px">
@@ -83,7 +83,7 @@
 
                                         </div>
                                     @endfor
-                                    
+
                                 </div>
                             </div>
 

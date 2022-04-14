@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Film extends Model
+class FilmImage extends Model
 {
     use HasFactory;
 
-    protected $table = 'films';
+    protected $table = 'film_images';
     protected $guarded = false;
 }

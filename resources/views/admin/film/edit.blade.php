@@ -57,21 +57,20 @@
                                 </div>
                             </div>
 
+
                             {{-- Поле для картинок --}}
                             <div class="form-group mt-5">
                                 <div class="d-flex justify-content-between">
                                     <label  >Галерея картинок <br><br> Размер: 1000 х 190</label>
-                                    @for ($i = 1; $i < 6; $i++)
-                                    @php
-                                        $test = "image_". "$i";
-                                        $imageFilm = $film->$test;
-                                    @endphp
+
+                                    @for ($i = 0; $i < 5; $i++)
+
                                         <div class="form-element mr-5 mb-5">
                                             <input type="file" id="img-{{ $i }}" accept="image/*"
-                                                name="image_{{ $i }}">
+                                                name="images[]">
                                             <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                @if($film->$test !== null)
-                                                <img src="{{ Storage::url($imageFilm) }}" alt=""
+                                                @if(isset($filmPaths[$i]))
+                                                <img src="{{ Storage::url($filmPaths[$i]) }}" alt=""
                                                     style="width: 150px; height: 150px">
                                                 <div class="bg-plus" hidden>
                                                     <span>+</span>
@@ -92,7 +91,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     @endfor
                                 </div>
                             </div>

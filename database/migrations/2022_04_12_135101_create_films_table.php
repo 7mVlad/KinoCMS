@@ -18,9 +18,6 @@ class CreateFilmsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('main_image')->nullable();
-            for($i = 1; $i < 6; $i++) {
-                $table->string('image_'.$i)->nullable();
-            }
             $table->string('trailer_link');
             $table->boolean('type_3d')->default(0);
             $table->boolean('type_2d')->default(0);
@@ -32,7 +29,6 @@ class CreateFilmsTable extends Migration
             $table->string('seo_description');
             $table->timestamps();
 
-            $table->softDeletes();
         });
     }
 
