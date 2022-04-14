@@ -21,7 +21,7 @@ class CreateFilmsTable extends Migration
             for($i = 1; $i < 6; $i++) {
                 $table->string('image_'.$i)->nullable();
             }
-            $table->text('trailer_link');
+            $table->string('trailer_link');
             $table->boolean('type_3d')->default(0);
             $table->boolean('type_2d')->default(0);
             $table->boolean('type_imax')->default(0);

@@ -148,15 +148,17 @@
 
                             <div class="form-group d-flex justify-content-center">
                                 <input type="submit" class="btn btn-primary font-weight-bolder mr-3" value="Изменить">
-                                <form action="{{route('admin.film.delete', $film->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" class="btn btn-danger font-weight-bolder" value="Удалить">
-                                </form>
-                            </div>
+
 
 
                           </form>
+                          <form action="{{route('admin.film.delete', $film->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" class="btn btn-danger font-weight-bolder" value="Удалить">
+                            </form>
+                        </div>
+
                       </div>
                   </div>
                   <!-- /.row -->

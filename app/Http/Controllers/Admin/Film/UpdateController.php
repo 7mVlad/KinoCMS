@@ -13,7 +13,7 @@ class UpdateController extends Controller
     public function __invoke(UpdateRequest $request ,Film $film)
     {
         $data = $request->validated();
-        if(isset($data['imain_image'])) {
+        if(isset($data['main_image'])) {
             $data['main_image'] = Storage::put('/public/images/film', $data['main_image']);
         }
 

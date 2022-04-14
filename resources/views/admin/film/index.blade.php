@@ -30,7 +30,7 @@
         </div>
         <!-- /.row -->
 
-        <h2 class="font-weight-bold text-center">Список фильмов которое скоро покажут</h2>
+        <h2 class="font-weight-bold text-center">Список фильмов которые скоро покажут</h2>
         <div class="row">
             @foreach ($films as $film)
             @if($film->release == 0)
