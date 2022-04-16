@@ -23,10 +23,7 @@ class CreateFilmsTable extends Migration
             $table->boolean('type_2d')->default(0);
             $table->boolean('type_imax')->default(0);
             $table->string('release')->default(0);
-            $table->string('seo_url');
-            $table->string('seo_title');
-            $table->string('seo_keywords');
-            $table->string('seo_description');
+            $table->foreignId('seo_block_id')->constrained('seo_block')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
 
         });

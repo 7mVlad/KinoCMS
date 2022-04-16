@@ -134,13 +134,13 @@
                             <div class="form-group w-50 ">
                                 <label class=" d-block">SEO блок:</label>
                                     <label>URL:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" value="{{$film->seo_url}}">
+                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" value="{{$seoBlock->url}}">
                                     <label>Title:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" value="{{$film->seo_title}}">
+                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" value="{{$seoBlock->title}}">
                                     <label>Keywords:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" value="{{$film->seo_keywords}}">
+                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" value="{{$seoBlock->keywords}}">
                                     <label>Description:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" value="{{$film->seo_description}}">
+                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" value="{{$seoBlock->description}}">
 
                             </div>
 
