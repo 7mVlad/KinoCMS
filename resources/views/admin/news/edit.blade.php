@@ -13,13 +13,31 @@
                             @csrf
                             @method('PATCH')
 
-                            {{-- Поле для статуса --}}
-                            <div class="form-group">
-                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch3" name="status" value="1">
-                                    <label class="custom-control-label" for="customSwitch3">Статус</label>
+                            @if($news->status == 1)
+                                <div class="form-group radio-switch">
+                                    <input type="radio" name="status" id="public" value="0">
+                                    <label for="public">
+                                    ВЫКЛ
+                                    </label>
+                                    <input type="radio" name="status" id="private" value="1" checked>
+                                    <label for="private">
+                                    ВКЛ
+                                    </label>
                                 </div>
+                            @else
+                            <div class="form-group radio-switch">
+                                <input type="radio" name="status" id="public" value="0" checked>
+                                <label for="public">
+                                ВЫКЛ
+                                </label>
+                                <input type="radio" name="status" id="private" value="1">
+                                <label for="private">
+                                ВКЛ
+                                </label>
                             </div>
+                            @endif
+
+
 
                             {{-- Поле для названия --}}
                             <div class="form-group d-flex">
