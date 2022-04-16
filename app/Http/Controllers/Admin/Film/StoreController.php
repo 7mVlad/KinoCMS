@@ -47,7 +47,6 @@ class StoreController extends Controller
 
             FilmImage::create([
                 'path' => $imagePath,
-                'url' => Storage::url($imagePath),
                 'film_id' => $film->id
             ]);
         }

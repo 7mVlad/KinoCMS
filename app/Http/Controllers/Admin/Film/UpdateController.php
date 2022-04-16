@@ -51,7 +51,7 @@ class UpdateController extends Controller
             $filmArr[] = $filmImage;
         }
 
-        if(isset($data['images'])) {
+        if(isset($images)) {
             foreach($images as $key => $image) {
                 if(array_key_exists($key, $filmArr)) {
                     $id = $filmArr[$key]->id;
@@ -59,14 +59,12 @@ class UpdateController extends Controller
                     $imagePath = Storage::put('/public/images/films', $image);
                     $filmImage->update([
                         'path' => $imagePath,
-                        'url' => Storage::url($imagePath),
                     ]);
                 } else {
                     $imagePath = Storage::put('/public/images/films', $image);
 
                     FilmImage::create([
                         'path' => $imagePath,
-                        'url' => Storage::url($imagePath),
                         'film_id' => $film->id
                     ]);
                 }

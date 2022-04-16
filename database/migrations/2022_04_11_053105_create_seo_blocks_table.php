@@ -18,7 +18,7 @@ class CreateSeoBlocksTable extends Migration
             $table->string('url');
             $table->string('title');
             $table->string('keywords');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }
