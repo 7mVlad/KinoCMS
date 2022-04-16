@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Film;
+namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Film\UpdateRequest;
-use App\Models\Film;
-use App\Models\FilmImage;
+use App\Http\Requests\Admin\News\UpdateRequest;
+use App\Models\News;
+use App\Models\NewsImage;
 use App\Models\SeoBlock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request ,Film $film)
+    public function __invoke(UpdateRequest $request ,News $news)
     {
         $data = $request->validated();
 
@@ -21,7 +21,6 @@ class UpdateController extends Controller
             $images = $data['images'];
             unset($data['images']);
         }
-
 
         $seoURL = $data['seo_url'];
         $seoTitle = $data['seo_title'];
@@ -33,7 +32,7 @@ class UpdateController extends Controller
         unset($data['seo_keywords']);
         unset($data['seo_description']);
 
-        $seoBlock = SeoBlock::find($film->seo_block_id);
+        $seoBlock = SeoBlock::find($news->seo_block_id);
         $seoBlock->update([
             'url' => $seoURL,
             'title' => $seoTitle,
@@ -42,37 +41,37 @@ class UpdateController extends Controller
         ]);
 
         if(isset($data['main_image'])) {
-            $data['main_image'] = Storage::put('/public/images/film', $data['main_image']);
+            $data['main_image'] = Storage::put('/public/images/news', $data['main_image']);
         }
 
-        $filmImages = DB::table('film_images')->where('film_id', '=', $film->id)->get();
+        $newsImages = DB::table('news_images')->where('news_id', '=', $news->id)->get();
 
-        foreach($filmImages as $key => $filmImage) {
-            $filmArr[] = $filmImage;
+        foreach($newsImages as $key => $newsImage) {
+            $newsArr[] = $newsImage;
         }
 
         if(isset($images)) {
             foreach($images as $key => $image) {
-                if(array_key_exists($key, $filmArr)) {
-                    $id = $filmArr[$key]->id;
-                    $filmImage = FilmImage::find($id);
-                    $imagePath = Storage::put('/public/images/films', $image);
-                    $filmImage->update([
+                if(array_key_exists($key, $newsArr)) {
+                    $id = $newsArr[$key]->id;
+                    $newsImage = NewsImage::find($id);
+                    $imagePath = Storage::put('/public/images/news', $image);
+                    $newsImage->update([
                         'path' => $imagePath,
                     ]);
                 } else {
-                    $imagePath = Storage::put('/public/images/films', $image);
+                    $imagePath = Storage::put('/public/images/news', $image);
 
-                    FilmImage::create([
+                    NewsImage::create([
                         'path' => $imagePath,
-                        'film_id' => $film->id
+                        'news_id' => $news->id
                     ]);
                 }
             }
         }
 
-        $film->update($data);
+        $news->update($data);
 
-        return redirect()->route('admin.film.index');
+        return redirect()->route('admin.news.index');
     }
 }

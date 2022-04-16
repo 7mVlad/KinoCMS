@@ -35,6 +35,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::delete('/{film}', 'DeleteController')->name('admin.film.delete');
     });
 
+    Route::group(['namespace' => 'News', 'prefix' => 'news'], function() {
+        Route::get('/', 'IndexController')->name('admin.news.index');
+        Route::get('/create', 'CreateController')->name('admin.news.create');
+        Route::post('/', 'StoreController')->name('admin.news.store');
+        Route::get('/{news}', 'ShowController')->name('admin.news.show');
+        Route::get('/{news}/edit', 'EditController')->name('admin.news.edit');
+        Route::patch('/{news}', 'UpdateController')->name('admin.news.update');
+        Route::delete('/{news}', 'DeleteController')->name('admin.news.delete');
+    });
+
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

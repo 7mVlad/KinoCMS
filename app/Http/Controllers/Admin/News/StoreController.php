@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Film;
+namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Film\StoreRequest;
-use App\Models\Film;
-use App\Models\FilmImage;
+use App\Http\Requests\Admin\News\StoreRequest;
+use App\Models\News;
+use App\Models\NewsImage;
 use App\Models\SeoBlock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +15,12 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request)
     {
         $data = $request->validated();
+
+        if(isset($data['status'])) {
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+        }
 
         if(isset($data['images'])) {
             $images = $data['images'];
@@ -40,22 +46,22 @@ class StoreController extends Controller
 
         $data['seo_block_id'] = $seoBlock->id;
 
-        $data['main_image'] = Storage::put('/public/images/film', $data['main_image']);
+        $data['main_image'] = Storage::put('/public/images/news', $data['main_image']);
 
-        $film = Film::firstOrCreate($data);
+        $news = News::firstOrCreate($data);
 
         if(isset($images)) {
             foreach ($images as $image) {
-                $imagePath = Storage::put('/public/images/films', $image);
+                $imagePath = Storage::put('/public/images/news', $image);
 
-                FilmImage::create([
+                NewsImage::create([
                     'path' => $imagePath,
-                    'film_id' => $film->id
+                    'news_id' => $news->id
                 ]);
             }
         }
 
-        return redirect()->route('admin.film.index');
+        return redirect()->route('admin.news.index');
 
     }
 }
