@@ -29,7 +29,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/', 'IndexController')->name('admin.film.index');
         Route::get('/create', 'CreateController')->name('admin.film.create');
         Route::post('/', 'StoreController')->name('admin.film.store');
-        Route::get('/{film}', 'ShowController')->name('admin.film.show');
         Route::get('/{film}/edit', 'EditController')->name('admin.film.edit');
         Route::patch('/{film}', 'UpdateController')->name('admin.film.update');
         Route::delete('/{film}', 'DeleteController')->name('admin.film.delete');
@@ -39,10 +38,18 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/', 'IndexController')->name('admin.news.index');
         Route::get('/create', 'CreateController')->name('admin.news.create');
         Route::post('/', 'StoreController')->name('admin.news.store');
-        Route::get('/{news}', 'ShowController')->name('admin.news.show');
         Route::get('/{news}/edit', 'EditController')->name('admin.news.edit');
         Route::patch('/{news}', 'UpdateController')->name('admin.news.update');
         Route::delete('/{news}', 'DeleteController')->name('admin.news.delete');
+    });
+
+    Route::group(['namespace' => 'Stock', 'prefix' => 'stocks'], function() {
+        Route::get('/', 'IndexController')->name('admin.stock.index');
+        Route::get('/create', 'CreateController')->name('admin.stock.create');
+        Route::post('/', 'StoreController')->name('admin.stock.store');
+        Route::get('/{stock}/edit', 'EditController')->name('admin.stock.edit');
+        Route::patch('/{stock}', 'UpdateController')->name('admin.stock.update');
+        Route::delete('/{stock}', 'DeleteController')->name('admin.stock.delete');
     });
 
 });

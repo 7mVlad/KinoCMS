@@ -10,11 +10,11 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-2 mb-3 mt-3">
-                <a href="{{route('admin.news.create')}}" class="btn btn-block btn-outline-success">Создать новость</a>
+                <a href="{{route('admin.stock.create')}}" class="btn btn-block btn-outline-success">Добавить акцию</a>
             </div>
         </div>
 
-        <h2 class="font-weight-bold text-center mb-5">Список Новостей</h2>
+        <h2 class="font-weight-bold text-center mb-5">Список Акций</h2>
 
         <div class="row">
             <table class="table table-striped table-dark col-10 m-auto text-center">
@@ -27,22 +27,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($newsMuch as $news)
+                    @foreach ($stocks as $stock)
                     <tr>
-                        <td>{{$news->title}}</td>
-                        <td>{{$news->date}}</td>
-                        @if($news->status == 1)
+                        <td>{{$stock->title}}</td>
+                        <td>{{$stock->date}}</td>
+                        @if($stock->status == 1)
                             <td>ВКЛ</td>
                         @else
                             <td>ВЫКЛ</td>
                         @endif
                         <td class="text-right">
-                            <a class="btn btn-info btn-sm" href="{{route('admin.news.edit', $news->id )}}">
+                            <a class="btn btn-info btn-sm" href="{{route('admin.stock.edit', $stock->id )}}">
                                 <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить
                             </a>
                         </td>
                         <td class="text-left">
-                            <form action="{{route('admin.news.delete', $news->id)}}" method="POST">
+                            <form action="{{route('admin.stock.delete', $stock->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">
