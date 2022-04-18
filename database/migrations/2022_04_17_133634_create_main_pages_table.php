@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagesTable extends Migration
+class CreateMainPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('main_page', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->date('date');
             $table->boolean('status')->default(0);
-            $table->string('main_image')->nullable();
-            $table->string('video_link');
+            $table->string('phone_one');
+            $table->string('phone_two');
+            $table->text('seo_text');
             $table->foreignId('seo_block_id')->constrained('seo_block')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('bg_banner');
+            $table->integer('top_speed_banner');
+            $table->integer('news_speed_banner');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('main_pages');
     }
 }

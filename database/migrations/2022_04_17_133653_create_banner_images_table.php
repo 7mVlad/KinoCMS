@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePageImagesTable extends Migration
+class CreateBannerImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreatePageImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('page_images', function (Blueprint $table) {
+        Schema::create('banner_images', function (Blueprint $table) {
             $table->id();
             $table->string('path');
-            $table->foreignId('page_id')->constrained('pages')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('url');
+            $table->string('text');
+            $table->string('banner_location');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreatePageImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('page_images');
+        Schema::dropIfExists('banner_images');
     }
 }

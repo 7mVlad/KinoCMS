@@ -45,6 +45,15 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{route('admin.page.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-light fa-file"></i>
+                    <p>
+                        Страницы
+                    </p>
+                </a>
+            </li>
+
         </ul>
     </div>
     <!-- /.sidebar -->

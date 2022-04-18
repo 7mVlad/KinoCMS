@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Stock;
+namespace App\Http\Controllers\Admin\Page;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Stock\StoreRequest;
+use App\Http\Requests\Admin\Page\StoreRequest;
+use App\Models\Page;
+use App\Models\PageImage;
 use App\Models\SeoBlock;
-use App\Models\Stock;
-use App\Models\StockImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,22 +40,22 @@ class StoreController extends Controller
 
         $data['seo_block_id'] = $seoBlock->id;
 
-        $data['main_image'] = Storage::put('/public/images/stock', $data['main_image']);
+        $data['main_image'] = Storage::put('/public/images/page', $data['main_image']);
 
-        $stock = Stock::firstOrCreate($data);
+        $page = Page::firstOrCreate($data);
 
         if(isset($images)) {
             foreach ($images as $image) {
-                $imagePath = Storage::put('/public/images/stock', $image);
+                $imagePath = Storage::put('/public/images/page', $image);
 
-                StockImage::create([
+                PageImage::create([
                     'path' => $imagePath,
-                    'stock_id' => $stock->id
+                    'page_id' => $page->id
                 ]);
             }
         }
 
-        return redirect()->route('admin.stock.index');
+        return redirect()->route('admin.page.index');
 
     }
 }

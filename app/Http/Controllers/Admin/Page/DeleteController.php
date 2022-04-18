@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Admin\Page;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\SeoBlock;
 use Illuminate\Http\Request;
 
 class DeleteController extends Controller
 {
-    public function __invoke(Stock $stock)
+    public function __invoke(Page $page)
     {
-        $seoBlock = SeoBlock::find($stock->seo_block_id);
+        $seoBlock = SeoBlock::find($page->seo_block_id);
         $seoBlock->delete();
-        $stock->delete();
-        return redirect()->route('admin.stock.index');
+        $page->delete();
+        return redirect()->route('admin.page.index');
     }
 }

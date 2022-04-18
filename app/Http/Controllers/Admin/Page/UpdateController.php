@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Stock;
+namespace App\Http\Controllers\Admin\Page;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Stock\UpdateRequest;
+use App\Http\Requests\Admin\Page\UpdateRequest;
+use App\Models\Page;
+use App\Models\PageImage;
 use App\Models\SeoBlock;
-use App\Models\Stock;
-use App\Models\StockImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, Stock $stock)
+    public function __invoke(UpdateRequest $request, Page $page)
     {
         $data = $request->validated();
 
@@ -32,7 +32,7 @@ class UpdateController extends Controller
         unset($data['seo_keywords']);
         unset($data['seo_description']);
 
-        $seoBlock = SeoBlock::find($stock->seo_block_id);
+        $seoBlock = SeoBlock::find($page->seo_block_id);
         $seoBlock->update([
             'url' => $seoURL,
             'title' => $seoTitle,
@@ -41,37 +41,37 @@ class UpdateController extends Controller
         ]);
 
         if(isset($data['main_image'])) {
-            $data['main_image'] = Storage::put('/public/images/stock', $data['main_image']);
+            $data['main_image'] = Storage::put('/public/images/page', $data['main_image']);
         }
 
-        $stockImages = DB::table('stock_images')->where('stock_id', '=', $stock->id)->get();
+        $pageImages = DB::table('page_images')->where('page_id', '=', $page->id)->get();
 
-        foreach($stockImages as $key => $stockImage) {
-            $stockArr[] = $stockImage;
+        foreach($pageImages as $key => $pageImage) {
+            $pageArr[] = $pageImage;
         }
 
         if(isset($images)) {
             foreach($images as $key => $image) {
-                if(array_key_exists($key, $stockArr)) {
-                    $id = $stockArr[$key]->id;
-                    $stockImage = StockImage::find($id);
+                if(array_key_exists($key, $pageArr)) {
+                    $id = $pageArr[$key]->id;
+                    $pageImage = PageImage::find($id);
                     $imagePath = Storage::put('/public/images/stock', $image);
-                    $stockImage->update([
+                    $pageImage->update([
                         'path' => $imagePath,
                     ]);
                 } else {
                     $imagePath = Storage::put('/public/images/stock', $image);
 
-                    StockImage::create([
+                    PageImage::create([
                         'path' => $imagePath,
-                        'news_id' => $stock->id
+                        'page_id' => $page->id
                     ]);
                 }
             }
         }
 
-        $stock->update($data);
+        $page->update($data);
 
-        return redirect()->route('admin.stock.index');
+        return redirect()->route('admin.page.index');
     }
 }

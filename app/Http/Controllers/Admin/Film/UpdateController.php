@@ -17,6 +17,35 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
 
+        if(isset($data['deleteImg'])) {
+            $deleteImgs = $data['deleteImg'];
+            unset($data['deleteImg']);
+        }
+
+        if(isset($deleteImgs)) {
+
+            foreach($deleteImgs as $deleteImg) {
+
+                $deleteImgPath = $deleteImg;
+                $deleteTableImgs = DB::table('film_images')->where('url', '=', $deleteImgPath)->get();
+
+                foreach($deleteTableImgs as $deleteTableImg) {
+                    $deleteImgId = $deleteTableImg;
+
+                    foreach($deleteImgId as $deleteIds) {
+
+                        $deleteid = $deleteIds;
+                        $deleteImage = FilmImage::find($deleteid);
+
+                        if(isset($deleteImage)) {
+                            $deleteImage->delete();
+                        }
+
+                    }
+                }
+            }
+        }
+
         if(isset($data['images'])) {
             $images = $data['images'];
             unset($data['images']);
@@ -42,7 +71,7 @@ class UpdateController extends Controller
         ]);
 
         if(isset($data['main_image'])) {
-            $data['main_image'] = Storage::put('/public/images/film', $data['main_image']);
+            $data['main_image'] = Storage::put('/public/images/films', $data['main_image']);
         }
 
         $filmImages = DB::table('film_images')->where('film_id', '=', $film->id)->get();
@@ -53,20 +82,41 @@ class UpdateController extends Controller
 
         if(isset($images)) {
             foreach($images as $key => $image) {
-                if(array_key_exists($key, $filmArr)) {
-                    $id = $filmArr[$key]->id;
-                    $filmImage = FilmImage::find($id);
-                    $imagePath = Storage::put('/public/images/films', $image);
-                    $filmImage->update([
-                        'path' => $imagePath,
-                    ]);
-                } else {
+
+                if(isset($filmArr)) {
+                    if(array_key_exists($key, $filmArr)) {
+                        $id = $filmArr[$key]->id;
+                        $filmImage = FilmImage::find($id);
+                        $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                        $imagePath = Storage::put('/public/images/films', $image);
+                        $filmImage->update([
+                            'path' => $imagePath,
+                            'url' => $imageURL,
+                        ]);
+                        Storage::delete($imageURL);
+                    }
+                    else {
+                        $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                        $imagePath = Storage::put('/public/images/films', $image);
+
+                        FilmImage::create([
+                            'path' => $imagePath,
+                            'url' =>  $imageURL,
+                            'film_id' => $film->id
+                        ]);
+                        Storage::delete($imageURL);
+                    }
+                }
+                else {
+                    $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
                     $imagePath = Storage::put('/public/images/films', $image);
 
                     FilmImage::create([
                         'path' => $imagePath,
+                        'url' =>  $imageURL,
                         'film_id' => $film->id
                     ]);
+                    Storage::delete($imageURL);
                 }
             }
         }

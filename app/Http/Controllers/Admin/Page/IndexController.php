@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Stock;
+namespace App\Http\Controllers\Admin\Page;
 
 use App\Http\Controllers\Controller;
-use App\Models\Stock;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function __invoke()
     {
-        $stocks = Stock::all();
-        return view('admin.stock.index', compact('stocks'));
+        $pages = Page::all();
+        return view('admin.page.index', compact('pages'));
     }
 }

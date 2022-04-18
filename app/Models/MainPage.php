@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PageImage extends Model
+class MainPage extends Model
 {
     use HasFactory;
 
-    protected $table = 'page_images';
+    protected $table = 'main_page';
     protected $guarded = false;
 }
+

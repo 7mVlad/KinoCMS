@@ -22,6 +22,10 @@ class EditController extends Controller
 
         $seoBlock = SeoBlock::find($film->seo_block_id);
 
-        return view('admin.film.edit', compact('film', 'filmImages', 'filmPaths', 'seoBlock'));
+        if(isset($filmPaths)) {
+            return view('admin.film.edit', compact('film', 'filmImages', 'filmPaths', 'seoBlock'));
+        } else {
+            return view('admin.film.edit', compact('film', 'filmImages', 'seoBlock'));
+        }
     }
 }

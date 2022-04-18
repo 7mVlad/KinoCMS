@@ -3,29 +3,29 @@
 namespace App\Http\Controllers\Admin\Page;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\SeoBlock;
-use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EditController extends Controller
 {
-    public function __invoke(Stock $stock)
+    public function __invoke(Page $page)
     {
-        $stockImages = DB::table('stock_images')->where('stock_id', '=', $stock->id)->get();
+        $pageImages = DB::table('page_images')->where('page_id', '=', $page->id)->get();
 
-        if(isset($stockImages)) {
-            foreach ($stockImages as $stockImage) {
-                $stockPaths[] = $stockImage->path;
+        if(isset($pageImages)) {
+            foreach ($pageImages as $pageImage) {
+                $pagePaths[] = $pageImage->path;
             }
         }
 
-        $seoBlock = SeoBlock::find($stock->seo_block_id);
+        $seoBlock = SeoBlock::find($page->seo_block_id);
 
-        if(isset($stockPaths)) {
-            return view('admin.stock.edit', compact('stock', 'stockImages', 'stockPaths', 'seoBlock'));
+        if(isset($pagePaths)) {
+            return view('admin.page.edit', compact('page', 'pageImages', 'pagePaths', 'seoBlock'));
         } else {
-            return view('admin.news.edit', compact('stock', 'stockImages', 'seoBlock'));
+            return view('admin.page.edit', compact('page', 'pageImages', 'seoBlock'));
         }
 
 

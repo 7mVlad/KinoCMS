@@ -16,6 +16,7 @@ class CreateFilmImagesTable extends Migration
         Schema::create('film_images', function (Blueprint $table) {
             $table->id();
             $table->string('path');
+            $table->string('url');
             $table->foreignId('film_id')->constrained('films')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

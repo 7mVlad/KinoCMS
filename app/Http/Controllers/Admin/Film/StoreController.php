@@ -40,18 +40,22 @@ class StoreController extends Controller
 
         $data['seo_block_id'] = $seoBlock->id;
 
-        $data['main_image'] = Storage::put('/public/images/film', $data['main_image']);
+        $data['main_image'] = Storage::put('/public/images/films', $data['main_image']);
 
         $film = Film::firstOrCreate($data);
 
         if(isset($images)) {
             foreach ($images as $image) {
+                $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
                 $imagePath = Storage::put('/public/images/films', $image);
 
                 FilmImage::create([
                     'path' => $imagePath,
+                    'url' =>  $imageURL,
                     'film_id' => $film->id
                 ]);
+
+                Storage::delete($imageURL);
             }
         }
 
