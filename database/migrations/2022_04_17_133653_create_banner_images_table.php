@@ -15,10 +15,11 @@ class CreateBannerImagesTable extends Migration
     {
         Schema::create('banner_images', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
-            $table->string('url');
-            $table->string('text');
-            $table->string('banner_location');
+            $table->string('image')->nullable();
+            $table->string('path')->nullable();
+            $table->string('url')->nullable();
+            $table->string('text')->nullable();
+            $table->string('banner_location')->nullable();
             $table->timestamps();
         });
     }

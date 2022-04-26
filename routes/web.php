@@ -43,22 +43,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::delete('/{news}', 'DeleteController')->name('admin.news.delete');
     });
 
-    Route::group(['namespace' => 'Stock', 'prefix' => 'stocks'], function() {
-        Route::get('/', 'IndexController')->name('admin.stock.index');
-        Route::get('/create', 'CreateController')->name('admin.stock.create');
-        Route::post('/', 'StoreController')->name('admin.stock.store');
-        Route::get('/{stock}/edit', 'EditController')->name('admin.stock.edit');
-        Route::patch('/{stock}', 'UpdateController')->name('admin.stock.update');
-        Route::delete('/{stock}', 'DeleteController')->name('admin.stock.delete');
-    });
 
-    Route::group(['namespace' => 'Page', 'prefix' => 'pages'], function() {
-        Route::get('/', 'IndexController')->name('admin.page.index');
-        Route::get('/create', 'CreateController')->name('admin.page.create');
-        Route::post('/', 'StoreController')->name('admin.page.store');
-        Route::get('/{page}/edit', 'EditController')->name('admin.page.edit');
-        Route::patch('/{page}', 'UpdateController')->name('admin.page.update');
-        Route::delete('/{page}', 'DeleteController')->name('admin.page.delete');
+    Route::group(['namespace' => 'Banner', 'prefix' => 'banners'], function() {
+        Route::get('/', 'EditController')->name('admin.banner.index');
+        Route::patch('/', 'UpdateController')->name('admin.banner.update');
     });
 
 });

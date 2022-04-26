@@ -27,6 +27,8 @@ function deleteImage(id) {
     }
 }
 
+
+
 function add_field(url){
 
     var x = document.getElementById("form");
@@ -43,8 +45,6 @@ function add_field(url){
     new_field.setAttribute("value", url);
 
     new_field.hidden = true;
-
-    // new_field.style.visibility = 'hidden';
 
     // определим место вствки нового поля ввода (перед каким элементом его вставить)
     var pos = x.childElementCount;
@@ -63,5 +63,9 @@ for (let i = 0; i < 5; i++) {
 
 previewBeforeUpload("img-main");
 deleteImage("main");
+
+
+
+
 
 

@@ -35,7 +35,7 @@
                     </p>
                 </a>
             </li>
-
+{{--
             <li class="nav-item">
                 <a href="{{route('admin.stock.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-light fa-business-time"></i>
@@ -50,6 +50,15 @@
                     <i class="nav-icon fas fa-light fa-file"></i>
                     <p>
                         Страницы
+                    </p>
+                </a>
+            </li> --}}
+
+            <li class="nav-item">
+                <a href="{{route('admin.banner.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-light fa-file"></i>
+                    <p>
+                        Баннеры
                     </p>
                 </a>
             </li>
