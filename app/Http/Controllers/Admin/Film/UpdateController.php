@@ -26,23 +26,8 @@ class UpdateController extends Controller
 
             foreach($deleteImgs as $deleteImg) {
 
-                $deleteImgPath = $deleteImg;
-                $deleteTableImgs = DB::table('film_images')->where('url', '=', $deleteImgPath)->get();
+                DB::table('film_images')->where('path', '=', $deleteImg)->delete();
 
-                foreach($deleteTableImgs as $deleteTableImg) {
-                    $deleteImgId = $deleteTableImg;
-
-                    foreach($deleteImgId as $deleteIds) {
-
-                        $deleteid = $deleteIds;
-                        $deleteImage = FilmImage::find($deleteid);
-
-                        if(isset($deleteImage)) {
-                            $deleteImage->delete();
-                        }
-
-                    }
-                }
             }
         }
 
@@ -87,36 +72,33 @@ class UpdateController extends Controller
                     if(array_key_exists($key, $filmArr)) {
                         $id = $filmArr[$key]->id;
                         $filmImage = FilmImage::find($id);
-                        $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
-                        $imagePath = Storage::put('/public/images/films', $image);
+                        $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                        Storage::put('/public/images/films', $image);
                         $filmImage->update([
                             'path' => $imagePath,
-                            'url' => $imageURL,
                         ]);
-                        Storage::delete($imageURL);
+                        Storage::delete($imagePath);
                     }
                     else {
-                        $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
-                        $imagePath = Storage::put('/public/images/films', $image);
+                        $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                        Storage::put('/public/images/films', $image);
 
                         FilmImage::create([
                             'path' => $imagePath,
-                            'url' =>  $imageURL,
                             'film_id' => $film->id
                         ]);
-                        Storage::delete($imageURL);
+                        Storage::delete($imagePath);
                     }
                 }
                 else {
-                    $imageURL = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
-                    $imagePath = Storage::put('/public/images/films', $image);
+                    $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                    Storage::put('/public/images/films', $image);
 
                     FilmImage::create([
                         'path' => $imagePath,
-                        'url' =>  $imageURL,
                         'film_id' => $film->id
                     ]);
-                    Storage::delete($imageURL);
+                    Storage::delete($imagePath);
                 }
             }
         }

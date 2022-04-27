@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Banner;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class UpdateBgRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'bg_image' => 'nullable|file',
-            'deleteImg' => 'nullable|array',
-            'images' => 'nullable|array',
-            'url' => 'nullable|array',
-            'text' => 'nullable|array',
-            'position' => 'nullable|string',
         ];
     }
 }

@@ -25,11 +25,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'bg_image' => 'nullable|file',
-            'deleteImg' => 'nullable|array',
-            'images' => 'nullable|array',
-            'url' => 'nullable|array',
-            'text' => 'nullable|array',
-            'position' => 'nullable|string',
         ];
     }
 }

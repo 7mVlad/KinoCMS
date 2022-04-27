@@ -19,6 +19,15 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{route('admin.banner.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-light fa-file"></i>
+                    <p>
+                        Баннеры
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{route('admin.film.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-solid fa-film"></i>
                     <p>
@@ -54,14 +63,7 @@
                 </a>
             </li> --}}
 
-            <li class="nav-item">
-                <a href="{{route('admin.banner.index')}}" class="nav-link">
-                    <i class="nav-icon fas fa-light fa-file"></i>
-                    <p>
-                        Баннеры
-                    </p>
-                </a>
-            </li>
+
 
         </ul>
     </div>

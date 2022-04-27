@@ -9,7 +9,7 @@
                   <!-- Small boxes (Stat box) -->
                   <div class="row">
                       <div class="col-12 mt-5">
-                          <form action="{{route('admin.news.update', $news->id)}}" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
+                          <form action="{{route('admin.news.update', $news->id)}}" id="form" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
                             @csrf
                             @method('PATCH')
 
@@ -99,7 +99,7 @@
                                                 name="images[]">
                                             <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
                                                 @if(isset($newsPaths[$i]))
-                                                <img src="{{ Storage::url($newsPaths[$i]) }}" alt=""
+                                                <img src="{{ $newsPaths[$i] }}" alt=""
                                                     style="width: 150px; height: 150px">
                                                 <div class="bg-plus" hidden>
                                                     <span>+</span>

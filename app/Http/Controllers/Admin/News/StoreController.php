@@ -46,12 +46,14 @@ class StoreController extends Controller
 
         if(isset($images)) {
             foreach ($images as $image) {
-                $imagePath = Storage::put('/public/images/news', $image);
+                $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                Storage::put('/public/images/films', $image);
 
                 NewsImage::create([
                     'path' => $imagePath,
                     'news_id' => $news->id
                 ]);
+                Storage::delete($imagePath);
             }
         }
 

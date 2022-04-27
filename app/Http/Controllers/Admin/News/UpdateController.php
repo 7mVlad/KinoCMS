@@ -17,6 +17,20 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
 
+        if(isset($data['deleteImg'])) {
+            $deleteImgs = $data['deleteImg'];
+            unset($data['deleteImg']);
+        }
+
+        if(isset($deleteImgs)) {
+
+            foreach($deleteImgs as $deleteImg) {
+
+                DB::table('news_images')->where('path', '=', $deleteImg)->delete();
+
+            }
+        }
+
         if(isset($data['images'])) {
             $images = $data['images'];
             unset($data['images']);
@@ -55,17 +69,21 @@ class UpdateController extends Controller
                 if(array_key_exists($key, $newsArr)) {
                     $id = $newsArr[$key]->id;
                     $newsImage = NewsImage::find($id);
-                    $imagePath = Storage::put('/public/images/news', $image);
+                    $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                    Storage::put('/public/images/films', $image);
                     $newsImage->update([
                         'path' => $imagePath,
                     ]);
+                    Storage::delete($imagePath);
                 } else {
-                    $imagePath = Storage::put('/public/images/news', $image);
+                    $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
+                    Storage::put('/public/images/films', $image);
 
                     NewsImage::create([
                         'path' => $imagePath,
                         'news_id' => $news->id
                     ]);
+                    Storage::delete($imagePath);
                 }
             }
         }

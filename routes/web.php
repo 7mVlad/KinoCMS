@@ -14,11 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
     Route::group(['namespace' => 'Main'], function() {
@@ -47,8 +44,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
     Route::group(['namespace' => 'Banner', 'prefix' => 'banners'], function() {
         Route::get('/', 'EditController')->name('admin.banner.index');
         Route::patch('/', 'UpdateController')->name('admin.banner.update');
+
     });
+
 
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['namespace' => 'Main'], function() {
+    Route::get('/', 'IndexController');
+});
+

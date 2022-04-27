@@ -63,7 +63,7 @@ for (let i = 0; i < 5; i++) {
 
 previewBeforeUpload("img-main");
 deleteImage("main");
-
+previewBeforeUpload("bgImage");
 
 
 

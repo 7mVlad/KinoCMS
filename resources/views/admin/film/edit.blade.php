@@ -70,7 +70,7 @@
                                                 name="images[]">
                                             <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
                                                 @if(isset($filmPaths[$i]))
-                                                <img src="{{ Storage::url($filmPaths[$i]) }}" alt=""
+                                                <img src="{{ $filmPaths[$i] }}" alt=""
                                                     style="width: 150px; height: 150px">
                                                 <div class="bg-plus" hidden>
                                                     <span>+</span>
