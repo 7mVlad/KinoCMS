@@ -74,10 +74,40 @@
                       <input type="submit" class="btn btn-primary" value="Сохранить"
                           style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
 
+                          <div style="position: absolute; left: 30px; bottom:30px;">
+                            <label>Скорость вращения</label>
+                            <select class="form-select ml-3" aria-label="Default select example" name="news_speed_banner">
+                                @if (isset($mainPage))
+                                    @if ($mainPage->top_speed_banner == 5000)
+                                    <option selected value="5000">5c</option>
+                                    @else
+                                        <option value="5000">5c</option>
+                                    @endif
 
-                {{-- Фон для страницы --}}
+                                    @if ($mainPage->top_speed_banner == 10000)
+                                        <option selected value="10000">10c</option>
+                                    @else
+                                        <option value="10000">10c</option>
+                                    @endif
+
+                                    @if ($mainPage->top_speed_banner == 15000)
+                                        <option selected value="15000">15c</option>
+                                    @else
+                                        <option value="15000">15c</option>
+                                    @endif
+
+                                @else
+                                    <option value="5000">5c</option>
+                                    <option value="10000">10c</option>
+                                    <option value="15000">15c</option>
+                                @endif
+
+                             </select>
+                          </div>
+
                   </form>
 
+                  {{-- Фон для страницы --}}
                   <h2 class="text-center mt-5 mb-5 font-weight-bold">Сквозной баннер на заднем фоне</h2>
                   <form id="form" action="#" method="post" enctype="multipart/form-data"
                   style="border: 3px solid rgb(0, 0, 0);padding-bottom: 40px;border-radius:20px;position: relative;">
@@ -91,7 +121,7 @@
                             <div class="form-element ml-5 mb-5">
                                 <input type="file" id="bgImage" accept="image/*" name="bg_image">
                                 <label for="bgImage" id="bgImage-preview">
-                                    <img src="https://bit.ly/3ubuq5o" alt="" style="width: 250px; height: 150px">
+                                    <img src="{{ $mainPage->bg_banner }}" alt="" style="width: 250px; height: 150px">
                                     <div class="bg-plus">
                                         <span>+</span>
                                     </div>
@@ -176,7 +206,40 @@
                       <input type="submit" class="btn btn-primary" value="Сохранить"
                           style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
 
+                          <div style="position: absolute; left: 30px; bottom:30px;">
+                            <label>Скорость вращения</label>
+                            <select class="form-select ml-3" aria-label="Default select example" name="news_speed_banner">
+                                @if (isset($mainPage))
+                                @if ($mainPage->top_speed_banner == 5000)
+                                <option selected value="5000">5c</option>
+                                @else
+                                    <option value="5000">5c</option>
+                                @endif
+
+                                @if ($mainPage->top_speed_banner == 10000)
+                                    <option selected value="10000">10c</option>
+                                @else
+                                    <option value="10000">10c</option>
+                                @endif
+
+                                @if ($mainPage->top_speed_banner == 15000)
+                                    <option selected value="15000">15c</option>
+                                @else
+                                    <option value="15000">15c</option>
+                                @endif
+
+                            @else
+                                <option value="5000">5c</option>
+                                <option value="10000">10c</option>
+                                <option value="15000">15c</option>
+                            @endif
+
+                             </select>
+                          </div>
+
+
                   </form>
+
 
               </div>
           </div>

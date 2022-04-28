@@ -19,7 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
     Route::group(['namespace' => 'Main'], function() {
-        Route::get('/', 'IndexController')->name('main.index');
+        Route::get('/', 'IndexController')->name('admin.main.index');
+    });
+
+    Route::group(['namespace' => 'Banner', 'prefix' => 'banners'], function() {
+        Route::get('/', 'EditController')->name('admin.banner.index');
+        Route::patch('/', 'UpdateController')->name('admin.banner.update');
+
     });
 
     Route::group(['namespace' => 'Film', 'prefix' => 'films'], function() {
@@ -40,17 +46,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::delete('/{news}', 'DeleteController')->name('admin.news.delete');
     });
 
-
-    Route::group(['namespace' => 'Banner', 'prefix' => 'banners'], function() {
-        Route::get('/', 'EditController')->name('admin.banner.index');
-        Route::patch('/', 'UpdateController')->name('admin.banner.update');
-
+    Route::group(['namespace' => 'Stock', 'prefix' => 'stocks'], function() {
+        Route::get('/', 'IndexController')->name('admin.stock.index');
+        Route::get('/create', 'CreateController')->name('admin.stock.create');
+        Route::post('/', 'StoreController')->name('admin.stock.store');
+        Route::get('/{stock}/edit', 'EditController')->name('admin.stock.edit');
+        Route::patch('/{stock}', 'UpdateController')->name('admin.stock.update');
+        Route::delete('/{stock}', 'DeleteController')->name('admin.stock.delete');
     });
 
 
 });
 
 Route::group(['namespace' => 'Main'], function() {
-    Route::get('/', 'IndexController');
+    Route::get('/', 'IndexController')->name('main.index');
 });
 

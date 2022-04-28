@@ -42,23 +42,17 @@
                             {{-- Поле для названия --}}
                             <div class="form-group d-flex">
                                 <label>Название новости</label>
-                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название новости" value="{{$news->title}}">
+                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название новости" value="{{$news->title}}" required>
                                 <label>Дата публикации</label>
-                                <input type="date" class="form-control w-25 ml-3" name="date" value="{{$news->date}}">
+                                <input type="date" class="form-control w-25 ml-3" name="date" value="{{$news->date}}" required>
                             </div>
-                              @error('title')
-                                <div class="text-danger">Это поле необходимо для заполнения</div>
-                              @enderror
 
                               {{-- Поле для описания --}}
                             <div class="form-group w-75">
                                 <label>Описание новости</label>
                                 <textarea class="form-control" placeholder="Описание новости" name="content"
-                                    style="resize: none; height:150px">{{$news->content}}</textarea>
+                                    style="resize: none; height:150px" required>{{$news->content}}</textarea>
                             </div>
-                            @error('content')
-                                <div class="text-danger">Это поле необходимо для заполнения</div>
-                            @enderror
 
                             {{-- Поле для главной картинки --}}
                             <div class="form-group mt-5">
@@ -134,13 +128,13 @@
                             <div class="form-group w-50 ">
                                 <label class=" d-block">SEO блок:</label>
                                     <label>URL:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" value="{{$seoBlock->url}}">
+                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" value="{{$seoBlock->url}}" required>
                                     <label>Title:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" value="{{$seoBlock->title}}">
+                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" value="{{$seoBlock->title}}" required>
                                     <label>Keywords:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" value="{{$seoBlock->keywords}}">
+                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" value="{{$seoBlock->keywords}}" required>
                                     <label>Description:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" value="{{$seoBlock->description}}">
+                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" value="{{$seoBlock->description}}" required>
 
                             </div>
 

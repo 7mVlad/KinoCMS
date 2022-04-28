@@ -28,23 +28,17 @@
                             {{-- Поле для названия --}}
                             <div class="form-group d-flex ">
                                 <label>Название новости</label>
-                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название новости" value="{{ old('title') }}">
+                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название новости" value="{{ old('title') }}" required>
                                 <label>Дата публикации</label>
-                                <input type="date" class="form-control w-25 ml-3" name="date" value="{{ old('date') }}">
+                                <input type="date" class="form-control w-25 ml-3" name="date" value="{{ old('date') }}" required>
                             </div>
-                            @error('title')
-                                <div class="text-danger">Это поле необходимо для заполнения</div>
-                            @enderror
 
                             {{-- Поле для описания --}}
                             <div class="form-group w-75">
                                 <label>Описание новости</label>
                                 <textarea class="form-control" placeholder="Описание новости" name="content"
-                                    style="resize: none; height:150px">{{ old('content') }}</textarea>
+                                    style="resize: none; height:150px" required>{{ old('content') }}</textarea>
                             </div>
-                            @error('content')
-                                <div class="text-danger">Это поле необходимо для заполнения</div>
-                            @enderror
 
                             {{-- Поле для главной картинки --}}
                             <div class="form-group mt-5">
@@ -105,7 +99,7 @@
                             {{-- Поле ссылки youtube --}}
                             <div class="form-group w-50">
                                 <label>Ссылка на видео</label>
-                                <input type="text" class="form-control" name="video_link" placeholder="Ссылка на видео в youtube">
+                                <input type="text" class="form-control" name="video_link" placeholder="Ссылка на видео в youtube" required>
                             </div>
 
                             {{-- SEO блок --}}
@@ -113,13 +107,13 @@
                                 <label class=" d-block">SEO блок:</label>
 
                                     <label>URL:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL">
+                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" required>
                                     <label>Title:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title">
+                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" required>
                                     <label>Keywords:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word">
+                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" required>
                                     <label>Description:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description">
+                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" required>
                             </div>
 
                             <input type="submit" class="btn btn-primary d-block m-auto font-weight-bolder"

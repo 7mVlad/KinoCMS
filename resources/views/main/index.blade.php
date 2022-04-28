@@ -1,16 +1,15 @@
 @extends('layouts.main')
 @section('content')
     <div class="col-12"
-        style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); background-size: cover;  background-attachment: fixed;">
+        style="background-image: url('{{ $mainPage->bg_banner }}'); background-size: cover;  background-attachment: fixed;">
         <section class="row" style="padding-top: 100px;">
             <div class="col-8 m-auto">
                 <div class="wrap">
                     <div class="container">
                         <div class="row justify-content-between">
                             <div class="col d-flex">
-                                <p class="mb-0 phone mr-5"><span class="fa fa-phone"></span> <a href="#">+00 1234
-                                        567</a></p>
-                                <p class="mb-0 phone"><span class="fa fa-phone"></span> <a href="#">+00 1234 567</a>
+                                <p class="mb-0 phone mr-5"><span class="fa fa-phone"></span> <a href="#">{{$mainPage->phone_one}}</a></p>
+                                <p class="mb-0 phone"><span class="fa fa-phone"></span> <a href="#">{{$mainPage->phone_two}}</a>
                                 </p>
                             </div>
                             <div class="col d-flex justify-content-end">
@@ -33,7 +32,7 @@
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
                     <div class="container">
-                        <a class="navbar-brand" href="index.html">Kino <span>CMS</span></a>
+                        <a class="navbar-brand" href="{{route('main.index')}}">Kino <span>CMS</span></a>
                         <form action="#" class="searchform order-sm-start order-lg-last">
                             <div class="form-group d-flex">
                                 <input type="text" class="form-control " placeholder="Поиск">
@@ -77,40 +76,44 @@
         </section>
         <section class="row">
             <div class="col-8 m-auto">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="{{$mainPage->top_speed_banner}}">
                     <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+
+                        @foreach ($bannersTop as $bannerTop)
+
+                            @if ($bannerTop->id == 1)
+                                <li data-target="#carouselExampleIndicators" data-slide-to="{{$bannerTop->id}}" class="active"></li>
+                            @else
+                                <li data-target="#carouselExampleIndicators" data-slide-to="{{$bannerTop->id}}"></li>
+                            @endif
+
+                        @endforeach
+
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" style="height: 500px;"
-                                src="https://natworld.info/wp-content/uploads/2018/01/-%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D1%8B-e1534007720297.jpg"
-                                alt="Первый слайд">
-                            <div class="carousel-caption d-none d-md-block">
-                                <p>Lorem ipsum dolor sit amet.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" style="height: 500px;"
-                                src="https://oir.mobi/uploads/posts/2021-06/1623706543_34-oir_mobi-p-krasivaya-priroda-mira-priroda-krasivo-fot-35.jpg"
-                                alt="Второй слайд">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" style="height: 500px;"
-                                src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg" alt="Третий слайд">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" style="height: 500px;"
-                                src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg" alt="Третий слайд">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" style="height: 500px;"
-                                src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg" alt="Третий слайд">
-                        </div>
+
+                        @foreach ($bannersTop as $bannerTop)
+
+                            @if ($bannerTop->id == 1)
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" style="height: 500px;"
+                                        src="{{$bannerTop->image}}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>{{$bannerTop->text}}</p>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" style="height: 500px;"
+                                        src="{{$bannerTop->image}}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <p>{{$bannerTop->text}}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                        @endforeach
+
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -127,139 +130,57 @@
         <section class="row">
             <div class="col-8 m-auto">
                 <div class="wrapper pb-5" style="background-color: aliceblue;">
+
                     <h2 class="text-center pt-3">Смотрите Сегодня</h2>
-
                     <div class="film__inner d-flex flex-wrap">
-
                         <div class="row ml-5 mr-5 pb-5">
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                            @foreach ($films as $film)
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                                @if ($film->release == 1)
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                                    <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
+                                        <a class="text-dark" href="#">
+                                            <img width="100%" height="100%"
+                                                src="{{ Storage::url($film->main_image) }}">
+                                            <h6 class="mt-2">{{$film->title}}</h6>
+                                            <div class="btn btn-success btn-sm">Купить билет</div>
+                                        </a>
+                                    </div>
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                                @endif
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
-
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
-
+                            @endforeach
 
                         </div>
-
-
                     </div>
 
 
                     <h2 class="text-center pt-3">Смотрите Скоро</h2>
 
                     <div class="film__inner d-flex flex-wrap">
-
                         <div class="row ml-5 mr-5 pb-5">
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                            @foreach ($films as $film)
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                                @if ($film->release == 1)
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                                    <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
+                                        <a class="text-dark" href="#">
+                                            <img width="100%" height="100%"
+                                                src="{{ Storage::url($film->main_image) }}">
+                                            <h6 class="mt-2">{{$film->title}}</h6>
+                                            <div class="btn btn-success btn-sm">Купить билет</div>
+                                        </a>
+                                    </div>
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                                @endif
 
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
-
-                            <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                <a class="text-dark" href="#">
-                                    <img width="100%" height="100%"
-                                        src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg">
-                                    <h6 class="mt-2"> Название фильма</h4>
-                                        <div class="btn btn-success btn-sm">Купить билет</div>
-                                </a>
-                            </div>
+                            @endforeach
 
 
                         </div>
-
-
                     </div>
-
                 </div>
 
 
@@ -273,23 +194,23 @@
                 <div class="wrapper pb-5" style="background-color: aliceblue;">
                     <h2 class="text-center pt-3">Новости и Акции</h2>
 
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="{{$mainPage->top_speed_banner}}">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100"
-                                    src="https://natworld.info/wp-content/uploads/2018/01/-%D0%BF%D1%80%D0%B8%D1%80%D0%BE%D0%B4%D1%8B-e1534007720297.jpg"
-                                    alt="Первый слайд" style="height: 500px;">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100"
-                                    src="https://icocnews.ru/wp-content/uploads/2015/09/priroda.jpg" alt="Первый слайд"
-                                    style="height: 500px;">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100"
-                                    src="https://oir.mobi/uploads/posts/2021-06/1623706543_34-oir_mobi-p-krasivaya-priroda-mira-priroda-krasivo-fot-35.jpg"
-                                    alt="Первый слайд" style="height: 500px;">
-                            </div>
+
+                            @foreach ($bannersBottom as $bannerBottom)
+                                @if($bannerBottom->id == 1)
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100"
+                                            src="{{$bannerBottom->image}}" style="height: 500px;">
+                                    </div>
+                                @else
+                                <div class="carousel-item">
+                                    <img class="d-block w-100"
+                                        src="{{$bannerBottom->image}}" style="height: 500px;">
+                                </div>
+                                @endif
+                            @endforeach
+
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                                 data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -300,6 +221,7 @@
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -308,12 +230,9 @@
         <section class="row">
             <div class="col-8 m-auto">
                 <div class="wrapper" style="background-color: aliceblue; color: #000;">
-                    <h2 class="text-center pt-3">SEO текст</h2>
+                    <h4 class="text-center pt-3">SEO текст</h4>
 
-                    <p class="p-5 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error enim esse ut
-                        voluptatibus repellat repudiandae commodi vitae corporis. Illo facere cumque, iste et accusamus
-                        dolor nesciunt, itaque velit tempore, architecto harum excepturi unde ipsa? Consequuntur, optio
-                        facere. Illum, cum placeat?</p>
+                    <p class="p-5 mb-0">{{$mainPage->seo_text}}</p>
                 </div>
             </div>
         </section>
@@ -342,7 +261,7 @@
                                             <img src="{{ asset('frontAssets/image/store.png') }}" alt="" width="150px">
                                         </div>
 
-                                        <h6 class="pt-5">Разработка сайтов: AVADA-MEDIA</h6>
+                                        <h6 class="pt-5">Разработка сайтов: <br> AVADA-MEDIA</h6>
                                     </div>
                                     <!-- Grid column -->
 

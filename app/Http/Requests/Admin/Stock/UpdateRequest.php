@@ -24,6 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'deleteImg' => 'nullable|array',
             'status' => 'nullable|boolean',
             'title' => 'required|string',
             'date' => 'nullable|date',
