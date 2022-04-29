@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 
@@ -54,6 +63,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::patch('/{stock}', 'UpdateController')->name('admin.stock.update');
         Route::delete('/{stock}', 'DeleteController')->name('admin.stock.delete');
     });
+
+    // Route::group(['namespace' => 'User', 'prefix' => 'users'], function() {
+    //     Route::get('/', 'IndexController')->name('admin.user.index');
+    //     Route::get('/create', 'CreateController')->name('admin.user.create');
+    //     Route::post('/', 'StoreController')->name('admin.user.store');
+    //     // Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
+    //     // Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
+    //     // Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
+    // });
 
 
 });

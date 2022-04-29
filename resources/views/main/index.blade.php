@@ -66,9 +66,17 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="btn btn-primary ml-3 mr-3">
-                        Войти
-                    </div>
+
+                        @if (Route::has('login'))
+                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block pr-3">
+                            @auth
+                                <a href="{{ url('/home') }}" class="btn btn-info">{{ Auth::user()->name }}</a>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-success">Войти</a>
+                            @endauth
+                        </div>
+                    @endif
+
                 </nav>
                 <!-- END nav -->
             </div>
@@ -163,7 +171,7 @@
 
                             @foreach ($films as $film)
 
-                                @if ($film->release == 1)
+                                @if ($film->release == 0)
 
                                     <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
                                         <a class="text-dark" href="#">
