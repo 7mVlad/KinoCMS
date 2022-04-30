@@ -9,11 +9,11 @@
                   <!-- Small boxes (Stat box) -->
                   <div class="row">
                       <div class="col-12 mt-5">
-                          <form action="{{route('admin.stock.update', $stock->id)}}" id="form" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
+                          <form action="{{route('admin.page.update', $page->id)}}" id="form" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
                             @csrf
                             @method('PATCH')
 
-                            @if($stock->status == 1)
+                            @if($page->status == 1)
                                 <div class="form-group radio-switch">
                                     <input type="radio" name="status" id="public" value="0">
                                     <label for="public">
@@ -41,10 +41,8 @@
 
                             {{-- Поле для названия --}}
                             <div class="form-group d-flex">
-                                <label>Название акции</label>
-                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название акции" value="{{$stock->title}}">
-                                <label>Дата публикации</label>
-                                <input type="date" class="form-control w-25 ml-3" name="date" value="{{$stock->date}}">
+                                <label>Название</label>
+                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название" value="{{$page->title}}">
                             </div>
                               @error('title')
                                 <div class="text-danger">Это поле необходимо для заполнения</div>
@@ -52,9 +50,9 @@
 
                               {{-- Поле для описания --}}
                             <div class="form-group w-75">
-                                <label>Описание акции</label>
-                                <textarea class="form-control" placeholder="Описание акции" name="content"
-                                    style="resize: none; height:150px">{{$stock->content}}</textarea>
+                                <label>Описание</label>
+                                <textarea class="form-control" placeholder="Описание" name="content"
+                                    style="resize: none; height:150px">{{$page->content}}</textarea>
                             </div>
                             @error('content')
                                 <div class="text-danger">Это поле необходимо для заполнения</div>
@@ -68,7 +66,7 @@
                                     <div class="form-element ml-5 mb-5">
                                         <input type="file" id="img-main" accept="image/*" name="main_image">
                                         <label for="img-main" id="img-main-preview">
-                                            <img src="{{ Storage::url($stock->main_image) }}" alt="" style="width: 250px; height: 150px">
+                                            <img src="{{ Storage::url($page->main_image) }}" alt="" style="width: 250px; height: 150px">
                                             <div class="bg-plus" hidden>
                                                 <span>+</span>
                                             </div>
@@ -98,8 +96,8 @@
                                             <input type="file" id="img-{{ $i }}" accept="image/*"
                                                 name="images[]">
                                             <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                @if(isset($stockPaths[$i]))
-                                                <img src="{{ $stockPaths[$i] }}" alt=""
+                                                @if(isset($pagePaths[$i]))
+                                                <img src="{{ $pagePaths[$i] }}" alt=""
                                                     style="width: 150px; height: 150px">
                                                 <div class="bg-plus" hidden>
                                                     <span>+</span>
@@ -122,12 +120,6 @@
                                         </div>
                                     @endfor
                                 </div>
-                            </div>
-
-                            {{-- Поле ссылки youtube --}}
-                            <div class="form-group w-50 mb-5">
-                                <label>Ссылка на видео</label>
-                                <input type="text" class="form-control" name="video_link" placeholder="Ссылка на видео в youtube" value="{{$stock->video_link}}">
                             </div>
 
                             {{-- SEO блок --}}

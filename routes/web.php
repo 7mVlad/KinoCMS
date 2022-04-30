@@ -15,18 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
-
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth','admin']], function() {
     Route::group(['namespace' => 'Main'], function() {
         Route::get('/', 'IndexController')->name('admin.main.index');
     });
@@ -64,14 +57,28 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::delete('/{stock}', 'DeleteController')->name('admin.stock.delete');
     });
 
-    // Route::group(['namespace' => 'User', 'prefix' => 'users'], function() {
-    //     Route::get('/', 'IndexController')->name('admin.user.index');
-    //     Route::get('/create', 'CreateController')->name('admin.user.create');
-    //     Route::post('/', 'StoreController')->name('admin.user.store');
-    //     // Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
-    //     // Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
-    //     // Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
-    // });
+    Route::group(['namespace' => 'Page', 'prefix' => 'pages'], function() {
+        Route::get('/', 'IndexController')->name('admin.page.index');
+        Route::get('/create', 'CreateController')->name('admin.page.create');
+        Route::post('/', 'StoreController')->name('admin.page.store');
+        Route::get('/{page}/edit', 'EditController')->name('admin.page.edit');
+        Route::patch('/{page}', 'UpdateController')->name('admin.page.update');
+        Route::delete('/{page}', 'DeleteController')->name('admin.page.delete');
+
+        Route::group(['namespace' => 'Main', 'prefix' => 'main'], function() {
+            Route::get('/{main}/edit', 'EditController')->name('admin.main-page.edit');
+            Route::patch('/{main}', 'UpdateController')->name('admin.main-page.update');
+        });
+    });
+
+    Route::group(['namespace' => 'User', 'prefix' => 'users'], function() {
+        Route::get('/', 'IndexController')->name('admin.user.index');
+        Route::get('/create', 'CreateController')->name('admin.user.create');
+        Route::post('/', 'StoreController')->name('admin.user.store');
+        Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
+        Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
+        Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
+    });
 
 
 });

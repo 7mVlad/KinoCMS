@@ -1,7 +1,13 @@
 @extends('layouts.main')
 @section('content')
+
+@if (isset($mainPage->bg_banner))
     <div class="col-12"
-        style="background-image: url('{{ $mainPage->bg_banner }}'); background-size: cover;  background-attachment: fixed;">
+    style="background-image: url('{{ $mainPage->bg_banner }}'); background-size: cover;  background-attachment: fixed;">
+@else
+    <div class="col-12">
+@endif
+
         <section class="row" style="padding-top: 100px;">
             <div class="col-8 m-auto">
                 <div class="wrap">
@@ -48,7 +54,7 @@
                             <ul class="navbar-nav m-auto">
                                 <li class="nav-item"><a href="#" class="nav-link">Афиша</a></li>
 
-                                <li class="nav-item"><a href="#" class="nav-link">Расписание</a></li>
+                                {{-- <li class="nav-item"><a href="#" class="nav-link">Расписание</a></li> --}}
                                 <li class="nav-item"><a href="#" class="nav-link">Скоро</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link">Кинотеатры</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link">Акции</a></li>
@@ -70,7 +76,7 @@
                         @if (Route::has('login'))
                         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block pr-3">
                             @auth
-                                <a href="{{ url('/home') }}" class="btn btn-info">{{ Auth::user()->name }}</a>
+                                <a href="{{ Auth::user()->role !== 1 ? url('/home') : route('admin.main.index') }}" class="btn btn-info">{{ Auth::user()->name }}</a>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-success">Войти</a>
                             @endauth
@@ -279,9 +285,9 @@
                                         <h6 class="text-uppercase fw-bold mb-4">
                                             <a href="#" class="text-reset">Афиша</a>
                                         </h6>
-                                        <p>
+                                        {{-- <p>
                                             <a href="#!" class="text-reset">Расписание</a>
-                                        </p>
+                                        </p> --}}
                                         <p>
                                             <a href="#!" class="text-reset">Скоро</a>
                                         </p>
@@ -367,4 +373,5 @@
             </div>
         </section>
     </div>
+
 @endsection

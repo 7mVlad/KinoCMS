@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\SeoBlock;
-use App\Models\Stock;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DeleteController extends Controller
 {
-    public function __invoke(Stock $stock)
+    public function __invoke(User $user)
     {
-        $seoBlock = SeoBlock::find($stock->seo_block_id);
-        $seoBlock->delete();
-        $stock->delete();
+        $user->delete();
         return redirect()->route('admin.user.index');
     }
 }

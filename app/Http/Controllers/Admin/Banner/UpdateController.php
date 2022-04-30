@@ -29,6 +29,7 @@ class UpdateController extends Controller
             $mainPage->update([
                 'bg_banner' => $imagePath
             ]);
+            Storage::delete($imagePath);
         }
 
         if(isset($data['position'])) {

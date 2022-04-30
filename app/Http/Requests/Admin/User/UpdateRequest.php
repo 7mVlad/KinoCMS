@@ -24,18 +24,20 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'deleteImg' => 'nullable|array',
-            'status' => 'nullable|boolean',
-            'title' => 'required|string',
-            'date' => 'nullable|date',
-            'content' => 'required|string',
-            'main_image' => 'nullable|file',
-            'images' => 'nullable|array',
-            'video_link' => 'required|string',
-            'seo_url' => 'required|string',
-            'seo_title' => 'required|string',
-            'seo_keywords' => 'required|string',
-            'seo_description' => 'required|string',
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users,email,' . $this->user_id,
+            'password' => 'nullable|string',
+            'user_id' => 'required|integer|exists:users,id',
+            'role' => 'nullable|integer',
+            'last_name' => 'required|string',
+            'pseudonym' => 'nullable|string',
+            'address' => 'nullable|string',
+            'card_number' => 'nullable|integer',
+            'language' => 'required|string',
+            'gender' => 'required|string',
+            'phone' => 'required|string',
+            'birthday' => 'nullable|date',
+            'city' => 'nullable|string',
         ];
     }
 }

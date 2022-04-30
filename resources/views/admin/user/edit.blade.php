@@ -7,142 +7,198 @@
           <section class="content">
               <div class="container-fluid">
                   <!-- Small boxes (Stat box) -->
-                  <div class="row">
-                      <div class="col-12 mt-5">
-                          <form action="{{route('admin.stock.update', $stock->id)}}" id="form" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
-                            @csrf
-                            @method('PATCH')
+                  <div class="row pt-5">
+                      <div class="col-10 m-auto">
+                          {{-- Форма --}}
+                          <form action="{{ route('admin.user.update', $user->id) }}" method="POST"
+                              enctype="multipart/form-data" class="ml-4 mb-3 ">
+                              @csrf
+                              @method('PATCH')
 
-                            @if($stock->status == 1)
-                                <div class="form-group radio-switch">
-                                    <input type="radio" name="status" id="public" value="0">
-                                    <label for="public">
-                                    ВЫКЛ
-                                    </label>
-                                    <input type="radio" name="status" id="private" value="1" checked>
-                                    <label for="private">
-                                    ВКЛ
-                                    </label>
-                                </div>
-                            @else
-                            <div class="form-group radio-switch">
-                                <input type="radio" name="status" id="public" value="0" checked>
-                                <label for="public">
-                                ВЫКЛ
-                                </label>
-                                <input type="radio" name="status" id="private" value="1">
-                                <label for="private">
-                                ВКЛ
-                                </label>
-                            </div>
-                            @endif
+                              <div class="row">
+                                  <div class="col-6">
+                                      <div class="mb-3 row">
+                                          <label class="col-sm-2 col-form-label">Имя</label>
+                                          <div class="col-sm-6">
+                                              <input type="text" class="form-control" name="name"
+                                                  value="{{ $user->name }}">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-6">
+                                      <div class="mb-3 row">
+                                          <div class="form-group mt-3">
+                                              <label class="mr-5">Язык</label>
+                                              <div class="form-check form-check-inline">
+                                                  <input class="form-check-input" type="radio" name="language" value="ru"
+                                                      {{ 'ru' == $user->language ? ' checked' : '' }}>
+                                                  <label class="form-check-label mr-4">Русский</label>
+                                                  <input class="form-check-input" type="radio" name="language" value="ua"
+                                                      {{ 'ua' == $user->language ? ' checked' : '' }}>
+                                                  <label class="form-check-label">Украинский</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                                  <div class="row">
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-2 col-form-label">Фамилия</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="last_name"
+                                                      value="{{ $user->last_name }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <div class="form-group mt-3">
+                                                  <label class="mr-5">Пол</label>
+                                                  <div class="form-check form-check-inline">
+                                                      <input class="form-check-input" type="radio" name="gender" value="man"
+                                                          {{ 'man' == $user->gender ? ' checked' : '' }}>
+                                                      <label class="form-check-label mr-4">Мужской</label>
+                                                      <input class="form-check-input" type="radio" name="gender"
+                                                          value="woman" {{ 'woman' == $user->gender ? ' checked' : '' }}>
+                                                      <label class="form-check-label">Женский</label>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="row mb-3">
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-2 col-form-label">Псевдоним</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="pseudonym"
+                                                      value="{{ $user->pseudonym }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-2 col-form-label">Телефон</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="phone"
+                                                      value="{{ $user->phone }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="row mb-3">
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-2 col-form-label">E-mail</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="email"
+                                                      value="{{ $user->email }}">
+
+                                              </div>
+                                              @error('email')
+                                                    <div class="text-danger">Пользователь с таким email уже существует</div>
+                                                @enderror
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-3 col-form-label">Дата рождения</label>
+                                              <div class="col-sm-5">
+                                                  <input type="date" class="form-control" name="birthday"
+                                                      value="{{ $user->birthday }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="row mb-3">
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-2 col-form-label">Адрес</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="address"
+                                                      value="{{ $user->address }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-2 col-form-label">Город</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="city"
+                                                      value="{{ $user->city }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="row mb-3">
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label for="password"
+                                                  class="col-md-2 col-form-label text-md-end">Пароль</label>
+
+                                              <div class="col-md-6">
+                                                  <input id="password" type="password" class="form-control"
+                                                      name="password">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label for="password-confirm"
+                                                  class="col-md-3 col-form-label text-md-end">Повторите
+                                                  пароль</label>
+
+                                              <div class="col-md-5">
+                                                  <input id="password-confirm" type="password" class="form-control"
+                                                      name="cor_password" autocomplete="new-password">
+                                              </div>
+
+                                              <div class="text-danger pt-1" id="error"></div>
+                                              <div class="text-success pt-1" id="success"></div>
+                                          </div>
+                                      </div>
+                                  </div>
 
 
+                                  <div class="row mb-5">
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-3 col-form-label">Номер карты</label>
+                                              <div class="col-sm-5">
+                                                  <input type="text" class="form-control" name="card_number"
+                                                      value="{{ $user->card_number }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-6">
+                                          <div class="mb-3 row">
+                                              <label class="col-sm-4 col-form-label">Выберите роль</label>
+                                              <select name="role" class="form-control col-sm-4">
+                                                  @foreach ($roles as $id => $role)
+                                                      <option value="{{ $id }}"
+                                                          {{ $id == $user->role ? ' selected' : '' }}>
+                                                          {{ $role }}
+                                                      </option>
+                                                  @endforeach
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </div>
 
-                            {{-- Поле для названия --}}
-                            <div class="form-group d-flex">
-                                <label>Название акции</label>
-                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название акции" value="{{$stock->title}}" required>
-                                <label>Дата публикации</label>
-                                <input type="date" class="form-control w-25 ml-3" name="date" value="{{$stock->date}}" required>
-                            </div>
-
-                              {{-- Поле для описания --}}
-                            <div class="form-group w-75">
-                                <label>Описание акции</label>
-                                <textarea class="form-control" placeholder="Описание акции" name="content"
-                                    style="resize: none; height:150px" required>{{$stock->content}}</textarea>
-                            </div>
-
-                            {{-- Поле для главной картинки --}}
-                            <div class="form-group mt-5">
-                                <div class=" d-flex">
-                                    <label >Главная картинка</label>
-
-                                    <div class="form-element ml-5 mb-5">
-                                        <input type="file" id="img-main" accept="image/*" name="main_image">
-                                        <label for="img-main" id="img-main-preview">
-                                            <img src="{{ Storage::url($stock->main_image) }}" alt="" style="width: 250px; height: 150px">
-                                            <div class="bg-plus" hidden>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
-                                        {{-- Delete img --}}
-                                        <div class="btn-inner">
-                                            <div class="btn-delete btn-image-main" id="submit-main"
-                                                style="margin-left: 235px;">
-                                                <span>x</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
+                                  <div class="form-group">
+                                      <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                  </div>
 
 
-                            {{-- Поле для картинок --}}
-                            <div class="form-group mt-5">
-                                <div class="d-flex justify-content-between">
-                                    <label>Галерея картинок <br><br> Размер: 1000 х 190</label>
-
-                                    @for ($i = 0; $i < 5; $i++)
-
-                                        <div class="form-element mr-5 mb-5">
-                                            <input type="file" id="img-{{ $i }}" accept="image/*"
-                                                name="images[]">
-                                            <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                @if(isset($stockPaths[$i]))
-                                                <img src="{{ $stockPaths[$i] }}" alt=""
-                                                    style="width: 150px; height: 150px">
-                                                <div class="bg-plus" hidden>
-                                                    <span>+</span>
-                                                </div>
-                                                @else
-                                                <img src="https://bit.ly/3ubuq5o" alt=""
-                                                    style="width: 150px; height: 150px">
-                                                <div class="bg-plus">
-                                                    <span>+</span>
-                                                </div>
-                                                @endif
-
-                                            </label>
-                                            {{-- Delete img --}}
-                                            <div class="btn-inner">
-                                                <div class="btn-delete btn-image" id="submit-{{ $i }}">
-                                                    <span>x</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
-
-                            {{-- Поле ссылки youtube --}}
-                            <div class="form-group w-50 mb-5">
-                                <label>Ссылка на видео</label>
-                                <input type="text" class="form-control" name="video_link" placeholder="Ссылка на видео в youtube" value="{{$stock->video_link}}">
-                            </div>
-
-                            {{-- SEO блок --}}
-                            <div class="form-group w-50 ">
-                                <label class=" d-block">SEO блок:</label>
-                                    <label>URL:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_url" placeholder="URL" value="{{$seoBlock->url}}" required>
-                                    <label>Title:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_title" placeholder="Title" value="{{$seoBlock->title}}" required>
-                                    <label>Keywords:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_keywords" placeholder="Word" value="{{$seoBlock->keywords}}" required>
-                                    <label>Description:</label>
-                                    <input type="text" class="form-control mb-2" name="seo_description" placeholder="Description" value="{{$seoBlock->description}}" required>
-
-                            </div>
-
-                            <input type="submit" class="btn btn-primary font-weight-bolder d-block m-auto" value="Изменить">
-
+                                  <input type="submit" class="btn btn-primary d-block m-auto font-weight-bolder"
+                                      value="Сохранить">
                           </form>
-
-
                       </div>
                   </div>
                   <!-- /.row -->
@@ -153,3 +209,23 @@
       </div>
       <!-- /.content-wrapper -->
   @endsection
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+  <script>
+      $(function() {
+          $("#password-confirm").keyup(function() {
+              var password = $("#password").val();
+              if (password !== $(this).val()) {
+                  $("#error").html("Пароли не совпадают");
+                  $("#success").html("");
+                  $("#submit").addClass('disabled');
+              } else {
+                  $("#success").html("Пароли совпадают");
+                  $("#error").html("");
+                  $("#submit").removeClass('disabled');
+              }
+          });
+
+      });
+  </script>

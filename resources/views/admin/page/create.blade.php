@@ -10,7 +10,7 @@
                 <div class="row ">
                     <div class="col-12 mt-5">
                         {{-- Форма --}}
-                        <form action="{{ route('admin.stock.store') }}" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
+                        <form action="{{ route('admin.page.store') }}" method="POST" enctype="multipart/form-data" class="ml-4 mb-3">
                             @csrf
 
                             {{-- Поле для статуса --}}
@@ -19,7 +19,7 @@
                                 <label for="public">
                                   ВЫКЛ
                                 </label>
-                                <input type="radio" name="status" id="private" value="1">
+                                <input type="radio" name="status" id="private" value="1" checked>
                                 <label for="private">
                                   ВКЛ
                                 </label>
@@ -98,12 +98,6 @@
                                     @endfor
 
                                 </div>
-                            </div>
-
-                            {{-- Поле ссылки youtube --}}
-                            <div class="form-group w-50">
-                                <label>Ссылка на видео</label>
-                                <input type="text" class="form-control" name="video_link" placeholder="Ссылка на видео в youtube">
                             </div>
 
                             {{-- SEO блок --}}
