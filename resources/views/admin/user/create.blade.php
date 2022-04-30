@@ -121,36 +121,6 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <div class="col-6">
-                                    <div class="mb-3 row">
-                                        <label for="password" class="col-md-2 col-form-label text-md-end">Пароль</label>
-
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control" name="password"
-                                                required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="mb-3 row">
-                                        <label for="password-confirm" class="col-md-3 col-form-label text-md-end">Повторите
-                                            пароль</label>
-
-                                        <div class="col-md-5">
-                                            <input id="password-confirm" type="password" class="form-control"
-                                                name="cor_password" required autocomplete="new-password">
-                                        </div>
-
-                                        <div class="text-danger pt-1" id="error"></div>
-                                        <div class="text-success pt-1" id="success"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
                             <div class="row mb-5">
                                 <div class="col-6">
                                     <div class="mb-3 row">

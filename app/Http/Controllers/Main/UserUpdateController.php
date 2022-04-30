@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\User;
+namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UpdateRequest;
@@ -8,11 +8,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UpdateController extends Controller
+class UserUpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request, User $user)
+    public function __invoke(UpdateRequest $request)
     {
         $data = $request->validated();
+        $user = User::find($data['user_id']);
+
         if($data['password'] != null) {
             $data['password'] = Hash::make($data['password']);
         } else {
@@ -21,6 +23,6 @@ class UpdateController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('login');
     }
 }

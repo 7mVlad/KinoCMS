@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{route('main.index')}}" class="brand-link">
         <span class="text-center brand-link">Kino CMS</span>
     </a>
 

@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'verified'], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+// Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth','admin']], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth','admin', 'verified']], function() {
     Route::group(['namespace' => 'Main'], function() {
         Route::get('/', 'IndexController')->name('admin.main.index');
     });
@@ -77,6 +80,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::post('/', 'StoreController')->name('admin.user.store');
         Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
         Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
+        // Route::patch('/{user}/personal', 'HomeUpdateController')->name('admin.home-user.update');
         Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
     });
 
@@ -85,5 +89,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
 Route::group(['namespace' => 'Main'], function() {
     Route::get('/', 'IndexController')->name('main.index');
+    Route::patch('/personal', 'UserUpdateController')->name('user.update');
 });
 
