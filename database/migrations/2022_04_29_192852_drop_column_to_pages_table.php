@@ -27,8 +27,8 @@ class DropColumnToPagesTable extends Migration
     public function down()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->date('date');
-            $table->string('video_link');
+            $table->dropColumn('date');
+            $table->dropColumn('video_link');
         });
     }
 }

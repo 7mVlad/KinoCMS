@@ -75,12 +75,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     });
 
     Route::group(['namespace' => 'User', 'prefix' => 'users'], function() {
-        Route::get('/', 'IndexController')->name('admin.user.index');
+        Route::get('/', 'IndexController@index')->name('admin.user.index');
+        Route::get('/search', 'IndexController@search')->name('admin.user.search');
         Route::get('/create', 'CreateController')->name('admin.user.create');
         Route::post('/', 'StoreController')->name('admin.user.store');
         Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
         Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
-        // Route::patch('/{user}/personal', 'HomeUpdateController')->name('admin.home-user.update');
         Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
     });
 
