@@ -24,18 +24,18 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email,' . $this->user_id,
+            'name' => 'nullable|string',
+            'email' => 'nullable|string|email|unique:users,email,' . $this->user_id,
             'password' => 'nullable|string',
-            'user_id' => 'required|integer|exists:users,id',
+            'user_id' => 'nullable|integer|exists:users,id',
             'role' => 'nullable|integer',
-            'last_name' => 'required|string',
+            'last_name' => 'nullable|string',
             'pseudonym' => 'nullable|string',
             'address' => 'nullable|string',
             'card_number' => 'nullable|integer',
-            'language' => 'required|string',
-            'gender' => 'required|string',
-            'phone' => 'required|string',
+            'language' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'phone' => 'nullable|string',
             'birthday' => 'nullable|date',
             'city' => 'nullable|string',
         ];

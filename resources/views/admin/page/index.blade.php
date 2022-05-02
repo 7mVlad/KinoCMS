@@ -57,6 +57,20 @@
                         </td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td>Контакты</td>
+                    <td>{{$mainPage->created_at}}</td>
+                    @if($mainPage->status == 1)
+                        <td>ВКЛ</td>
+                    @else
+                        <td>ВЫКЛ</td>
+                    @endif
+                    <td class="text-center">
+                        <a class="btn btn-info btn-sm" href="{{route('admin.contact.edit')}}">
+                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить
+                        </a>
+                    </td>
+                </tr>
                 </tbody>
               </table>
         </div>

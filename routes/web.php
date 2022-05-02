@@ -72,6 +72,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
             Route::get('/{main}/edit', 'EditController')->name('admin.main-page.edit');
             Route::patch('/{main}', 'UpdateController')->name('admin.main-page.update');
         });
+
+        Route::group(['namespace' => 'Contact', 'prefix' => 'contacts'], function() {
+            Route::get('/', 'EditController')->name('admin.contact.edit');
+            Route::patch('/update', 'UpdateController')->name('admin.contact.update');
+        });
     });
 
     Route::group(['namespace' => 'User', 'prefix' => 'users'], function() {
