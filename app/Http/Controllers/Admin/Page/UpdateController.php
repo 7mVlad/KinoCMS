@@ -66,24 +66,35 @@ class UpdateController extends Controller
 
         if(isset($images)) {
             foreach($images as $key => $image) {
-                if(array_key_exists($key, $pageArr)) {
-                    $id = $pageArr[$key]->id;
-                    $stockImage = PageImage::find($id);
-                    $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/page', $image);
-                    Storage::put('/public/images/page', $image);
-                    $stockImage->update([
-                        'path' => $imagePath,
-                    ]);
-                    Storage::delete($imagePath);
+                if(isset($filmArr)) {
+                    if(array_key_exists($key, $pageArr)) {
+                        $id = $pageArr[$key]->id;
+                        $stockImage = PageImage::find($id);
+                        $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/page', $image);
+                        Storage::put('/public/images/page', $image);
+                        $stockImage->update([
+                            'path' => $imagePath,
+                        ]);
+                        Storage::delete($imagePath);
+                    } else {
+                        $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/page', $image);
+                        Storage::put('/public/images/page', $image);
+
+                        PageImage::create([
+                            'path' => $imagePath,
+                            'page_id' => $page->id
+                        ]);
+                        Storage::delete($imagePath);
+                    }
                 } else {
                     $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/page', $image);
-                    Storage::put('/public/images/stock', $image);
+                        Storage::put('/public/images/page', $image);
 
-                    PageImage::create([
-                        'path' => $imagePath,
-                        'page_id' => $page->id
-                    ]);
-                    Storage::delete($imagePath);
+                        PageImage::create([
+                            'path' => $imagePath,
+                            'page_id' => $page->id
+                        ]);
+                        Storage::delete($imagePath);
                 }
             }
         }

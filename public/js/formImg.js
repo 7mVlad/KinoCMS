@@ -54,7 +54,6 @@ function add_field(url){
 }
 
 
-
 for (let i = 0; i < 5; i++) {
     previewBeforeUpload("img-"+i);
     deleteImage(i);

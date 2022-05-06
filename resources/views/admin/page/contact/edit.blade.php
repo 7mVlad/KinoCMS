@@ -17,7 +17,7 @@
                                   <div hidden>
                                       <div class="contact__form m-5">
                                           <div
-                                              style="border: 3px solid rgb(0, 0, 0);padding-bottom:100px;border-radius:20px;">
+                                              style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
                                               <div class="form-group d-flex m-5">
                                                   <label>Название кинотеатра</label>
                                                   <input type="text" class="form-control w-50 ml-5" name="title[]"
@@ -46,11 +46,10 @@
 
 
                                                       <div class="btn-inner">
-                                                          <div class="btn-delete btn-image-main"
-                                                              style="margin-left: 235px;">
-                                                              <span class="delete__image">x</span>
-                                                          </div>
-                                                      </div>
+                                                        <div class="mt-5">
+                                                            <span class="btn btn-danger delete__item">Удалить</span>
+                                                        </div>
+                                                    </div>
                                                   </div>
 
                                               </div>
@@ -65,7 +64,7 @@
                                   @foreach ($contacts as $contact)
                                       <div class="contact__form m-5">
                                           <div
-                                              style="border: 3px solid rgb(0, 0, 0);padding-bottom:100px;border-radius:20px;">
+                                              style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
                                               <div class="form-group d-flex m-5">
                                                   <label>Название кинотеатра</label>
                                                   <input type="text" class="form-control w-50 ml-5" name="title[]"
@@ -94,9 +93,8 @@
 
 
                                                       <div class="btn-inner">
-                                                          <div class="btn-delete btn-image-main"
-                                                              style="margin-left: 235px;">
-                                                              <span class="delete__image">x</span>
+                                                          <div class="mt-5">
+                                                              <span class="btn btn-danger delete__item">Удалить</span>
                                                           </div>
                                                       </div>
                                                   </div>
@@ -170,25 +168,6 @@
               position: relative;
           }
 
-          .btn-inner .btn-delete {
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-              position: relative;
-
-              margin-left: 135px;
-
-              background-color: red;
-              cursor: pointer;
-          }
-
-          .btn-delete span {
-              color: #fff;
-              position: absolute;
-              font-size: 25px;
-              top: -5px;
-              right: 8px;
-          }
 
       </style>
 
@@ -235,7 +214,7 @@
 
 
           function deleteAll() {
-              document.querySelectorAll(".delete__image").forEach((inputElement) => {
+              document.querySelectorAll(".delete__item").forEach((inputElement) => {
 
                   const dropZoneDelete = inputElement.closest(".contact__form");
 
