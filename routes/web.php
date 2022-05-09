@@ -46,14 +46,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::post('/', 'StoreController')->name('admin.cinema.store');
         Route::get('/{cinema}/edit', 'EditController')->name('admin.cinema.edit');
         Route::patch('/{cinema}', 'UpdateController')->name('admin.cinema.update');
-        // Route::delete('/{cinema}', 'DeleteController')->name('admin.cinema.delete');
+        Route::delete('/{cinema}', 'DeleteController')->name('admin.cinema.delete');
 
         Route::group(['namespace' => 'Hall', 'prefix' => 'halls'], function () {
             Route::get('/create/{cinema}', 'CreateController')->name('admin.hall.create');
             Route::post('/{cinema}', 'StoreController')->name('admin.hall.store');
             Route::get('/{hall}/edit', 'EditController')->name('admin.hall.edit');
             Route::patch('/{hall}', 'UpdateController')->name('admin.hall.update');
-            // Route::delete('/{cinema}', 'DeleteController')->name('admin.cinema.delete');
+            Route::get('/{hall}', 'DeleteController')->name('admin.hall.delete');
         });
     });
 
@@ -103,7 +103,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
         Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
     });
+
+    Route::group(['namespace' => 'Mailing', 'prefix' => 'mailings'], function () {
+        Route::get('/', 'IndexController@index')->name('admin.mailing.index');
+        Route::post('/send', 'IndexController@send')->name('admin.mailing.send');
+        Route::get('/{mailing}', 'IndexController@delete')->name('admin.mailing.delete');
+    });
 });
+
+// end Admin
 
 Route::group(['namespace' => 'Main'], function () {
     Route::get('/', 'IndexController')->name('main.index');
@@ -120,8 +128,6 @@ Route::group(['namespace' => 'Film'], function () {
         Route::get('/soon', 'IndexController')->name('soon.index');
     });
 });
-
-
 
 Route::group(['namespace' => 'Stock'], function () {
     Route::get('/stock', 'IndexController')->name('stock.index');

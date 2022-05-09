@@ -151,15 +151,10 @@
                                                       </a>
                                                   </td>
                                                   <td class="text-left">
-                                                      <form action="#" {{-- {{ route('admin.stock.delete', $hall->id) }} --}} method="POST">
-                                                          @csrf
-                                                          @method('DELETE')
-                                                          <button type="submit" class="btn btn-danger btn-sm">
-                                                              <i class="fas fa-trash"
-                                                                  role="button">&nbsp;&nbsp;Удалить</i>
-                                                          </button>
-                                                      </form>
-                                                  </td>
+                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.hall.delete', $hall->id) }}">
+                                                        <i class="fas fa-trash"></i>&nbsp;&nbsp;Удалить
+                                                    </a>
+                                                </td>
                                               </tr>
                                           @endforeach
                                       </tbody>
@@ -199,8 +194,7 @@
                                   <input type="submit" class="btn btn-primary font-weight-bolder mr-3" value="Изменить">
 
                           </form>
-                          <form action="#" method="POST">
-                              {{-- {{route('admin.cinema.delete', $cinema->id)}} --}}
+                          <form action="{{route('admin.cinema.delete', $cinema->id)}}" method="POST">
                               @csrf
                               @method('DELETE')
                               <input type="submit" class="btn btn-danger font-weight-bolder" value="Удалить">
