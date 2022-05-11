@@ -7,6 +7,7 @@ use App\Models\BannerBottom;
 use App\Models\BannerTop;
 use App\Models\Film;
 use App\Models\MainPage;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -17,6 +18,7 @@ class IndexController extends Controller
         $bannersTop = BannerTop::all();
         $bannersBottom = BannerBottom::all();
         $films = Film::all();
-        return view('main.index', compact('mainPage', 'bannersTop', 'bannersBottom', 'films'));
+        $pages = Page::all();
+        return view('main.index', compact('mainPage', 'bannersTop', 'bannersBottom', 'films', 'pages'));
     }
 }

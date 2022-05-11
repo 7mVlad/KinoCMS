@@ -16,6 +16,9 @@ class StoreController extends Controller
     {
         $data = $request->validated();
 
+        $cinemaIds = $data['cinema_ids'];
+        unset($data['cinema_ids']);
+
         if(isset($data['images'])) {
             $images = $data['images'];
             unset($data['images']);
@@ -43,6 +46,8 @@ class StoreController extends Controller
         $data['main_image'] = Storage::put('/public/images/stock', $data['main_image']);
 
         $stock = Stock::firstOrCreate($data);
+
+        $stock->cinemas()->attach($cinemaIds);
 
         if(isset($images)) {
             foreach ($images as $image) {

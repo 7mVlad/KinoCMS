@@ -69,22 +69,22 @@
                     </button>
                     <div class="collapse navbar-collapse" id="ftco-nav">
                         <ul class="navbar-nav m-auto">
-                            <li class="nav-item"><a href="{{route('poster.index')}}" class="nav-link">Афиша</a></li>
+                            <li class="nav-item"><a href="{{ route('poster.index') }}"
+                                    class="nav-link">Афиша</a></li>
 
                             {{-- <li class="nav-item"><a href="#" class="nav-link">Расписание</a></li> --}}
-                            <li class="nav-item"><a href="{{route('soon.index')}}" class="nav-link">Скоро</a></li>
+                            <li class="nav-item"><a href="{{ route('soon.index') }}"
+                                    class="nav-link">Скоро</a></li>
                             <li class="nav-item"><a href="#" class="nav-link">Кинотеатры</a></li>
-                            <li class="nav-item"><a href="{{route('stock.index')}}" class="nav-link">Акции</a></li>
+                            <li class="nav-item"><a href="{{ route('stock.index') }}"
+                                    class="nav-link">Акции</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">О Кинотеатре</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                    <a class="dropdown-item" href="{{route('news.index')}}">Новости</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '4')}}">Реклама</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '2')}}">Кафе</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '3')}}">Vip-зал</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '5')}}">Детская комната</a>
-                                    <a class="dropdown-item" href="{{route('mobile.show')}}">Мобильное приложение</a>
+                                    @foreach ($pages as $page)
+                                        <a class="dropdown-item" href="{{ $page->id != 6 ? route('page.show', $page->id) : route('mobile.show') }}">{{$page->title}}</a>
+                                    @endforeach
                                     <a class="dropdown-item" href="#">Контакты</a>
                                 </div>
                             </li>
@@ -290,19 +290,19 @@
                                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                     <!-- Links -->
                                     <h6 class="text-uppercase fw-bold mb-4">
-                                        <a href="{{route('poster.index')}}" class="text-reset">Афиша</a>
+                                        <a href="{{ route('poster.index') }}" class="text-reset">Афиша</a>
                                     </h6>
                                     {{-- <p>
                                             <a href="#!" class="text-reset">Расписание</a>
                                         </p> --}}
                                     <p>
-                                        <a href="{{route('soon.index')}}" class="text-reset">Скоро</a>
+                                        <a href="{{ route('soon.index') }}" class="text-reset">Скоро</a>
                                     </p>
                                     <p>
                                         <a href="#!" class="text-reset">Кинотеатры</a>
                                     </p>
                                     <p>
-                                        <a href="{{route('stock.index')}}" class="text-reset">Акции</a>
+                                        <a href="{{ route('stock.index') }}" class="text-reset">Акции</a>
                                     </p>
                                 </div>
                                 <!-- Grid column -->
@@ -314,19 +314,20 @@
                                         <a href="#" class="text-reset">О Кинотеатре</a>
                                     </h6>
                                     <p>
-                                        <a href="{{route('news.index')}}" class="text-reset">Новости</a>
+                                        <a href="{{ route('news.index') }}" class="text-reset">Новости</a>
                                     </p>
                                     <p>
-                                        <a href="{{route('page.show', '4')}}" class="text-reset">Реклама</a>
+                                        <a href="{{ route('page.show', '4') }}" class="text-reset">Реклама</a>
                                     </p>
                                     <p>
-                                        <a href="{{route('page.show', '2')}}" class="text-reset">Кафе-бар</a>
+                                        <a href="{{ route('page.show', '2') }}" class="text-reset">Кафе-бар</a>
                                     </p>
                                     <p>
-                                        <a href="{{route('page.show', '3')}}" class="text-reset">Vip-зал</a>
+                                        <a href="{{ route('page.show', '3') }}" class="text-reset">Vip-зал</a>
                                     </p>
                                     <p>
-                                        <a href="{{route('page.show', '5')}}" class="text-reset">Детская комната</a>
+                                        <a href="{{ route('page.show', '5') }}" class="text-reset">Детская
+                                            комната</a>
                                     </p>
                                     <p>
                                         <a href="#!" class="text-reset">Контакты</a>

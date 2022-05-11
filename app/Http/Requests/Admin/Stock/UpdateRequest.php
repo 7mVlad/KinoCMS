@@ -36,6 +36,7 @@ class UpdateRequest extends FormRequest
             'seo_title' => 'required|string',
             'seo_keywords' => 'required|string',
             'seo_description' => 'required|string',
+            'cinema_ids' => 'nullable|array',
         ];
     }
 }

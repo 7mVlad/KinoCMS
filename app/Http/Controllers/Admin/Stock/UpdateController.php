@@ -17,6 +17,12 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
 
+        $cinemaIds = $data['cinema_ids'];
+        unset($data['cinema_ids']);
+
+        $stock->cinemas()->sync($cinemaIds);
+
+
         if(isset($data['deleteImg'])) {
             $deleteImgs = $data['deleteImg'];
             unset($data['deleteImg']);

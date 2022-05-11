@@ -11,4 +11,9 @@ class Stock extends Model
 
     protected $table = 'stocks';
     protected $guarded = false;
+
+    public function cinemas()
+    {
+        return $this->belongsToMany( Cinema::class, 'stock_cinemas', 'stock_id', 'cinema_id');
+    }
 }

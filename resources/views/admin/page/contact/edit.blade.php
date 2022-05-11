@@ -20,8 +20,12 @@
                                               style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
                                               <div class="form-group d-flex m-5">
                                                   <label>Название кинотеатра</label>
-                                                  <input type="text" class="form-control w-50 ml-5" name="title[]"
-                                                      placeholder="Название кинотеатра" value="{{ old('title') }}">
+                                                  <select name="cinema_id[]" class="form-control w-50 ml-5">
+                                                    <option value="">--- Выберите кинотеатр ---</option>
+                                                    @foreach ($cinemas as $key => $cinema)
+                                                        <option value="{{ $cinema->id }}">{{ $cinema->title }}</option>
+                                                    @endforeach
+                                                </select>
                                               </div>
                                               <div class="form-group d-flex m-5">
                                                   <label>Адресс</label>
@@ -66,9 +70,13 @@
                                           <div
                                               style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
                                               <div class="form-group d-flex m-5">
-                                                  <label>Название кинотеатра</label>
-                                                  <input type="text" class="form-control w-50 ml-5" name="title[]"
-                                                      placeholder="Название кинотеатра" value="{{ $contact->title }}">
+                                                <label>Название кинотеатра</label>
+                                                <select name="cinema_id[]" class="form-control w-50 ml-5">
+                                                  <option value="{{$contact->cinema_id}}">{{$contact->title}}</option>
+                                                  @foreach ($cinemas as $key => $cinema)
+                                                      <option value="{{ $cinema->id }}">{{ $cinema->title }}</option>
+                                                  @endforeach
+                                              </select>
                                               </div>
                                               <div class="form-group d-flex m-5">
                                                   <label>Адресс</label>

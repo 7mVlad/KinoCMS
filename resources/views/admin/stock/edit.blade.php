@@ -124,6 +124,19 @@
                                 <input type="text" class="form-control" name="video_link" placeholder="Ссылка на видео в youtube" value="{{$stock->video_link}}">
                             </div>
 
+                            <div class="form-group w-50">
+                                <label>Кинотеатры</label>
+                                <div class="select2-purple">
+                                    <select name="cinema_ids[]" class="select2" multiple="multiple"
+                                        data-placeholder="Выберите кинотеатры" data-dropdown-css-class="select2-purple"
+                                        style="width: 100%;">
+                                        @foreach ($cinemas as $cinema)
+                                            <option value="{{$cinema->id}}" {{is_array($stock->cinemas->pluck('id')->toArray()) && in_array($cinema->id, $stock->cinemas->pluck('id')->toArray()) ? ' selected' : ''}}>{{$cinema->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             {{-- SEO блок --}}
                             <div class="form-group w-50 ">
                                 <label class=" d-block">SEO блок:</label>

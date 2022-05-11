@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'deleteImg' => 'nullable|array',
-            'title' => 'nullable|array',
+            'cinema_id' => 'nullable|array',
             'address' => 'nullable|array',
             'coordinates' => 'nullable|array',
             'logo_image' => 'nullable|array',
