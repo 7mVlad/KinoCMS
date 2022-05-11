@@ -59,7 +59,7 @@ class StoreController extends Controller
             }
         }
 
-        return redirect()->route('admin.film.index');
+        return redirect()->route('admin.cinema.index');
 
     }
 }

@@ -25,6 +25,7 @@
                                 </label>
                             </div>
 
+
                             {{-- Поле для названия --}}
                             <div class="form-group d-flex ">
                                 <label>Название акции</label>

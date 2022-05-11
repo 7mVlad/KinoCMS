@@ -1,3 +1,6 @@
+
+
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -23,6 +26,15 @@
                     <i class="nav-icon fas fa-light fa-file"></i>
                     <p>
                         Баннеры
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{route('admin.schedule.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-solid fa-clipboard-list"></i>
+                    <p>
+                        Расписание
                     </p>
                 </a>
             </li>

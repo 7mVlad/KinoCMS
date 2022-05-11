@@ -12,11 +12,10 @@
 
                 <div class="row">
                     <div class="col-10 m-auto">
-                        <h2 class="font-weight-bold text-center m-5">E-mail</h2>
 
                         <form action="{{ route('admin.mailing.send') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div id="users" hidden>
+                            <div class="mt-5" id="users" hidden>
 
                                 <table class="table table-striped table-dark m-auto text-center">
                                     <thead>
@@ -60,6 +59,8 @@
                             </div>
 
                             <div id="main">
+                                <h2 class="font-weight-bold text-center m-5">E-mail</h2>
+
                                 <div class="form-group d-flex">
                                     <label>Выбрать email кому слать</label>
                                     <input class="ml-5 mr-3 users" type="checkbox" name="user" style="transform:scale(2);"
@@ -82,15 +83,25 @@
 
                                 <div class="p-3 w-25" style="border: 3px solid #000">
                                     <h5 class="text-center pb-3">Список последних загруженных шаблонов</h3>
-                                    @foreach ($templates as $template)
-                                        <div class=" d-block">
-                                            <input class="template mr-3" type="checkbox" name="template" value="{{ $template->path }}">
-                                            <label>{{ $template->title }}</label>
-                                            <a class="btn btn-danger btn-sm ml-5" href="{{ route('admin.mailing.delete', $template) }}">
-                                                <i class="fas fa-trash"></i>&nbsp;&nbsp;Удалить
-                                            </a>
-                                        </div>
-                                    @endforeach
+                                        @foreach ($templates as $template)
+                                            <div class="d-block pb-2">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input class="template mr-3" type="checkbox" name="template"
+                                                            value="{{ $template->path }}">
+                                                        <label>{{ $template->title }}</label>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a class="btn btn-danger btn-sm ml-5"
+                                                            href="{{ route('admin.mailing.delete', $template) }}">
+                                                            <i class="fas fa-trash"></i>&nbsp;&nbsp;Удалить
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        @endforeach
                                 </div>
 
                                 <input type="submit" class="btn btn-primary d-block m-auto font-weight-bolder"

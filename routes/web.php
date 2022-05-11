@@ -109,6 +109,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::post('/send', 'IndexController@send')->name('admin.mailing.send');
         Route::get('/{mailing}', 'IndexController@delete')->name('admin.mailing.delete');
     });
+
+    Route::group(['namespace' => 'Schedule', 'prefix' => 'schedule'], function () {
+        Route::get('/', 'IndexController')->name('admin.schedule.index');
+        Route::get('/create', 'CreateController@index')->name('admin.schedule.create');
+        Route::get('/{id}', 'CreateController@ajax')->name('admin.schedule.ajax');
+        Route::post('/', 'StoreController')->name('admin.schedule.store');
+        Route::get('/{schedule}/edit', 'EditController')->name('admin.schedule.edit');
+        Route::patch('/{schedule}', 'UpdateController')->name('admin.schedule.update');
+        Route::delete('/{schedule}', 'DeleteController')->name('admin.schedule.delete');
+    });
 });
 
 // end Admin
