@@ -399,6 +399,8 @@ previewBeforeUpload("bgImage");
         deleteAll();
 
     }
+    inputAll();
+    deleteAll();
 
     function add_img() {
 

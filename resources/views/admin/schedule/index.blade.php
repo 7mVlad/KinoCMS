@@ -30,7 +30,7 @@
                 <tbody>
                     @foreach ($schedules as $schedule)
                     <tr>
-                        <td>{{$schedule->film_title}}</td>
+                        <td>{{$schedule->getFilm->title}}</td>
                         <td>{{$schedule->cost}}</td>
                         <td>{{$schedule->date}}</td>
                         <td>{{$schedule->time}}</td>

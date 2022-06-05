@@ -18,7 +18,7 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
 
-        if(isset($data['bg_image'])) {
+        if (isset($data['bg_image'])) {
 
             $mainPage = MainPage::find(1);
             $image = $data['bg_image'];
@@ -32,111 +32,159 @@ class UpdateController extends Controller
             Storage::delete($imagePath);
         }
 
-        if(isset($data['position'])) {
-            if($data['position'] == 'top') {
-                if(isset($data['deleteImg'])) {
-                    $deleteImgs = $data['deleteImg'];
+        // if(isset($data['position'])) {
+        //     if($data['position'] == 'top') {
+        //         if(isset($data['deleteImg'])) {
+        //             $deleteImgs = $data['deleteImg'];
 
-                    foreach($deleteImgs as $key => $deleteImg) {
-                        DB::table('banner_top')->where('path', '=', $deleteImg)->delete();
-                    }
-                }
+        //             foreach($deleteImgs as $key => $deleteImg) {
+        //                 DB::table('banner_top')->where('path', '=', $deleteImg)->delete();
+        //             }
+        //         }
 
-                if(isset($data['images'])) {
-                    $images = $data['images'];
-                    $urls = $data['url'];
-                    $texts = $data['text'];
+        //         if(isset($data['images'])) {
+        //             $images = $data['images'];
+        //             $urls = $data['url'];
+        //             $texts = $data['text'];
 
-                    foreach($images as $key => $image) {
-                        $banner = BannerTop::find($key);
-                        if($banner != null) {
-                            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
-                            Storage::put('/public/images/banner', $image);
+        //             foreach($images as $key => $image) {
+        //                 $banner = BannerTop::find($key);
+        //                 if($banner != null) {
+        //                     $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
+        //                     Storage::put('/public/images/banner', $image);
 
-                            $banner->update([
-                                    'id' => $key,
-                                    'image' => $imagePath,
-                                    'url' => $urls[$key],
-                                    'text' => $texts[$key],
-                                ]);
+        //                     $banner->update([
+        //                             'id' => $key,
+        //                             'image' => $imagePath,
+        //                             'url' => $urls[$key],
+        //                             'text' => $texts[$key],
+        //                         ]);
 
-                            Storage::delete($imagePath);
+        //                     Storage::delete($imagePath);
 
-                        } else {
-                            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
-                            Storage::put('/public/images/banner', $image);
+        //                 } else {
+        //                     $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
+        //                     Storage::put('/public/images/banner', $image);
 
-                            BannerTop::create(
-                                [
-                                    'id' => $key,
-                                    'image' => $imagePath,
-                                    'url' => $urls[$key],
-                                    'text' => $texts[$key],
-                                ]
-                            );
-                            Storage::delete($imagePath);
-                        }
+        //                     BannerTop::create(
+        //                         [
+        //                             'id' => $key,
+        //                             'image' => $imagePath,
+        //                             'url' => $urls[$key],
+        //                             'text' => $texts[$key],
+        //                         ]
+        //                     );
+        //                     Storage::delete($imagePath);
+        //                 }
 
 
+        //             }
+        //         }
+        //     }
+        //     else {
+        //         if(isset($data['deleteImg'])) {
+        //             $deleteImgs = $data['deleteImg'];
+
+        //             foreach($deleteImgs as $key => $deleteImg) {
+        //                 DB::table('banner_bottom')->where('path', '=', $deleteImg)->delete();
+        //             }
+        //         }
+
+        //         if(isset($data['images'])) {
+        //             $images = $data['images'];
+        //             $urls = $data['url'];
+        //             $texts = $data['text'];
+
+        //             foreach($images as $key => $image) {
+        //                 $banner = BannerBottom::find($key);
+        //                 if($banner != null) {
+        //                     $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
+        //                     Storage::put('/public/images/banner', $image);
+
+        //                     $banner->update(
+        //                         [
+        //                             'id' => $key,
+        //                             'image' => $imagePath,
+        //                             'url' => $urls[$key],
+        //                             'text' => $texts[$key],
+        //                         ]
+        //                     );
+        //                     Storage::delete($imagePath);
+        //                 } else {
+        //                     $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
+        //                     Storage::put('/public/images/banner', $image);
+
+        //                     BannerBottom::create(
+        //                         [
+        //                             'id' => $key,
+        //                             'image' => $imagePath,
+        //                             'url' => $urls[$key],
+        //                             'text' => $texts[$key],
+        //                         ]
+        //                     );
+        //                     Storage::delete($imagePath);
+        //                 }
+
+
+        //             }
+        //         }
+        //     }
+        // }
+
+
+        if (isset($data['position'])) {
+            if (isset($data['deleteImg'])) {
+                $deleteImgs = $data['deleteImg'];
+
+                foreach ($deleteImgs as $key => $deleteImg) {
+                    if ($data['position'] == 'top') {
+                        DB::table('banner_top')->where('image', '=', $deleteImg)->delete();
+                    } else {
+                        DB::table('banner_bottom')->where('image', '=', $deleteImg)->delete();
                     }
                 }
             }
-            else {
-                if(isset($data['deleteImg'])) {
-                    $deleteImgs = $data['deleteImg'];
 
-                    foreach($deleteImgs as $key => $deleteImg) {
-                        DB::table('banner_bottom')->where('path', '=', $deleteImg)->delete();
-                    }
-                }
+            if (isset($data['images'])) {
+                $images = $data['images'];
+                $urls = $data['url'];
+                $texts = $data['text'];
 
-                if(isset($data['images'])) {
-                    $images = $data['images'];
-                    $urls = $data['url'];
-                    $texts = $data['text'];
-
-                    foreach($images as $key => $image) {
+                foreach ($images as $key => $image) {
+                    if ($data['position'] == 'top') {
+                        $banner = BannerTop::find($key);
+                    } else {
                         $banner = BannerBottom::find($key);
-                        if($banner != null) {
-                            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
-                            Storage::put('/public/images/banner', $image);
-
-                            $banner->update(
-                                [
-                                    'id' => $key,
-                                    'image' => $imagePath,
-                                    'url' => $urls[$key],
-                                    'text' => $texts[$key],
-                                ]
-                            );
-                            Storage::delete($imagePath);
-                        } else {
-                            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
-                            Storage::put('/public/images/banner', $image);
-
-                            BannerBottom::create(
-                                [
-                                    'id' => $key,
-                                    'image' => $imagePath,
-                                    'url' => $urls[$key],
-                                    'text' => $texts[$key],
-                                ]
-                            );
-                            Storage::delete($imagePath);
-                        }
-
-
                     }
+
+                    $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/banner', $image);
+                    Storage::put('/public/images/banner', $image);
+
+                    if ($banner != null) {
+                        $banner->update([
+                                'id' => $key,
+                                'image' => $imagePath,
+                                'url' => $urls[$key],
+                                'text' => $texts[$key],
+                            ]);
+                    } else {
+
+                        BannerBottom::create([
+                                'id' => $key,
+                                'image' => $imagePath,
+                                'url' => $urls[$key],
+                                'text' => $texts[$key],
+                            ]);
+                    }
+
+                    Storage::delete($imagePath);
                 }
             }
         }
 
 
 
+
         return redirect()->route('admin.banner.index');
     }
-
-
-
-
 }

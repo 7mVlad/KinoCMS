@@ -64,9 +64,9 @@
                         <ul class="navbar-nav m-auto">
                             <li class="nav-item"><a href="{{route('poster.index')}}" class="nav-link">Афиша</a></li>
 
-                            {{-- <li class="nav-item"><a href="#" class="nav-link">Расписание</a></li> --}}
+                            <li class="nav-item"><a href="{{route('schedule.index')}}" class="nav-link">Расписание</a></li>
                             <li class="nav-item"><a href="{{route('soon.index')}}" class="nav-link">Скоро</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Кинотеатры</a></li>
+                            <li class="nav-item"><a href="{{route('cinema.index')}}" class="nav-link">Кинотеатры</a></li>
                             <li class="nav-item"><a href="{{route('stock.index')}}" class="nav-link">Акции</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"

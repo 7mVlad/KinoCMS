@@ -21,7 +21,7 @@
                                         <select name="cinema_id" class="form-control">
                                             <option value="">--- Выберите кинотеатр ---</option>
                                             @foreach ($cinemas as $key => $cinema)
-                                                <option value="{{ $key }}">{{ $cinema->title }}</option>
+                                                <option value="{{ $cinema->id }}">{{ $cinema->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -69,7 +69,6 @@
         $(document).ready(function() {
             $('select[name="cinema_id"]').on('change', function() {
                 var cinemaID = $(this).val();
-                cinemaID++;
                 if (cinemaID) {
                     $.ajax({
                         url: 'http://127.0.0.1:8000/admin/schedule/' + cinemaID,

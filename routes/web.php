@@ -139,6 +139,12 @@ Route::group(['namespace' => 'Film'], function () {
     });
 });
 
+Route::group(['namespace' => 'Schedule'], function () {
+    Route::get('/schedule', 'IndexController')->name('schedule.index');
+    Route::get('/booking/{id}', 'BookingController@index')->name('booking.index');
+    Route::post('/booking/store', 'BookingController@bookingStore')->name('booking.store');
+});
+
 Route::group(['namespace' => 'Stock'], function () {
     Route::get('/stock', 'IndexController')->name('stock.index');
     Route::get('/stocks/{stock}', 'ShowController')->name('stock.show');
@@ -157,3 +163,8 @@ Route::group(['namespace' => 'Page'], function () {
     });
 });
 
+
+Route::group(['namespace' => 'Cinema'], function () {
+    Route::get('/cinema', 'IndexController')->name('cinema.index');
+    Route::get('/cinema/{cinema}', 'ShowController')->name('cinema.show');
+});

@@ -11,4 +11,13 @@ class Schedule extends Model
 
     protected $table = 'schedules';
     protected $guarded = false;
+
+    public function getHall() {
+        return $this->hasOne(Hall::class, 'id', 'hall_id');
+    }
+
+    public function getFilm() {
+        return $this->hasOne(Film::class, 'id', 'film_id');
+    }
+
 }

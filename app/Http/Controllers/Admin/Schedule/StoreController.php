@@ -15,9 +15,6 @@ class StoreController extends Controller
     {
         $data = $request->validated();
 
-        $film = Film::find($data['film_id']);
-        $data['film_title'] = $film->title;
-
         Schedule::create($data);
 
         return redirect()->route('admin.schedule.index');
