@@ -7,13 +7,14 @@ use App\Models\News;
 use App\Models\SeoBlock;
 use Illuminate\Http\Request;
 
-class DeleteController extends Controller
+class DeleteController extends BaseController
 {
     public function __invoke(News $news)
     {
-        $seoBlock = SeoBlock::find($news->seo_block_id);
-        $seoBlock->delete();
+        SeoBlock::find($news->seo_block_id)->delete();
+
         $news->delete();
+
         return redirect()->route('admin.news.index');
     }
 }

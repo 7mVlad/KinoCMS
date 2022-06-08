@@ -99,15 +99,12 @@
                                               <input type="file" id="img-{{ $i }}" accept="image/*"
                                                   name="images[]">
                                               <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                  @if (isset($cinemaPaths[$i]))
-                                                      <img src="{{ $cinemaPaths[$i] }}" alt=""
+                                                  @if (isset($cinemaImages[$i]))
+                                                      <img src="{{ $cinemaImages[$i] }}" alt=""
                                                           style="width: 150px; height: 150px">
                                                       <div class="bg-plus" hidden>
                                                           <span>+</span>
                                                       </div>
-                                                      {{-- @php
-                                                    $path = $cinemaPaths[$i];
-                                                @endphp --}}
                                                   @else
                                                       <img src="https://bit.ly/3ubuq5o" alt=""
                                                           style="width: 150px; height: 150px">

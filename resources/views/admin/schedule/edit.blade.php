@@ -21,24 +21,22 @@
                                     <div class="form-group w-25">
                                         <label>Выберите кинотеатр:</label>
                                         <select name="cinema_id" class="form-control">
-                                            <option value="{{$schedule->cinema_id}}">{{$cinema->title}}</option>
-                                            @foreach ($cinemas as $key => $cinema)
-                                                <option value="{{ $key }}">{{ $cinema->title }}</option>
+                                            @foreach ($cinemas as $cinema)
+                                                <option value="{{ $cinema->id }}" {{$schedule->cinema_id == $cinema->id ? 'selected' : ''}}>{{ $cinema->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group w-25">
                                         <label>Выберите зал:</label>
                                         <select name="hall_id" class="form-control">
-                                            <option value="{{$hall->id}}">{{$hall->hall_number}}</option>
+                                            <option value="{{$schedule->getHall->id}}">{{$schedule->getHall->hall_number}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group w-25">
                                         <label>Выберите фильм:</label>
                                         <select name="film_id" class="form-control">
-                                            <option value="{{$schedule->film_id}}">{{$schedule->film_title}}</option>
                                             @foreach ($films as $film)
-                                                <option value="{{ $film->id }}">{{ $film->title }}</option>
+                                                <option value="{{ $film->id }}" {{$schedule->film_id == $film->id ? 'selected' : ''}}>{{ $film->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>

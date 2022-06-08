@@ -17,10 +17,8 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->date('date');
             $table->boolean('status')->default(0);
             $table->string('main_image')->nullable();
-            $table->string('video_link');
             $table->foreignId('seo_block_id')->constrained('seo_block')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

@@ -13,30 +13,18 @@
                             @csrf
                             @method('PATCH')
 
-                            @if($stock->status == 1)
-                                <div class="form-group radio-switch">
-                                    <input type="radio" name="status" id="public" value="0">
-                                    <label for="public">
-                                    ВЫКЛ
-                                    </label>
-                                    <input type="radio" name="status" id="private" value="1" checked>
-                                    <label for="private">
-                                    ВКЛ
-                                    </label>
-                                </div>
-                            @else
                             <div class="form-group radio-switch">
-                                <input type="radio" name="status" id="public" value="0" checked>
+                                <input type="radio" name="status" id="public" value="0"
+                                    {{ $stock->status == 0 ? 'checked' : '' }}>
                                 <label for="public">
-                                ВЫКЛ
+                                    ВЫКЛ
                                 </label>
-                                <input type="radio" name="status" id="private" value="1">
+                                <input type="radio" name="status" id="private" value="1"
+                                    {{ $stock->status == 1 ? 'checked' : '' }}>
                                 <label for="private">
-                                ВКЛ
+                                    ВКЛ
                                 </label>
                             </div>
-                            @endif
-
 
 
                             {{-- Поле для названия --}}
@@ -92,8 +80,8 @@
                                             <input type="file" id="img-{{ $i }}" accept="image/*"
                                                 name="images[]">
                                             <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                @if(isset($stockPaths[$i]))
-                                                <img src="{{ $stockPaths[$i] }}" alt=""
+                                                @if(isset($stockImages[$i]))
+                                                <img src="{{ $stockImages[$i] }}" alt=""
                                                     style="width: 150px; height: 150px">
                                                 <div class="bg-plus" hidden>
                                                     <span>+</span>

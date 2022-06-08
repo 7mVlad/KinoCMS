@@ -15,9 +15,9 @@ class CreateContactsTable extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->foreignId('cinema_id')->constrained('cinemas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('address');
-            $table->string('coordinates');
+            $table->text('coordinates');
             $table->string('logo_image');
             $table->timestamps();
         });

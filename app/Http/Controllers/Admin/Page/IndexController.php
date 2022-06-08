@@ -7,7 +7,7 @@ use App\Models\MainPage;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke()
     {

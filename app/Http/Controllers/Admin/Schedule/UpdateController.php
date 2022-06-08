@@ -14,11 +14,6 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
 
-        if(empty($data['film_title'])) {
-            $film = Film::find($data['film_id']);
-            $data['film_title'] = $film->title;
-        }
-
         $schedule->update($data);
 
         return redirect()->route('admin.schedule.index');

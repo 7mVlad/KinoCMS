@@ -11,4 +11,8 @@ class Contact extends Model
 
     protected $table = 'contacts';
     protected $guarded = false;
+
+    public function getCinema() {
+        return $this->hasOne(Cinema::class, 'id', 'cinema_id');
+    }
 }

@@ -18,9 +18,7 @@ class EditController extends Controller
     {
         $cinemas = DB::table("cinemas")->get();
         $films = Film::all();
-        $cinema = Cinema::find($schedule->cinema_id);
-        $hall = Hall::find($schedule->hall_id);
 
-        return view('admin.schedule.edit', compact('schedule', 'cinema', 'cinemas', 'films', 'hall'));
+        return view('admin.schedule.edit', compact('schedule', 'cinemas', 'films',));
     }
 }

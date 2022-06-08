@@ -19,7 +19,7 @@
                                 <label for="public">
                                   ВЫКЛ
                                 </label>
-                                <input type="radio" name="status" id="private" value="1">
+                                <input type="radio" name="status" id="private" value="1" checked>
                                 <label for="private">
                                   ВКЛ
                                 </label>

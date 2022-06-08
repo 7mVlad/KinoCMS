@@ -9,6 +9,7 @@ use App\Models\Film;
 use App\Models\MainPage;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {

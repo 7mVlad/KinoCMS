@@ -69,16 +69,15 @@
                             <li class="nav-item"><a href="{{route('cinema.index')}}" class="nav-link">Кинотеатры</a></li>
                             <li class="nav-item"><a href="{{route('stock.index')}}" class="nav-link">Акции</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">О Кинотеатре</a>
+                                <a class="nav-link dropdown-toggle" href="{{ route('page.show', 1) }}" id="dropdown04">О Кинотеатре</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                                     <a class="dropdown-item" href="{{route('news.index')}}">Новости</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '4')}}">Реклама</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '2')}}">Кафе</a>
-                                    <a class="dropdown-item" href="{{route('page.show', '3')}}">Vip-зал</a>
+                                    <a class="dropdown-item" href="{{route('page.show', '2')}}">Реклама</a>
+                                    <a class="dropdown-item" href="{{route('page.show', '3')}}">Кафе</a>
+                                    <a class="dropdown-item" href="{{route('page.show', '4')}}">Vip-зал</a>
                                     <a class="dropdown-item" href="{{route('page.show', '5')}}">Детская комната</a>
                                     <a class="dropdown-item" href="{{route('mobile.show')}}">Мобильное приложение</a>
-                                    <a class="dropdown-item" href="#">Контакты</a>
+                                    <a class="dropdown-item" href="{{route('contact.index')}}">Контакты</a>
                                 </div>
                             </li>
                         </ul>

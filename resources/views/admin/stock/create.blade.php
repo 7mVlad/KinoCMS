@@ -16,11 +16,11 @@
 
                             {{-- Поле для статуса --}}
                             <div class="form-group radio-switch">
-                                <input type="radio" name="status" id="public" value="0">
+                                <input type="radio" name="status" id="public" value="0" >
                                 <label for="public">
                                     ВЫКЛ
                                 </label>
-                                <input type="radio" name="status" id="private" value="1">
+                                <input type="radio" name="status" id="private" value="1" checked>
                                 <label for="private">
                                     ВКЛ
                                 </label>

@@ -12,7 +12,7 @@
 
                         @foreach ($cinemas as $cinema)
                             <div class="col-4">
-                                <a href="#">
+                                <a href="{{route('cinema.show', $cinema->id)}}">
                                     <img src="{{ Storage::url($cinema->logo_image) }}" style="width: 100%"
                                         height="300">
                                     <h4 class="text-center font-weight-bolder pt-3">{{ $cinema->title }}</h4>

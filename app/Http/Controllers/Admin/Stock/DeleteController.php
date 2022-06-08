@@ -7,13 +7,14 @@ use App\Models\SeoBlock;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
-class DeleteController extends Controller
+class DeleteController extends BaseController
 {
     public function __invoke(Stock $stock)
     {
-        $seoBlock = SeoBlock::find($stock->seo_block_id);
-        $seoBlock->delete();
+        SeoBlock::find($stock->seo_block_id)->delete();
+
         $stock->delete();
+
         return redirect()->route('admin.stock.index');
     }
 }

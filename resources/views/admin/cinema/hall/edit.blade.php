@@ -94,8 +94,8 @@
                                               <input type="file" id="img-{{ $i }}" accept="image/*"
                                                   name="images[]">
                                               <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                  @if (isset($hallPaths[$i]))
-                                                      <img src="{{ $hallPaths[$i] }}" alt=""
+                                                  @if (isset($hallImages[$i]))
+                                                      <img src="{{ $hallImages[$i] }}" alt=""
                                                           style="width: 150px; height: 150px">
                                                       <div class="bg-plus" hidden>
                                                           <span>+</span>

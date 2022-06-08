@@ -72,20 +72,26 @@
                             <li class="nav-item"><a href="{{ route('poster.index') }}"
                                     class="nav-link">Афиша</a></li>
 
-                            <li class="nav-item"><a href="{{route('schedule.index')}}" class="nav-link">Расписание</a></li>
+                            <li class="nav-item"><a href="{{ route('schedule.index') }}"
+                                    class="nav-link">Расписание</a></li>
                             <li class="nav-item"><a href="{{ route('soon.index') }}"
                                     class="nav-link">Скоро</a></li>
-                            <li class="nav-item"><a href="{{route('cinema.index')}}" class="nav-link">Кинотеатры</a></li>
+                            <li class="nav-item"><a href="{{ route('cinema.index') }}"
+                                    class="nav-link">Кинотеатры</a></li>
                             <li class="nav-item"><a href="{{ route('stock.index') }}"
                                     class="nav-link">Акции</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">О Кинотеатре</a>
+                                <a class="nav-link dropdown-toggle" href="{{ route('page.show', 1) }}"
+                                    id="dropdown04">О Кинотеатре</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="{{ route('news.index') }}">Новости</a>
                                     @foreach ($pages as $page)
-                                        <a class="dropdown-item" href="{{ $page->id != 6 ? route('page.show', $page->id) : route('mobile.show') }}">{{$page->title}}</a>
+                                        @if ($page->id != 1)
+                                            <a class="dropdown-item"
+                                                href="{{ $page->id != 6 ? route('page.show', $page->id) : route('mobile.show') }}">{{ $page->title }}</a>
+                                        @endif
                                     @endforeach
-                                    <a class="dropdown-item" href="#">Контакты</a>
+                                    <a class="dropdown-item" href="{{ route('contact.index') }}">Контакты</a>
                                 </div>
                             </li>
                         </ul>
@@ -168,7 +174,7 @@
                         @foreach ($films as $film)
                             @if ($film->release == 1)
                                 <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                    <a class="text-dark" href="#">
+                                    <a class="text-dark" href="{{ route('film.show', $film->id) }}">
                                         <img width="100%" height="100%" src="{{ Storage::url($film->main_image) }}">
                                         <h6 class="mt-2">{{ $film->title }}</h6>
                                         <div class="btn btn-success btn-sm">Купить билет</div>
@@ -189,7 +195,7 @@
                         @foreach ($films as $film)
                             @if ($film->release == 0)
                                 <div class="col-3 text-center mt-5 pb-5" style="height: 300px">
-                                    <a class="text-dark" href="#">
+                                    <a class="text-dark" href="{{ route('film.show', $film->id) }}">
                                         <img width="100%" height="100%" src="{{ Storage::url($film->main_image) }}">
                                         <h6 class="mt-2">{{ $film->title }}</h6>
                                         <div class="btn btn-success btn-sm">Купить билет</div>

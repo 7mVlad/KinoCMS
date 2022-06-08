@@ -12,7 +12,7 @@ class CreateController extends Controller
     public function index()
     {
         $cinemas = DB::table("cinemas")->get();
-        $films = Film::all();
+        $films = DB::table('films')->where('release', '=', '1')->get();
 
         return view('admin.schedule.create',compact('cinemas', 'films'));
     }

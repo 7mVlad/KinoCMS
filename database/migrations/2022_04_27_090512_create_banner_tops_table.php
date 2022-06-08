@@ -14,7 +14,7 @@ class CreateBannerTopsTable extends Migration
     public function up()
     {
         Schema::create('banner_top', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->string('image')->nullable();
             $table->string('url')->nullable();
             $table->string('text')->nullable();

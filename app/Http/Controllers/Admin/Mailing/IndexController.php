@@ -7,9 +7,6 @@ use App\Http\Requests\Admin\Mailing\SendRequest;
 use App\Jobs\MailingJob;
 use App\Models\HtmlTemplate;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
@@ -19,6 +16,7 @@ class IndexController extends Controller
         $users = User::all();
 
         $templates =  collect(HtmlTemplate::orderBy('id', 'desc')->take(3)->get())->reverse();
+
         return view('admin.mailing.index', compact('users', 'templates'));
     }
 
@@ -33,13 +31,16 @@ class IndexController extends Controller
         }
 
         if (isset($data['html'])) {
+
             $htmlTitle = $data['html']->getClientOriginalName();
             $htmlPath = Storage::put('/public/html', $data['html']);
             unset($data['html']);
+
             HtmlTemplate::create([
                 'title' => $htmlTitle,
                 'path' => $htmlPath,
             ]);
+
             $htmlSend = Storage::get($htmlPath);
         } else {
             $htmlSend = Storage::get($data['template']);

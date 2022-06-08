@@ -23,11 +23,12 @@ class CreateUsersTable extends Migration
             $table->string('pseudonym')->nullable();
             $table->string('address')->nullable();
             $table->integer('card_number')->nullable();
-            $table->string('language')->nullable();
-            $table->string('gender')->nullable();
+            $table->string('language')->default('ru');
+            $table->string('gender')->default('man');
             $table->string('phone')->nullable();
             $table->date('birthday')->nullable();
             $table->string('city')->nullable();
+            $table->unsignedSmallInteger('role')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,9 +11,9 @@
                         <div class="row ">
 
                             @foreach ($muchNews as $news)
-                                <div class="col-4 mt-5 pb-5" style="height: 500px">
+                                <div class="col-4 mt-5 pb-5" style="height: 350px">
                                     <a href="{{ route('news.show', $news->id) }}">
-                                    <img width="100%" height="60%" src="{{ Storage::url($news->main_image) }}">
+                                    <img width="100%" height="70%" src="{{ Storage::url($news->main_image) }}">
                                         <div class="mt-2" style="font-size: 22px">{{ $news->title }}</div>
                                     </a>
                                     <div>{{ $news->date }}</div>

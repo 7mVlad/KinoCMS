@@ -11,14 +11,13 @@
                         <div class="row ">
 
                             @foreach ($stocks as $stock)
-                                <div class="col-4 mt-5 pb-5" style="height: 500px">
+                                <div class="col-4 mt-5 pb-5" style="height: 350px">
                                     <a href="{{ route('stock.show', $stock->id) }}">
-                                    <img width="100%" height="60%" src="{{ Storage::url($stock->main_image) }}">
+                                    <img width="100%" height="70%" src="{{ Storage::url($stock->main_image) }}">
                                         <div class="mt-2" style="font-size: 22px">{{ $stock->title }}</div>
                                     </a>
                                     <div>{{ $stock->date }}</div>
                                     <p style="font-size: 14px;line-height:1.4;">{{ $stock->content }}</p>
-
                                 </div>
                             @endforeach
 
@@ -30,3 +29,4 @@
         </div>
     </section>
 @endsection
+

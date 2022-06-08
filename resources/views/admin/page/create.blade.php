@@ -27,8 +27,8 @@
 
                             {{-- Поле для названия --}}
                             <div class="form-group d-flex ">
-                                <label>Название акции</label>
-                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название акции" value="{{ old('title') }}">
+                                <label>Название страницы</label>
+                                <input type="text" class="form-control w-25 mr-5 ml-3" name="title" placeholder="Название страницы" value="{{ old('title') }}">
                             </div>
                             @error('title')
                                 <div class="text-danger">Это поле необходимо для заполнения</div>
@@ -36,8 +36,8 @@
 
                             {{-- Поле для описания --}}
                             <div class="form-group w-75">
-                                <label>Описание акции</label>
-                                <textarea class="form-control" placeholder="Описание акции" name="content"
+                                <label>Описание страницы</label>
+                                <textarea class="form-control" placeholder="Описание страницы" name="content"
                                     style="resize: none; height:150px">{{ old('content') }}</textarea>
                             </div>
                             @error('content')
