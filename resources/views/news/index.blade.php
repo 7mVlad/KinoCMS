@@ -16,7 +16,7 @@
                                     <img width="100%" height="70%" src="{{ Storage::url($news->main_image) }}">
                                         <div class="mt-2" style="font-size: 22px">{{ $news->title }}</div>
                                     </a>
-                                    <div>{{ $news->date }}</div>
+                                    <div>{{date('d.m.Y', strtotime($news->date))}}</div>
                                     <p style="font-size: 14px;line-height:1.4;">{{ $news->content }}</p>
 
                                 </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Mailing\SendRequest;
 use App\Jobs\MailingJob;
 use App\Models\HtmlTemplate;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
@@ -15,7 +16,7 @@ class IndexController extends Controller
     {
         $users = User::all();
 
-        $templates =  collect(HtmlTemplate::orderBy('id', 'desc')->take(3)->get())->reverse();
+        $templates = collect(HtmlTemplate::orderBy('id', 'desc')->take(3)->get())->reverse();
 
         return view('admin.mailing.index', compact('users', 'templates'));
     }
@@ -60,6 +61,5 @@ class IndexController extends Controller
 
         $result = 'Шаблон успешно удален';
         return view('admin.mailing.send', compact('result'));
-
     }
 }

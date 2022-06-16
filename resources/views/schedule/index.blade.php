@@ -34,7 +34,7 @@
                                 <select class="custom-select" name="date">
                                     <option value="">--- Выберите дату ---</option>
                                     @foreach ($schedules as $key => $scheduleDate)
-                                        <option value="{{ $key }}">{{ $key }}</option>
+                                        <option value="{{ $key }}">{{date('d.m.Y', strtotime($key))}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,7 +46,7 @@
 
 
                     @foreach ($schedules as $key => $scheduleDate)
-                        <h4>{{ $key }}</h4>
+                        <h4>{{date('d.m.Y', strtotime($key))}}</h4>
                         <table class="table mb-5 ">
                             <thead class="thead-light">
                                 <tr>
@@ -62,7 +62,7 @@
                                 @foreach ($scheduleDate as $schedule)
                                     @if ($key == $schedule->date)
                                         <tr>
-                                            <td>{{ $schedule->time }}</td>
+                                            <td>{{date('h:i', strtotime($schedule->time))}}</td>
                                             <td>{{ $schedule->getFilm->title }}</td>
                                             <td>{{ $schedule->getHall->hall_number }}</td>
                                             <td>{{ $schedule->cost }}</td>

@@ -49,8 +49,8 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
-                                        <td>{{ $user->created_at }}</td>
-                                        <td>{{ $user->birthday }}</td>
+                                        <td>{{date('d.m.Y', strtotime($user->created_at))}}</td>
+                                        <td>{{isset($user->birthday) ? date('d.m.Y', strtotime($user->birthday)) : ''}}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>{{ $user->name }} {{ $user->last_name }}</td>

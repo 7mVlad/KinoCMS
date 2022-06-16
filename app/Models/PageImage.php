@@ -14,24 +14,24 @@ class PageImage extends Model
     protected $table = 'page_images';
     protected $guarded = false;
 
-    public static function store($page, $images)
+    public static function storeImages($page, $images)
     {
-        $pageImages = DB::table('page_images')->where('page_id', '=', $page->id)->get()->pluck('id')->toArray();
+        $pageImages = DB::table('page_images')->where('page_id', $page->id)->get()->toArray();
 
         foreach ($images as $key => $image) {
 
-            $id = $pageImages[$key] ?? 0;
+            $id = $pageImages[$key]->id ?? 0;
 
-            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/page', $image);
-
-            Storage::put('/public/images/page', $image);
+            $imagePath = Storage::disk('public')->put('images/page', $image);
 
             PageImage::updateOrCreate(['id' => $id], [
                 'path' => $imagePath,
                 'page_id' => $page->id
             ]);
 
-            Storage::delete($imagePath);
+            if(isset($pageImages[$key]->path)) {
+                Storage::disk('public')->delete($pageImages[$key]->path);
+            }
         }
     }
 }

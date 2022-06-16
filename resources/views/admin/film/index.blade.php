@@ -14,7 +14,7 @@
                 </div>
 
                 <h2 class="font-weight-bold text-center">Список текущих фильмов</h2>
-                <div class="row mb-5">
+                <div class="row pb-5">
                     @foreach ($films as $film)
                         @if ($film->release == 1)
                             <div class="col-2 text-center m-5" style="height: 250px">
@@ -29,7 +29,7 @@
                 <!-- /.row -->
 
                 <h2 class="font-weight-bold text-center">Список фильмов которые скоро покажут</h2>
-                <div class="row  mb-5">
+                <div class="row  pb-5">
                     @foreach ($films as $film)
                         @if ($film->release == 0)
                             <div class="col-2 text-center m-5" style="height: 250px">

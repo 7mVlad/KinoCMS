@@ -30,96 +30,91 @@
                               </div>
 
 
-                              {{-- Поле для главной картинки --}}
-                              <div class="form-group mt-5">
-                                  <div class=" d-flex">
-                                      <label>Схема зала</label>
+                               {{-- Поле для схема зала --}}
+                            <div class="form-group mt-5">
+                                <div class="d-flex">
+                                    <label>Схема Зала</label>
 
-                                      <div class="form-element ml-5 mb-5">
-                                          <input type="file" id="img-logo" accept="image/*" name="hall_scheme">
-                                          <label for="img-logo" id="img-logo-preview">
-                                              <img src="{{ Storage::url($hall->hall_scheme) }}" alt=""
-                                                  style="width: 250px; height: 150px">
-                                              <div class="bg-plus" hidden>
-                                                  <span>+</span>
-                                              </div>
-                                          </label>
-                                          {{-- Delete img --}}
-                                          <div class="btn-inner">
-                                              <div class="btn-delete btn-image-logo" id="submit-logo"
-                                                  style="margin-left: 235px;">
-                                                  <span>x</span>
-                                              </div>
-                                          </div>
+                                    <div class="form-element ml-5 mb-5">
 
-                                      </div>
+                                        <label>
+                                            <input type="file" accept="image/*" name="hall_scheme"
+                                                onchange="document.getElementById('schemeImage').src = window.URL.createObjectURL(this.files[0])">
 
-                                  </div>
-                              </div>
+                                            <img id="schemeImage"
+                                                src="{{ isset($hall->hall_scheme) ? Storage::url($hall->hall_scheme) : 'https://bit.ly/3ubuq5o' }}"
+                                                style="width: 250px">
 
-                              {{-- Поле для главной картинки --}}
-                              <div class="form-group mt-5">
-                                  <div class="d-flex">
-                                      <label>Фото верхнего баннера</label>
+                                        </label>
 
-                                      <div class="form-element ml-5 mb-5">
-                                          <input type="file" id="img-banner" accept="image/*" name="top_banner">
-                                          <label for="img-banner" id="img-banner-preview">
-                                              <img src="{{ Storage::url($hall->top_banner) }}" alt=""
-                                                  style="width: 250px; height: 150px">
-                                              <div class="bg-plus">
-                                                  <span>+</span>
-                                              </div>
-                                          </label>
-                                          {{-- Delete img --}}
-                                          <div class="btn-inner">
-                                              <div class="btn-delete btn-image-banner" id="submit-banner"
-                                                  style="margin-left: 235px;">
-                                                  <span>x</span>
-                                              </div>
-                                          </div>
 
-                                      </div>
+                                        {{-- Удаление картинок --}}
+                                        <div class="btn-delete" style="margin-left:235px"
+                                            onclick="imageSchemeDelete('{{ $hall->id ?? '' }}')">
+                                            <span>x</span>
+                                        </div>
 
-                                  </div>
-                              </div>
+                                    </div>
 
-                              {{-- Поле для картинок --}}
-                              <div class="form-group mt-5">
-                                  <div class="d-flex justify-content-between">
-                                      <label>Галерея картинок <br><br> Размер: 1000 х 190</label>
+                                </div>
+                            </div>
 
-                                      @for ($i = 0; $i < 5; $i++)
-                                          <div class="form-element mr-5 mb-5">
-                                              <input type="file" id="img-{{ $i }}" accept="image/*"
-                                                  name="images[]">
-                                              <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                  @if (isset($hallImages[$i]))
-                                                      <img src="{{ $hallImages[$i] }}" alt=""
-                                                          style="width: 150px; height: 150px">
-                                                      <div class="bg-plus" hidden>
-                                                          <span>+</span>
-                                                      </div>
-                                                  @else
-                                                      <img src="https://bit.ly/3ubuq5o" alt=""
-                                                          style="width: 150px; height: 150px">
-                                                      <div class="bg-plus">
-                                                          <span>+</span>
-                                                      </div>
-                                                  @endif
+                            {{-- Поле для верхнего баннера --}}
+                            <div class="form-group mt-5">
+                                <div class="d-flex">
+                                    <label>Фото верхнего баннера</label>
 
-                                              </label>
+                                    <div class="form-element ml-5 mb-5">
 
-                                              {{-- Delete img --}}
-                                              <div class="btn-inner">
-                                                  <div class="btn-delete btn-image" id="submit-{{ $i }}">
-                                                      <span>x</span>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      @endfor
-                                  </div>
-                              </div>
+                                        <label>
+                                            <input type="file" accept="image/*" name="top_banner"
+                                                onchange="document.getElementById('bannerImage').src = window.URL.createObjectURL(this.files[0])">
+
+                                            <img id="bannerImage"
+                                                src="{{ isset($hall->top_banner) ? Storage::url($hall->top_banner) : 'https://bit.ly/3ubuq5o' }}"
+                                                style="width: 250px">
+
+                                        </label>
+
+
+                                        {{-- Удаление картинок --}}
+                                        <div class="btn-delete" style="margin-left:235px"
+                                            onclick="imageBannerDelete('{{ $hall->id ?? '' }}')">
+                                            <span>x</span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {{-- Поле для картинок --}}
+                            <div class="form-group mt-5">
+                                <div class="d-flex justify-content-between">
+                                    <label>Галерея картинок <br><br> Размер: 1000 х 190</label>
+
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <div class="form-element mr-5 mb-5">
+
+                                            <label>
+                                                <input type="file" accept="image/*" name="images[]"
+                                                    onchange="document.getElementById('img-{{ $i }}').src = window.URL.createObjectURL(this.files[0])">
+
+                                                <img id="img-{{ $i }}"
+                                                    src="{{ isset($hallImages[$i]->path) ? Storage::url($hallImages[$i]->path) : 'https://bit.ly/3ubuq5o' }}">
+
+                                            </label>
+
+                                            {{-- Удаление картинок --}}
+                                            <div class="btn-delete"
+                                                onclick="imageDelete('{{ $hallImages[$i]->id ?? '' }}', {{ $i }})">
+                                                <span>x</span>
+                                            </div>
+
+                                        </div>
+                                    @endfor
+                                </div>
+                            </div>
 
                               {{-- SEO блок --}}
                               <div class="form-group w-50 ">

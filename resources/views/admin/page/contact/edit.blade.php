@@ -16,18 +16,84 @@
                             @csrf
                             @method('PATCH')
 
+                            @foreach ($contacts as $key => $contact)
+
+                                <div class="contact__form m-5" id="contact-{{$key}}">
+                                    <div style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
+                                        <div class="form-group d-flex m-5">
+                                            <label>Название кинотеатра</label>
+                                            <select name="cinema_id[]" class="form-control w-50 ml-5">
+                                                @foreach ($cinemas as $cinema)
+                                                    <option value="{{ $cinema->id }}"
+                                                        {{ $cinema->id == $contact->cinema_id ? 'selected' : '' }}>
+                                                        {{ $cinema->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group d-flex m-5">
+                                            <label>Адресс</label>
+                                            <textarea class="form-control w-75 ml-5" placeholder="Адресс" name="address[]" style="resize: none; height:150px">{{ $contact->address }}</textarea>
+                                        </div>
+                                        <div class="form-group d-flex m-5">
+                                            <label>Координаты для карты</label>
+                                            <input type="text" class="form-control w-50 ml-5" name="coordinates[]"
+                                                placeholder="Координаты для карты" value="{{ $contact->coordinates }}">
+                                        </div>
+
+
+                                        {{-- Поле для Логотип --}}
+                                        <div class="form-group m-5">
+                                            <div class="d-flex">
+                                                <label>Лого</label>
+
+                                                <div class="form-element ml-5 mb-5">
+
+                                                    <label>
+                                                        <input type="file" accept="image/*" name="logo_image[]"
+                                                            onchange="document.getElementById('logoImage-{{$key}}').src = window.URL.createObjectURL(this.files[0])">
+                                                        <img id="logoImage-{{$key}}"
+                                                            src="{{ isset($contact->logo_image) ? Storage::url($contact->logo_image) : 'https://bit.ly/3ubuq5o' }}"
+                                                            style="width: 250px">
+
+                                                    </label>
+
+
+                                                    {{-- Удаление картинок --}}
+                                                    <div class="btn-delete" style="margin-left:235px"
+                                                        onclick="contactsDeleteImage('{{ $contact->id ?? '' }}', {{$key}})">
+                                                        <span>x</span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            {{-- Delete Item Contact --}}
+                                            <div class="btn btn-danger" onclick="contactsDelete('{{ $contact->id ?? '' }}', {{$key}})">
+                                                Удалить
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            @endforeach
+
                             <script>
                                 $(document).ready(function () {
-                                    let i = 0;
+                                    let i = 0 + {{count($contacts)}};
                                     $('#add').on('click',function(){
-                                        ++i;
-                                        $('#formInner').before(`<div class="contact__form m-5">
+                                        i++;
+                                        $('#formInner').before(`<div class="contact__form m-5" id="contact-`+ i +`>
                                         <div style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
                                             <div class="form-group d-flex m-5">
                                                 <label>Название кинотеатра</label>
                                                 <select name="cinema_id[]" class="form-control w-50 ml-5">
                                                     <option value="">--- Выберите кинотеатр ---</option>
-                                                    @foreach ($cinemas as $key => $cinema)
+                                                    @foreach ($cinemas as $cinema)
                                                         <option value="{{ $cinema->id }}">{{ $cinema->title }}</option>
                                                     @endforeach
                                                 </select>
@@ -43,31 +109,43 @@
                                                     placeholder="Координаты для карты" value="{{ old('title') }}">
                                             </div>
 
-                                            <div class="form-group d-flex">
-                                                <label class="ml-5 mb-4 mt-3">Лого</label>
+                                            {{-- Поле для Логотип --}}
+                                        <div class="form-group mt-5">
+                                            <div class="d-flex">
+                                                <label>Логотип</label>
 
-                                                <div class="image__item ml-5 pl-5">
-                                                    <div class="drop-zone">
-                                                        <input type="file" name="logo_image[]" accept="image/*"
-                                                            class="drop-zone__input" required>
-                                                        <img src="https://bit.ly/3ubuq5o" class="drop-zone__thumb" alt="">
+                                                <div class="form-element ml-5 mb-5">
+
+                                                    <label>
+                                                        <input type="file" accept="image/*" name="logo_image[]"
+                                                            onchange="document.getElementById('logoImage-`+ i +`').src = window.URL.createObjectURL(this.files[0])">
+
+                                                        <img id="logoImage-`+ i +`"
+                                                            src="https://bit.ly/3ubuq5o"
+                                                            style="width: 250px">
+
+                                                    </label>
+
+
+                                                    {{-- Удаление картинок --}}
+                                                    <div class="btn-delete" style="margin-left:235px"
+                                                        onclick="contactsDeleteImage('{{ $contact->id ?? '' }}', `+ i +`)">
+                                                        <span>x</span>
                                                     </div>
 
-
-                                                    <div class="btn-inner">
-                                                        <div class="mt-5">
-                                                            <span class="btn btn-danger delete__item">Удалить</span>
-                                                        </div>
-                                                    </div>
                                                 </div>
 
                                             </div>
+                                            {{-- Delete Item Contact --}}
+                                            <div class="btn btn-danger" onclick="contactsDelete('{{ $contact->id ?? '' }}', `+ i +`">
+                                                Удалить
+                                            </div>
+                                        </div>
 
                                         </div>
 
                                     </div>`);
-                                        inputAll();
-                                        deleteAll();
+
                                     });
 
 
@@ -77,54 +155,7 @@
 
 
 
-                            @foreach ($contacts as $contact)
-                                <div class="contact__form m-5">
-                                    <div style="border: 3px solid rgb(0, 0, 0);border-radius:20px;">
-                                        <div class="form-group d-flex m-5">
-                                            <label>Название кинотеатра</label>
-                                            <select name="cinema_id[]" class="form-control w-50 ml-5">
-                                                @foreach ($cinemas as $key => $cinema)
-                                                    <option  value="{{ $cinema->id }}"
-                                                        {{ $cinema->id == $contact->cinema_id ? 'selected' : '' }} >
-                                                        {{ $cinema->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group d-flex m-5">
-                                            <label>Адресс</label>
-                                            <textarea class="form-control w-75 ml-5" placeholder="Адресс" name="address[]"
-                                                style="resize: none; height:150px">{{ $contact->address }}</textarea>
-                                        </div>
-                                        <div class="form-group d-flex m-5">
-                                            <label>Координаты для карты</label>
-                                            <input  type="text" class="form-control w-50 ml-5" name="coordinates[]"
-                                                placeholder="Координаты для карты" value="{{ $contact->coordinates }}">
-                                        </div>
 
-                                        <div class="form-group d-flex">
-                                            <label class="ml-5 mb-4 mt-3">Лого</label>
-
-                                            <div class="image__item ml-5 pl-5">
-                                                <div class="drop-zone">
-                                                    <input type="file" name="logo_image[]" accept="image/*"
-                                                        class="drop-zone__input">
-                                                    <img src="{{ $contact->logo_image }}" class="drop-zone__thumb" alt="">
-                                                </div>
-
-
-                                                <div class="btn-inner">
-                                                    <div class="mt-5">
-                                                        <span class="btn btn-danger delete__item">Удалить</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            @endforeach
 
                             <div id="formInner">
 
@@ -168,95 +199,22 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+<script>
+    function contactsDeleteImage(id, i) {
+        document.getElementById('logoImage-' + i).src = 'https://bit.ly/3ubuq5o';
 
-    <style>
-        .drop-zone {
-            width: 250px;
-            height: 150px;
-            cursor: pointer;
-            border: 2px solid #000;
-            border-radius: 10px;
-        }
+    if (id != '') {
+        form.insertAdjacentHTML("afterbegin", '<input type="hidden" name="contactsDeleteImage[]" value="'+id+'">');
+    }
+    }
 
-        .drop-zone__input {
-            display: none;
-        }
+    function contactsDelete(id, i) {
 
-        .drop-zone__thumb {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: #cccccc;
-            background-size: cover;
-            position: relative;
-        }
+    document.getElementById('contact-' + i).remove();
 
-    </style>
-
-    <script>
-        function inputAll() {
-            document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-
-                const dropZoneElement = inputElement.closest(".drop-zone");
-
-                dropZoneElement.addEventListener("click", (e) => {
-                    inputElement.click();
-                });
-
-                inputElement.addEventListener("change", (e) => {
-                    if (inputElement.files.length) {
-
-                        updateThumbnail(dropZoneElement, inputElement.files[0]);
-                    }
-                });
-
-
-            });
-        }
-
-        function updateThumbnail(dropZoneElement, file) {
-
-            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-
-            // Show thumbnail for image files
-            if (file.type.startsWith("image/")) {
-                const reader = new FileReader();
-
-                reader.readAsDataURL(file);
-                let url = URL.createObjectURL(file);
-                reader.onload = () => {
-                    thumbnailElement.src = url;
-                };
-            } else {
-                thumbnailElement.src = null;
-            }
-
-        }
-
-        function deleteAll() {
-            document.querySelectorAll(".delete__item").forEach((inputElement) => {
-
-                const dropZoneDelete = inputElement.closest(".contact__form");
-
-                deleteItem(inputElement, dropZoneDelete);
-
-            });
-        }
-
-        function deleteItem(element, dropZoneDelete) {
-
-            let image = dropZoneDelete.querySelector('img');
-
-            element.onclick = function() {
-                let path = image.src;
-                dropZoneDelete.remove();
-                add_field(path);
-            }
-
-        }
-
-        inputAll();
-        deleteAll();
-    </script>
+    if (id != '') {
+        form.insertAdjacentHTML("afterbegin", '<input type="hidden" name="contactsDelete[]" value="'+id+'">');
+    }
+}
+</script>
 @endsection

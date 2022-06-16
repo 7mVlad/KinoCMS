@@ -30,7 +30,7 @@
                           <tbody>
                               <tr>
                                   <td>Главная страница</td>
-                                  <td>{{ $mainPage->created_at }}</td>
+                                  <td>{{date('d.m.Y', strtotime($mainPage->created_at))}}</td>
                                   @if ($mainPage->status == 1)
                                       <td>ВКЛ</td>
                                   @else
@@ -46,7 +46,7 @@
                               @foreach ($pages as $page)
                                   <tr>
                                       <td>{{ $page->title }}</td>
-                                      <td>{{ $page->created_at }}</td>
+                                      <td>{{date('d.m.Y', strtotime($page->created_at))}}</td>
                                       @if ($page->status == 1)
                                           <td>ВКЛ</td>
                                       @else
@@ -73,7 +73,7 @@
                               @endforeach
                               <tr>
                                   <td>Контакты</td>
-                                  <td>{{ $mainPage->created_at }}</td>
+                                  <td>{{date('d.m.Y', strtotime($mainPage->created_at))}}</td>
                                   @if ($mainPage->status == 1)
                                       <td>ВКЛ</td>
                                   @else

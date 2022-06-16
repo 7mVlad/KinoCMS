@@ -30,7 +30,7 @@
                     @foreach ($newsMuch as $news)
                     <tr>
                         <td>{{$news->title}}</td>
-                        <td>{{$news->date}}</td>
+                        <td>{{date('d.m.Y', strtotime($news->date))}}</td>
                         @if($news->status == 1)
                             <td>ВКЛ</td>
                         @else

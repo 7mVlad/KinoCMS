@@ -14,23 +14,24 @@ class HallImage extends Model
     protected $table = 'hall_images';
     protected $guarded = false;
 
-    public static function store($hall, $images)
+    public static function storeImages($hall, $images)
     {
-        $hallImages = DB::table('hall_images')->where('hall_id', '=', $hall->id)->get()->pluck('id')->toArray();
+        $hallImages = DB::table('hall_images')->where('hall_id', $hall->id)->get()->toArray();
 
         foreach ($images as $key => $image) {
 
-            $id = $hallImages[$key] ?? 0;
+            $id = $hallImages[$key]->id ?? 0;
 
-            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/hall', $image);
-            Storage::put('/public/images/hall', $image);
+            $imagePath = Storage::disk('public')->put('images/hall', $image);
 
             HallImage::updateOrCreate(['id' => $id], [
                 'path' => $imagePath,
                 'hall_id' => $hall->id
             ]);
 
-            Storage::delete($imagePath);
+            if(isset($hallImages[$key]->path)) {
+                Storage::disk('public')->delete($hallImages[$key]->path);
+            }
         }
     }
 }

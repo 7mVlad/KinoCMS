@@ -14,24 +14,24 @@ class StockImage extends Model
     protected $table = 'stock_images';
     protected $guarded = false;
 
-    public static function store($stock, $images)
+    public static function storeImages($stock, $images)
     {
-        $stockImages = DB::table('stock_images')->where('stock_id', '=', $stock->id)->get()->pluck('id')->toArray();
+        $stockImages = DB::table('stock_images')->where('stock_id', $stock->id)->get()->toArray();
 
         foreach ($images as $key => $image) {
 
-            $id = $stockImages[$key] ?? 0;
+            $id = $stockImages[$key]->id ?? 0;
 
-            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/stock', $image);
-
-            Storage::put('/public/images/stock', $image);
+            $imagePath = Storage::disk('public')->put('images/stock', $image);
 
             StockImage::updateOrCreate(['id' => $id], [
                 'path' => $imagePath,
                 'stock_id' => $stock->id
             ]);
 
-            Storage::delete($imagePath);
+            if(isset($stockImages[$key]->path)) {
+                Storage::disk('public')->delete($stockImages[$key]->path);
+            }
         }
     }
 }

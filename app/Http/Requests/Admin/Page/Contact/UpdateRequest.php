@@ -24,7 +24,8 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'deleteImg' => 'nullable|array',
+            'contactsDeleteImage' => 'nullable|array',
+            'contactsDelete' => 'nullable|array',
             'cinema_id' => 'nullable|array',
             'address' => 'nullable|array',
             'coordinates' => 'nullable|array',

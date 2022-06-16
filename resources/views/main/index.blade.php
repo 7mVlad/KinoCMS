@@ -18,7 +18,7 @@
 
     @if (isset($mainPage->bg_banner))
         <div class="col-12"
-            style="background-image: url('{{ $mainPage->bg_banner }}'); background-size: cover;  background-attachment: fixed;">
+            style="background-image: url('{{ Storage::url($mainPage->bg_banner) }}'); background-size: cover;  background-attachment: fixed;">
         @else
             <div class="col-12">
     @endif
@@ -120,34 +120,22 @@
                 data-interval="{{ $mainPage->top_speed_banner }}">
                 <ol class="carousel-indicators">
 
-                    @foreach ($bannersTop as $bannerTop)
-                        @if ($bannerTop->id == 1)
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $bannerTop->id }}"
-                                class="active"></li>
-                        @else
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $bannerTop->id }}"></li>
-                        @endif
+                    @foreach ($bannersTop as $key => $banner)
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $banner->id }}"
+                            class="{{ $key == 0 ? 'active' : '' }}"></li>
                     @endforeach
 
                 </ol>
                 <div class="carousel-inner">
 
-                    @foreach ($bannersTop as $bannerTop)
-                        @if ($bannerTop->id == 1)
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" style="height: 500px;" src="{{ $bannerTop->image }}">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <p>{{ $bannerTop->text }}</p>
-                                </div>
+                    @foreach ($bannersTop as $key => $banner)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <img class="d-block w-100" style="height: 500px;"
+                                src="{{ Storage::url($banner->image) }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <p>{{ $banner->text }}</p>
                             </div>
-                        @else
-                            <div class="carousel-item">
-                                <img class="d-block w-100" style="height: 500px;" src="{{ $bannerTop->image }}">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <p>{{ $bannerTop->text }}</p>
-                                </div>
-                            </div>
-                        @endif
+                        </div>
                     @endforeach
 
                 </div>
@@ -224,18 +212,10 @@
                     data-interval="{{ $mainPage->top_speed_banner }}">
                     <div class="carousel-inner">
 
-                        @foreach ($bannersBottom as $bannerBottom)
-                            @if ($bannerBottom->id == 1)
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100" src="{{ $bannerBottom->image }}"
-                                        style="height: 500px;">
-                                </div>
-                            @else
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="{{ $bannerBottom->image }}"
-                                        style="height: 500px;">
-                                </div>
-                            @endif
+                        @foreach ($bannersBottom as $key => $banner)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <img class="d-block w-100" src="{{ Storage::url($banner->image)}}" style="height: 500px;">
+                            </div>
                         @endforeach
 
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
@@ -288,7 +268,7 @@
                                         <img src="{{ asset('frontAssets/image/store.png') }}" alt="" width="150px">
                                     </div>
 
-                                    <h6 class="pt-5">Разработка сайтов: <br> AVADA-MEDIA</h6>
+                                    <h6 class="pt-5">Разработка сайтов: <br> </h6>
                                 </div>
                                 <!-- Grid column -->
 
@@ -298,14 +278,15 @@
                                     <h6 class="text-uppercase fw-bold mb-4">
                                         <a href="{{ route('poster.index') }}" class="text-reset">Афиша</a>
                                     </h6>
-                                    {{-- <p>
-                                            <a href="#!" class="text-reset">Расписание</a>
-                                        </p> --}}
+                                    <p>
+                                        <a href="{{ route('schedule.index') }}"
+                                            class="text-reset">Расписание</a>
+                                    </p>
                                     <p>
                                         <a href="{{ route('soon.index') }}" class="text-reset">Скоро</a>
                                     </p>
                                     <p>
-                                        <a href="#!" class="text-reset">Кинотеатры</a>
+                                        <a href="{{ route('cinema.index') }}" class="text-reset">Кинотеатры</a>
                                     </p>
                                     <p>
                                         <a href="{{ route('stock.index') }}" class="text-reset">Акции</a>

@@ -14,24 +14,24 @@ class CinemaImage extends Model
     protected $table = 'cinema_images';
     protected $guarded = false;
 
-    public static function store($cinema, $images)
+    public static function storeImages($cinema, $images)
     {
-        $cinemaImages = DB::table('cinema_images')->where('cinema_id', '=', $cinema->id)->get()->pluck('id')->toArray();
+        $cinemaImages = DB::table('cinema_images')->where('cinema_id', $cinema->id)->get()->toArray();
 
         foreach ($images as $key => $image) {
 
-            $id = $cinemaImages[$key] ?? 0;
+            $id = $cinemaImages[$key]->id ?? 0;
 
-            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/cinema', $image);
-
-            Storage::put('/public/images/cinema', $image);
+            $imagePath = Storage::disk('public')->put('images/cinema', $image);
 
             CinemaImage::updateOrCreate(['id' => $id], [
                 'path' => $imagePath,
                 'cinema_id' => $cinema->id
             ]);
 
-            Storage::delete($imagePath);
+            if(isset($cinemaImages[$key]->path)) {
+                Storage::disk('public')->delete($cinemaImages[$key]->path);
+            }
         }
     }
 }

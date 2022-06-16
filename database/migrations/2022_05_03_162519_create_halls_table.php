@@ -17,8 +17,8 @@ class CreateHallsTable extends Migration
             $table->id();
             $table->string('hall_number');
             $table->text('description');
-            $table->string('hall_scheme');
-            $table->string('top_banner');
+            $table->string('hall_scheme')->nullable();
+            $table->string('top_banner')->nullable();
             $table->foreignId('seo_block_id')->constrained('seo_block')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('cinema_id')->constrained('cinemas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -42,25 +42,28 @@
                                     style="resize: none; height:150px" required>{{$stock->content}}</textarea>
                             </div>
 
-                            {{-- Поле для главной картинки --}}
-                            <div class="form-group mt-5">
-                                <div class=" d-flex">
-                                    <label >Главная картинка</label>
+                              {{-- Поле для главной картинки --}}
+                              <div class="form-group mt-5">
+                                <div class="d-flex">
+                                    <label>Главная картинка</label>
 
                                     <div class="form-element ml-5 mb-5">
-                                        <input type="file" id="img-main" accept="image/*" name="main_image">
-                                        <label for="img-main" id="img-main-preview">
-                                            <img src="{{ Storage::url($stock->main_image) }}" alt="" style="width: 250px; height: 150px">
-                                            <div class="bg-plus" hidden>
-                                                <span>+</span>
-                                            </div>
+
+                                        <label>
+                                            <input type="file" accept="image/*" name="main_image"
+                                                onchange="document.getElementById('mainImage').src = window.URL.createObjectURL(this.files[0])">
+
+                                            <img id="mainImage"
+                                                src="{{ isset($stock->main_image) ? Storage::url($stock->main_image) : 'https://bit.ly/3ubuq5o' }}"
+                                                style="width: 250px">
+
                                         </label>
-                                        {{-- Delete img --}}
-                                        <div class="btn-inner">
-                                            <div class="btn-delete btn-image-main" id="submit-main"
-                                                style="margin-left: 235px;">
-                                                <span>x</span>
-                                            </div>
+
+
+                                        {{-- Удаление картинок --}}
+                                        <div class="btn-delete" style="margin-left:235px"
+                                            onclick="imageMainDelete('{{ $stock->id ?? '' }}')">
+                                            <span>x</span>
                                         </div>
 
                                     </div>
@@ -75,32 +78,23 @@
                                     <label>Галерея картинок <br><br> Размер: 1000 х 190</label>
 
                                     @for ($i = 0; $i < 5; $i++)
-
                                         <div class="form-element mr-5 mb-5">
-                                            <input type="file" id="img-{{ $i }}" accept="image/*"
-                                                name="images[]">
-                                            <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                @if(isset($stockImages[$i]))
-                                                <img src="{{ $stockImages[$i] }}" alt=""
-                                                    style="width: 150px; height: 150px">
-                                                <div class="bg-plus" hidden>
-                                                    <span>+</span>
-                                                </div>
-                                                @else
-                                                <img src="https://bit.ly/3ubuq5o" alt=""
-                                                    style="width: 150px; height: 150px">
-                                                <div class="bg-plus">
-                                                    <span>+</span>
-                                                </div>
-                                                @endif
+
+                                            <label>
+                                                <input type="file" accept="image/*" name="images[]"
+                                                    onchange="document.getElementById('img-{{ $i }}').src = window.URL.createObjectURL(this.files[0])">
+
+                                                <img id="img-{{ $i }}"
+                                                    src="{{ isset($stockImages[$i]->path) ? Storage::url($stockImages[$i]->path) : 'https://bit.ly/3ubuq5o' }}">
 
                                             </label>
-                                            {{-- Delete img --}}
-                                            <div class="btn-inner">
-                                                <div class="btn-delete btn-image" id="submit-{{ $i }}">
-                                                    <span>x</span>
-                                                </div>
+
+                                            {{-- Удаление картинок --}}
+                                            <div class="btn-delete"
+                                                onclick="imageDelete('{{ $stockImages[$i]->id ?? '' }}', {{ $i }})">
+                                                <span>x</span>
                                             </div>
+
                                         </div>
                                     @endfor
                                 </div>
@@ -117,7 +111,7 @@
                                 <div class="select2-purple">
                                     <select name="cinema_ids[]" class="select2" multiple="multiple"
                                         data-placeholder="Выберите кинотеатры" data-dropdown-css-class="select2-purple"
-                                        style="width: 100%;">
+                                        style="width: 100%;" required>
                                         @foreach ($cinemas as $cinema)
                                             <option value="{{$cinema->id}}" {{is_array($stock->cinemas->pluck('id')->toArray()) && in_array($cinema->id, $stock->cinemas->pluck('id')->toArray()) ? ' selected' : ''}}>{{$cinema->title}}</option>
                                         @endforeach

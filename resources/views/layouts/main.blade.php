@@ -118,7 +118,7 @@
                                     <img src="{{ asset('frontAssets/image/store.png') }}" alt="" width="150px">
                                 </div>
 
-                                <h6 class="pt-5">Разработка сайтов: <br> AVADA-MEDIA</h6>
+                                <h6 class="pt-5">Разработка сайтов: <br> </h6>
                             </div>
                             <!-- Grid column -->
 
@@ -128,14 +128,14 @@
                                 <h6 class="text-uppercase fw-bold mb-4">
                                     <a href="{{route('poster.index')}}" class="text-reset">Афиша</a>
                                 </h6>
-                                {{-- <p>
-                                        <a href="#!" class="text-reset">Расписание</a>
-                                    </p> --}}
+                                <p>
+                                        <a href="{{ route('schedule.index') }}" class="text-reset">Расписание</a>
+                                    </p>
                                 <p>
                                     <a href="{{route('soon.index')}}" class="text-reset">Скоро</a>
                                 </p>
                                 <p>
-                                    <a href="#!" class="text-reset">Кинотеатры</a>
+                                    <a href="{{ route('cinema.index') }}" class="text-reset">Кинотеатры</a>
                                 </p>
                                 <p>
                                     <a href="{{route('stock.index')}}" class="text-reset">Акции</a>

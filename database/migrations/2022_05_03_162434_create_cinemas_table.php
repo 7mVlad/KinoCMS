@@ -18,8 +18,8 @@ class CreateCinemasTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('conditions');
-            $table->string('logo_image');
-            $table->string('top_banner');
+            $table->string('logo_image')->nullable();
+            $table->string('top_banner')->nullable();
             $table->foreignId('seo_block_id')->constrained('seo_block')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

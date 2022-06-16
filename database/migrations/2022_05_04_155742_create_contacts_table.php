@@ -18,7 +18,7 @@ class CreateContactsTable extends Migration
             $table->foreignId('cinema_id')->constrained('cinemas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('address');
             $table->text('coordinates');
-            $table->string('logo_image');
+            $table->string('logo_image')->nullable();
             $table->timestamps();
         });
     }

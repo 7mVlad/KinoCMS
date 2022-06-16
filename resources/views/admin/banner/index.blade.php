@@ -1,388 +1,308 @@
-  @extends('admin.layouts.main')
-  @section('content')
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+@extends('admin.layouts.main')
+@section('content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
 
-          <div class="row">
-              <div class="col-10 m-auto">
-                  <h2 class=" text-center mt-5 mb-5 font-weight-bold">На главной верх</h2>
-
-
-
-                  <form action="{{ route('admin.banner.update') }}" id="form" method="POST" enctype="multipart/form-data"
-                      style="border: 3px solid rgb(0, 0, 0);padding-bottom: 180px;position: relative;border-radius:20px;">
-                      @csrf
-                      @method('PATCH')
-                      <label class="ml-5 mb-4 mt-3">Размер: 1000х190</label>
-
-                      <input type="text" name="position" value="top" hidden>
-
-                      <div class="btn__add d-flex">
-
-                          <div class="image__inner d-flex " id="formInner-top">
-
-                              <div hidden>
-                                  <div class="image__item-top mt-5 ml-3">
-                                      <div class="drop-zone-top m-auto">
-                                          <input type="file" name="images[]" accept="image/*" class="drop-zone__input-top">
-                                          <img src="https://bit.ly/3ubuq5o" class="drop-zone__thumb-top" alt="">
-                                      </div>
-                                      <label class="mt-3">URL:</label>
-                                      <input class="w-75 form-control d-inline mb-3 url" name="url[]" type="text"
-                                          placeholder="URL">
-                                      <br>
-                                      <label>Текст:</label>
-                                      <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
-                                          placeholder="Текст">
-                                      <div class="btn-inner">
-                                          <div class="btn-delete btn-image-main" style="margin-left: 235px;">
-                                              <span class="delete__image-top">x</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              @foreach ($bannersTop as $banner)
-                                  <div class="image__item-top mt-5 ml-3">
-                                      <div class="drop-zone-top m-auto">
-                                          <input type="file" name="images[]" accept="image/*" class="drop-zone__input-top">
-                                          <img src="{{ $banner->image }}" class="drop-zone__thumb-top" alt="">
-                                      </div>
-                                      <label class="mt-3">URL:</label>
-                                      <input class="w-75 form-control d-inline mb-3 url" name="url[]" type="text"
-                                          placeholder="URL" value="{{ $banner->url }}">
-                                      <br>
-                                      <label>Текст:</label>
-                                      <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
-                                          placeholder="Текст" value="{{ $banner->text }}">
-                                      <div class="btn-inner">
-                                          <div class="btn-delete btn-image-main" style="margin-left: 235px;">
-                                              <span class="delete__image-top">x</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              @endforeach
-
-
-                          </div>
-                          <div class="btn btn-dark" id="add-top"
-                              style="height: 100px;width: 100px;margin-top: 150px;margin-left:20px;">
-                              <span style="display: block;margin-top: -5px;font-size: 64px;font-weight: 700;">+</span>
-                          </div>
-                      </div>
-
-
-                      <input type="submit" class="btn btn-primary" value="Сохранить"
-                          style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
-
-                      <div style="position: absolute; left: 30px; bottom:30px;">
-                          <label>Скорость вращения</label>
-                          <select class="form-select ml-3" aria-label="Default select example" name="news_speed_banner">
-                              @if (isset($mainPage))
-                                  <option value="5000" {{ $mainPage->top_speed_banner == 5000 ? 'selected' : '' }}>5c
-                                  </option>
-                                  <option value="10000" {{ $mainPage->top_speed_banner == 10000 ? 'selected' : '' }}>10c
-                                  </option>
-                                  <option value="15000" {{ $mainPage->top_speed_banner == 15000 ? 'selected' : '' }}>15c
-                                  </option>
-                              @endif
-
-                          </select>
-                      </div>
-
-                  </form>
-
-                  {{-- Фон для страницы --}}
-                  <h2 class="text-center mt-5 mb-5 font-weight-bold">Сквозной баннер на заднем фоне</h2>
-                  <form id="form" action="#" method="post" enctype="multipart/form-data"
-                      style="border: 3px solid rgb(0, 0, 0);padding-bottom: 40px;border-radius:20px;position: relative;">
-                      @csrf
-                      @method('PATCH')
-
-                      <div class="form-group mt-5">
-                          <div class="d-flex">
-                              <label class="pl-5 pr-5">Размер 2000х3000</label>
-
-                              <div class="form-element ml-5 mb-5">
-                                  <input type="file" id="bgImage" accept="image/*" name="bg_image">
-                                  <label for="bgImage" id="bgImage-preview">
-                                      <img src="{{ $mainPage->bg_banner }}" alt="" style="width: 250px; height: 150px">
-                                      <div class="bg-plus">
-                                          <span>+</span>
-                                      </div>
-                                  </label>
-
-                              </div>
-
-                          </div>
-                      </div>
-
-                      <input type="submit" class="btn btn-primary" value="Сохранить"
-                          style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
-                  </form>
+        <div class="row">
+            <div class="col-10 m-auto">
+                <h2 class=" text-center mt-5 mb-5 font-weight-bold">На главной верх</h2>
 
 
 
-                  {{-- Нижний баннер --}}
-                  <h2 class=" text-center mt-5 mb-5 font-weight-bold">На главной Новости Акции</h2>
+                <form action="{{ route('admin.banner.update') }}" id="formTop" method="POST" enctype="multipart/form-data"
+                    style="border: 3px solid rgb(0, 0, 0);position: relative;border-radius:20px;">
+                    @csrf
+                    @method('PATCH')
+                    <label class="ml-5 mt-3">Размер: 1000х190</label>
 
-                  <form action="{{ route('admin.banner.update') }}" id="form" method="POST" enctype="multipart/form-data"
-                      style="border: 3px solid rgb(0, 0, 0);padding-bottom: 180px;position: relative;border-radius:20px;">
-                      @csrf
-                      @method('PATCH')
-                      <label class="ml-5 mb-4 mt-3">Размер: 1000х190</label>
+                    <input type="text" name="position" value="top" hidden>
 
-                      <input type="text" name="position" value="bottom" hidden>
+                    @php
+                        $i = 0;
+                    @endphp
+                    <div class="form-group pl-5">
+                        <div class="d-flex flex-wrap">
 
-                      <div class="btn__add d-flex">
+                            @foreach ($bannersTop as $key => $banner)
+                                @php
+                                    $i++;
+                                @endphp
+                                <div class="item pb-5" id="item-{{ $i }}">
 
-                          <div class="image__inner d-flex " id="formInner-bottom">
+                                    <div class="form-element m-5">
+                                        <label>
+                                            <input type="file" accept="image/*" name="images[]"
+                                                onchange="document.getElementById('img-{{ $i }}').src = window.URL.createObjectURL(this.files[0])">
 
-                              <div hidden>
-                                  <div class="image__item-bottom mt-5 ml-3">
-                                      <div class="drop-zone-bottom m-auto">
-                                          <input type="file" name="images[]" accept="image/*"
-                                              class="drop-zone__input-bottom">
-                                          <img src="https://bit.ly/3ubuq5o" class="drop-zone__thumb-bottom" alt="">
-                                      </div>
-                                      <label class="mt-3">URL:</label>
-                                      <input class="w-75 form-control d-inline mb-3 url" name="url[]" type="text"
-                                          placeholder="URL">
-                                      <br>
-                                      <label>Текст:</label>
-                                      <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
-                                          placeholder="Текст">
-                                      <div class="btn-inner">
-                                          <div class="btn-delete btn-image-main" style="margin-left: 235px;">
-                                              <span class="delete__image-bottom">x</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              @foreach ($bannersBottom as $banner)
-                                  <div class="image__item-bottom mt-5 ml-3">
-                                      <div class="drop-zone-bottom m-auto">
-                                          <input type="file" name="images[]" accept="image/*"
-                                              class="drop-zone__input-bottom">
-                                          <img src="{{ $banner->image }}" class="drop-zone__thumb-bottom" alt="">
-                                      </div>
-                                      <label class="mt-3">URL:</label>
-                                      <input class="w-75 form-control d-inline mb-3 url" name="url[]" type="text"
-                                          placeholder="URL" value="{{ $banner->url }}">
-                                      <br>
-                                      <label>Текст:</label>
-                                      <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
-                                          placeholder="Текст" value="{{ $banner->text }}">
-                                      <div class="btn-inner">
-                                          <div class="btn-delete btn-image-main" style="margin-left: 235px;">
-                                              <span class="delete__image-bottom">x</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              @endforeach
+                                            <img id="img-{{ $i }}" style="width: 200px; height:200px"
+                                                src="{{ isset($banner->image) ? Storage::url($banner->image) : 'https://bit.ly/3ubuq5o' }}">
+
+                                        </label>
+
+                                        {{-- Удаление картинок --}}
+                                        <div class="btn-delete" style="margin-top: -220px;margin-left: 190px;"
+                                            onclick="deleteBannerTop('{{ $banner->id ?? '' }}', {{ $i }})">
+                                            <span>x</span>
+                                        </div>
+                                    </div>
+                                    <label class="pt-5 pb-2">URL:</label>
+                                    <input class="w-75 form-control d-inline ml-2" name="url[]" type="text"
+                                        placeholder="URL" value="{{ $banner->url }}">
+                                    <br>
+                                    <label>Текст:</label>
+                                    <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
+                                        placeholder="Текст" value="{{ $banner->text }}">
+                                </div>
+                            @endforeach
+
+                            <div id="topInner">
+
+                            </div>
+                            <div class="btn btn-dark mr-5" id="addTop"
+                                style="height: 100px;width: 100px;margin-top: 75px;;margin-bottom: 75px;margin-left:20px;">
+                                <span style="display: block;margin-top: -5px;font-size: 64px;font-weight: 700;">+</span>
+                            </div>
+                        </div>
+                    </div>
 
 
-                          </div>
-                          <div class="btn btn-dark" id="add-bottom"
-                              style="height: 100px;width: 100px;margin-top: 150px;margin-left:20px;">
-                              <span style="display: block;margin-top: -5px;font-size: 64px;font-weight: 700;">+</span>
-                          </div>
-                      </div>
+                    <input type="submit" class="btn btn-primary" value="Сохранить"
+                        style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
 
-
-                      <input type="submit" class="btn btn-primary" value="Сохранить"
-                          style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
-
-                      <div style="position: absolute; left: 30px; bottom:30px;">
-                          <label>Скорость вращения</label>
-                          <select class="form-select ml-3" aria-label="Default select example" name="news_speed_banner">
+                    <div style="position: absolute; left: 30px; bottom:30px;">
+                        <label>Скорость вращения</label>
+                        <select class="form-select ml-3" aria-label="Default select example" name="news_speed_banner">
                             @if (isset($mainPage))
-                            <option value="5000" {{ $mainPage->news_speed_banner == 5000 ? 'selected' : '' }}>5c
-                            </option>
-                            <option value="10000" {{ $mainPage->news_speed_banner == 10000 ? 'selected' : '' }}>10c
-                            </option>
-                            <option value="15000" {{ $mainPage->news_speed_banner == 15000 ? 'selected' : '' }}>15c
-                            </option>
-                        @endif
+                                <option value="5000" {{ $mainPage->top_speed_banner == 5000 ? 'selected' : '' }}>5c
+                                </option>
+                                <option value="10000" {{ $mainPage->top_speed_banner == 10000 ? 'selected' : '' }}>10c
+                                </option>
+                                <option value="15000" {{ $mainPage->top_speed_banner == 15000 ? 'selected' : '' }}>15c
+                                </option>
+                            @endif
 
-                          </select>
-                      </div>
+                        </select>
+                    </div>
 
+                </form>
 
-                  </form>
+                {{-- Фон для страницы --}}
+                <h2 class="text-center mt-5 mb-5 font-weight-bold">Сквозной баннер на заднем фоне</h2>
+                <form id="form" action="#" method="post" enctype="multipart/form-data"
+                    style="border: 3px solid rgb(0, 0, 0);padding-bottom: 40px;border-radius:20px;position: relative;">
+                    @csrf
+                    @method('PATCH')
 
+                    <div class="form-group m-5">
+                        <div class="d-flex">
+                            <label>Размер 2000х3000</label>
 
-              </div>
-          </div>
+                            <div class="form-element ml-5 mb-5">
 
+                                <label>
+                                    <input type="file" accept="image/*" name="bg_image"
+                                        onchange="document.getElementById('mainImage').src = window.URL.createObjectURL(this.files[0])">
 
+                                    <img id="mainImage"
+                                        src="{{ isset($mainPage->bg_banner) ? Storage::url($mainPage->bg_banner) : 'https://bit.ly/3ubuq5o' }}"
+                                        style="width: 250px; height:200px">
 
-      </div>
+                                </label>
 
-      <script>
-          function previewBeforeUpload(id) {
+                            </div>
 
-              document.querySelector("#" + id).addEventListener("change", function(e) {
+                        </div>
+                    </div>
 
-                  if (e.target.files.length == 0) {
-                      return;
-                  }
-
-                  let file = e.target.files[0];
-                  let url = URL.createObjectURL(file);
-
-                  document.querySelector("#" + id + "-preview div").style.visibility = "hidden";
-                  document.querySelector("#" + id + "-preview img").src = url;
-
-
-              });
-          }
-
-          previewBeforeUpload("bgImage");
-      </script>
-
-      <style>
-          .drop-zone-top,
-          .drop-zone-bottom {
-              width: 200px;
-              height: 200px;
-              cursor: pointer;
-              border: 2px solid #000;
-              border-radius: 10px;
-          }
-
-          .drop-zone__input-top,
-          .drop-zone__input-bottom {
-              display: none;
-          }
-
-          .drop-zone__thumb-top,
-          .drop-zone__thumb-bottom {
-              width: 100%;
-              height: 100%;
-              border-radius: 10px;
-              overflow: hidden;
-              background-color: #cccccc;
-              background-size: cover;
-              position: relative;
-          }
-
-          .btn-inner .btn-delete {
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-              position: relative;
-
-              margin-top: -330px;
-              margin-left: 135px;
-
-              background-color: red;
-              cursor: pointer;
-          }
-
-          .btn-delete span {
-              color: #fff;
-              position: absolute;
-              font-size: 25px;
-              top: -5px;
-              right: 8px;
-          }
-      </style>
-
-      <script>
-          function bannerPosition(position) {
-              function inputAll() {
-                  document.querySelectorAll(".drop-zone__input-" + position).forEach((inputElement) => {
-
-                      const dropZoneElement = inputElement.closest(".drop-zone-" + position);
-
-                      dropZoneElement.addEventListener("click", (e) => {
-                          inputElement.click();
-                      });
-
-                      inputElement.addEventListener("change", (e) => {
-                          if (inputElement.files.length) {
-
-                              updateThumbnail(dropZoneElement, inputElement.files[0]);
-                          }
-                      });
+                    <input type="submit" class="btn btn-primary" value="Сохранить"
+                        style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
+                </form>
 
 
-                  });
-              }
+
+                {{-- Нижний баннер --}}
+                <h2 class=" text-center mt-5 mb-5 font-weight-bold">На главной Новости Акции</h2>
+
+                <form action="{{ route('admin.banner.update') }}" id="formBottom" method="POST" enctype="multipart/form-data"
+                    style="border: 3px solid rgb(0, 0, 0);position: relative;border-radius:20px;">
+                    @csrf
+                    @method('PATCH')
+                    <label class="ml-5 mt-3">Размер: 1000х190</label>
+
+                    <input type="text" name="position" value="bottom" hidden>
 
 
-              function updateThumbnail(dropZoneElement, file) {
+                    <div class="form-group pl-5">
+                        <div class="d-flex flex-wrap">
 
-                  let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb-" + position);
+                            @foreach ($bannersBottom as $key => $banner)
+                                @php
+                                    $i++;
+                                @endphp
+                                <div class="item pb-5" id="item-{{ $i }}">
 
-                  // Show thumbnail for image files
-                  if (file.type.startsWith("image/")) {
-                      const reader = new FileReader();
+                                    <div class="form-element m-5">
+                                        <label>
+                                            <input type="file" accept="image/*" name="images[]"
+                                                onchange="document.getElementById('img-{{ $i }}').src = window.URL.createObjectURL(this.files[0])">
 
-                      reader.readAsDataURL(file);
-                      let url = URL.createObjectURL(file);
-                      reader.onload = () => {
-                          thumbnailElement.src = url;
-                      };
-                  } else {
-                      thumbnailElement.src = null;
-                  }
+                                            <img id="img-{{ $i }}" style="width: 200px; height:200px"
+                                                src="{{ isset($banner->image) ? Storage::url($banner->image) : 'https://bit.ly/3ubuq5o' }}">
 
-              }
+                                        </label>
+
+                                        {{-- Удаление картинок --}}
+                                        <div class="btn-delete" style="margin-top: -220px;margin-left: 190px;"
+                                            onclick="deleteBannerBottom('{{ $banner->id ?? '' }}', {{ $i }})">
+                                            <span>x</span>
+                                        </div>
+                                    </div>
+                                    <label class="pt-5 pb-2">URL:</label>
+                                    <input class="w-75 form-control d-inline ml-2" name="url[]" type="text"
+                                        placeholder="URL" value="{{ $banner->url }}">
+                                    <br>
+                                    <label>Текст:</label>
+                                    <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
+                                        placeholder="Текст" value="{{ $banner->text }}">
+                                </div>
+                            @endforeach
+
+                            <div id="bottomInner">
+
+                            </div>
+                            <div class="btn btn-dark mr-5" id="addBottom"
+                                style="height: 100px;width: 100px;margin-top: 75px;;margin-bottom: 75px;margin-left:20px;">
+                                <span style="display: block;margin-top: -5px;font-size: 64px;font-weight: 700;">+</span>
+                            </div>
+                        </div>
+                    </div>
 
 
-              function deleteAll() {
-                  document.querySelectorAll(".delete__image-" + position).forEach((inputElement) => {
 
-                      const dropZoneDelete = inputElement.closest(".image__item-" + position);
+                    <input type="submit" class="btn btn-primary" value="Сохранить"
+                        style="position: absolute;bottom: 0;left: 50%;margin: 20px;">
 
-                      deleteImageBanner(inputElement, dropZoneDelete);
+                    <div style="position: absolute; left: 30px; bottom:30px;">
+                        <label>Скорость вращения</label>
+                        <select class="form-select ml-3" aria-label="Default select example" name="news_speed_banner">
+                            @if (isset($mainPage))
+                                <option value="5000" {{ $mainPage->news_speed_banner == 5000 ? 'selected' : '' }}>5c
+                                </option>
+                                <option value="10000" {{ $mainPage->news_speed_banner == 10000 ? 'selected' : '' }}>10c
+                                </option>
+                                <option value="15000" {{ $mainPage->news_speed_banner == 15000 ? 'selected' : '' }}>15c
+                                </option>
+                            @endif
 
-                  });
-              }
+                        </select>
+                    </div>
 
-              function deleteImageBanner(element, dropZoneDelete) {
+                </form>
 
-                  let image = dropZoneDelete.querySelector('img');
-                  let url = dropZoneDelete.querySelector('.url');
-                  let text = dropZoneDelete.querySelector('.text');
 
-                  element.onclick = function() {
-                      let path = image.src;
-                      image.src = "https://bit.ly/3ubuq5o";
-                      url.value = "";
-                      text.value = "";
-                      add_field(path);
-                  }
-              }
+            </div>
+        </div>
 
-              function add_img_block() {
 
-                  let parent = document.getElementById('formInner-' + position);
-                  let elem = parent.querySelector('.image__item-' + position);
 
-                  let clone = elem.cloneNode(true);
-                  parent.appendChild(clone);
+    </div>
 
-                  inputAll();
-                  deleteAll();
+    <script>
+        $(document).ready(function() {
+            let i = 0 + {{ count($bannersBottom) }} + {{ count($bannersTop) }};
 
-              }
-              inputAll();
-              deleteAll();
+            $('#addBottom').on('click', function() {
+                i++;
+                $('#bottomInner').before(`
+                        <div class="item pb-5" id="item-` + i + `">
 
-              function add_img() {
+                            <div class="form-element m-5">
+                                <label>
+                                    <input type="file" accept="image/*" name="images[]"
+                                    onchange="document.getElementById('img-` + i + `').src = window.URL.createObjectURL(this.files[0])" required>
 
-                  document.querySelector("#add-" + position).onclick = function() {
-                      add_img_block();
-                  }
-              }
+                                <img id="img-` + i + `" style="width: 200px; height:200px"
+                                src="https://bit.ly/3ubuq5o">
 
-              add_img();
-          }
+                                </label>
 
-          bannerPosition("top");
-          bannerPosition("bottom");
-      </script>
-      <!-- /.content-wrapper -->
-  @endsection
+                                {{-- Удаление картинок --}}
+                                <div class="btn-delete" style="margin-top: -220px;margin-left: 190px;"
+                                    onclick="deleteBannerTop('{{ $banner->id ?? '' }}', ` + i + `)">
+                                    <span>x</span>
+                                </div>
+                            </div>
+                            <label class="pt-5 pb-2">URL:</label>
+                            <input class="w-75 form-control d-inline ml-2" name="url[]" type="text"
+                                placeholder="URL">
+                            <br>
+                            <label>Текст:</label>
+                            <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
+                                placeholder="Текст">
+                        </div>
+                    `);
+            });
+
+            $('#addTop').on('click', function() {
+                i++;
+                $('#topInner').before(`
+                        <div class="item pb-5" id="item-` + i + `">
+
+                            <div class="form-element m-5">
+                                <label>
+                                    <input type="file" accept="image/*" name="images[]"
+                                    onchange="document.getElementById('img-` + i + `').src = window.URL.createObjectURL(this.files[0])" required>
+
+                                <img id="img-` + i + `" style="width: 200px; height:200px"
+                                src="https://bit.ly/3ubuq5o">
+
+                                </label>
+
+                                {{-- Удаление картинок --}}
+                                <div class="btn-delete" style="margin-top: -220px;margin-left: 190px;"
+                                    onclick="deleteBannerBottom('{{ $banner->id ?? '' }}', ` + i + `)">
+                                    <span>x</span>
+                                </div>
+                            </div>
+                            <label class="pt-5 pb-2">URL:</label>
+                            <input class="w-75 form-control d-inline ml-2" name="url[]" type="text"
+                                placeholder="URL">
+                            <br>
+                            <label>Текст:</label>
+                            <input class="w-75 form-control d-inline mb-3 text" name="text[]" type="text"
+                                placeholder="Текст">
+                        </div>
+                    `);
+            });
+
+
+
+        });
+    </script>
+
+    <script>
+        function deleteBannerTop(id, i) {
+            form = document.getElementById('formTop');
+
+            document.getElementById('item-' + i).remove();
+
+            if (id != '') {
+                form.insertAdjacentHTML("afterbegin", '<input type="hidden" name="deleteBannerTop[]" value="' + id + '">');
+            }
+        }
+        function deleteBannerBottom(id, i) {
+            form = document.getElementById('formBottom');
+
+            document.getElementById('item-' + i).remove();
+
+            if (id != '') {
+                form.insertAdjacentHTML("afterbegin", '<input type="hidden" name="deleteBannerBottom[]" value="' + id + '">');
+            }
+        }
+    </script>
+
+
+    <!-- /.content-wrapper -->
+@endsection

@@ -9,7 +9,7 @@
                   <!-- Small boxes (Stat box) -->
                   <div class="row">
                       <div class="col-12 mt-5">
-                          <form action="{{ route('admin.main-page.update', $mainPage->id) }}" id="form" method="POST"
+                          <form action="{{ route('admin.main-page.store', $mainPage->id) }}" id="form" method="POST"
                               enctype="multipart/form-data" class="ml-4 mb-3">
                               @csrf
                               @method('PATCH')

@@ -14,24 +14,24 @@ class FilmImage extends Model
     protected $table = 'film_images';
     protected $guarded = false;
 
-    public static function store($film, $images)
+    public static function storeImages($film, $images)
     {
-        $filmImages = DB::table('film_images')->where('film_id', '=', $film->id)->get()->pluck('id')->toArray();
+        $filmImages = DB::table('film_images')->where('film_id', $film->id)->get()->toArray();
 
         foreach ($images as $key => $image) {
 
-            $id = $filmImages[$key] ?? 0;
+            $id = $filmImages[$key]->id ?? 0;
 
-            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/films', $image);
-
-            Storage::put('/public/images/films', $image);
+            $imagePath = Storage::disk('public')->put('images/film', $image);
 
             FilmImage::updateOrCreate(['id' => $id], [
                 'path' => $imagePath,
                 'film_id' => $film->id
             ]);
 
-            Storage::delete($imagePath);
+            if(isset($filmImages[$key]->path)) {
+                Storage::disk('public')->delete($filmImages[$key]->path);
+            }
         }
     }
 }

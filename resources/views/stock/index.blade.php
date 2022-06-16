@@ -16,7 +16,7 @@
                                     <img width="100%" height="70%" src="{{ Storage::url($stock->main_image) }}">
                                         <div class="mt-2" style="font-size: 22px">{{ $stock->title }}</div>
                                     </a>
-                                    <div>{{ $stock->date }}</div>
+                                    <div>{{date('d.m.Y', strtotime($stock->date))}}</div>
                                     <p style="font-size: 14px;line-height:1.4;">{{ $stock->content }}</p>
                                 </div>
                             @endforeach

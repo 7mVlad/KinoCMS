@@ -27,23 +27,24 @@
 
                             {{-- Поле для главной картинки --}}
                             <div class="form-group mt-5">
-                                <div class=" d-flex">
-                                    <label >Главная картинка</label>
+                                <div class="d-flex">
+                                    <label>Главная картинка</label>
 
                                     <div class="form-element ml-5 mb-5">
-                                        <input type="file" id="img-main" accept="image/*" name="main_image">
-                                        <label for="img-main" id="img-main-preview">
-                                            <img src="https://bit.ly/3ubuq5o" alt="" style="width: 250px; height: 150px">
-                                            <div class="bg-plus">
-                                                <span>+</span>
-                                            </div>
+
+                                        <label>
+                                            <input type="file" accept="image/*" name="main_image"
+                                                onchange="document.getElementById('mainImage').src = window.URL.createObjectURL(this.files[0])">
+
+                                            <img id="mainImage" src="https://bit.ly/3ubuq5o" style="width: 250px">
+
                                         </label>
-                                        {{-- Delete img --}}
-                                        <div class="btn-inner">
-                                            <div class="btn-delete btn-image-main" id="submit-main"
-                                                style="margin-left: 235px;">
-                                                <span>x</span>
-                                            </div>
+
+
+                                        {{-- Удаление картинок --}}
+                                        <div class="btn-delete" style="margin-left:235px"
+                                            onclick="imageMainDelete('{{ $film->id ?? '' }}')">
+                                            <span>x</span>
                                         </div>
 
                                     </div>
@@ -54,24 +55,21 @@
                             {{-- Поле для картинок --}}
                             <div class="form-group mt-5">
                                 <div class="d-flex justify-content-between">
-                                    <label  >Галерея картинок <br><br> Размер: 1000 х 190</label>
+                                    <label>Галерея картинок <br><br> Размер: 1000 х 190</label>
 
                                     @for ($i = 0; $i < 5; $i++)
                                         <div class="form-element mr-5 mb-5">
-                                            <input type="file" id="img-{{ $i }}" accept="image/*"
-                                                name="images[]">
-                                            <label for="img-{{ $i }}" id="img-{{ $i }}-preview">
-                                                <img src="https://bit.ly/3ubuq5o" alt=""
-                                                    style="width: 150px; height: 150px">
-                                                <div class="bg-plus">
-                                                    <span>+</span>
-                                                </div>
+                                            <label>
+                                                <input type="file" accept="image/*" name="images[]"
+                                                    onchange="document.getElementById('img-{{ $i }}').src = window.URL.createObjectURL(this.files[0])">
+
+                                                <img src="https://bit.ly/3ubuq5o" id="img-{{ $i }}">
                                             </label>
-                                            {{-- Delete img --}}
-                                            <div class="btn-inner">
-                                                <div class="btn-delete btn-image" id="submit-{{ $i }}">
-                                                    <span>x</span>
-                                                </div>
+
+                                            {{-- Удаление картинок --}}
+                                            <div class="btn-delete"
+                                                onclick="imageDelete('{{ $filmImages[$i]->id ?? '' }}', {{ $i }})">
+                                                <span>x</span>
                                             </div>
 
 

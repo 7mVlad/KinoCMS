@@ -14,24 +14,24 @@ class NewsImage extends Model
     protected $table = 'news_images';
     protected $guarded = false;
 
-    public static function store($news, $images)
+    public static function storeImages($news, $images)
     {
-        $newsImages = DB::table('news_images')->where('news_id', '=', $news->id)->get()->pluck('id')->toArray();
+        $newsImages = DB::table('news_images')->where('news_id', $news->id)->get()->toArray();
 
         foreach ($images as $key => $image) {
 
-            $id = $newsImages[$key] ?? 0;
+            $id = $newsImages[$key]->id ?? 0;
 
-            $imagePath = Storage::put('/http://127.0.0.1:8000/storage/images/news', $image);
-
-            Storage::put('/public/images/news', $image);
+            $imagePath = Storage::disk('public')->put('images/news', $image);
 
             NewsImage::updateOrCreate(['id' => $id], [
                 'path' => $imagePath,
                 'news_id' => $news->id
             ]);
 
-            Storage::delete($imagePath);
+            if(isset($newsImages[$key]->path)) {
+                Storage::disk('public')->delete($newsImages[$key]->path);
+            }
         }
     }
 }

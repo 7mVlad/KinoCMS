@@ -1,0 +1,37 @@
+.form-element {
+    width: 150px;
+    height: 150px;
+    color: #f5f5f5;
+    font-weight: 700;
+}
+
+.form-element input {
+    display: none;
+}
+
+.form-element img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+
+}
+
+.btn-delete {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: relative;
+
+    margin-top: -170px;
+    margin-left: 135px;
+
+    background-color: rgb(205, 66, 66);
+    cursor: pointer;
+}
+
+.btn-delete span {
+    position: absolute;
+    font-size: 20px;
+    top: -4px;
+    right: 7px;
+}

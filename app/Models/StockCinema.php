@@ -11,4 +11,5 @@ class StockCinema extends Model
 
     protected $table = 'stock_cinemas';
     protected $guarded = false;
+
 }

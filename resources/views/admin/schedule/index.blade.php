@@ -32,8 +32,8 @@
                     <tr>
                         <td>{{$schedule->getFilm->title}}</td>
                         <td>{{$schedule->cost}}</td>
-                        <td>{{$schedule->date}}</td>
-                        <td>{{$schedule->time}}</td>
+                        <td>{{date('d.m.Y', strtotime($schedule->date))}}</td>
+                        <td>{{date('h:i', strtotime($schedule->time))}}</td>
                         <td class="text-right">
                             <a class="btn btn-info btn-sm" href="{{route('admin.schedule.edit', $schedule->id)}}">
                                 <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Изменить

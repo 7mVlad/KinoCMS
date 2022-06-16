@@ -30,7 +30,7 @@
                     @foreach ($stocks as $stock)
                     <tr>
                         <td>{{$stock->title}}</td>
-                        <td>{{$stock->date}}</td>
+                        <td>{{date('d.m.Y', strtotime($stock->date))}}</td>
                         @if($stock->status == 1)
                             <td>ВКЛ</td>
                         @else
