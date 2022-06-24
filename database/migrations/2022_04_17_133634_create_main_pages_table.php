@@ -16,13 +16,13 @@ class CreateMainPagesTable extends Migration
         Schema::create('main_page', function (Blueprint $table) {
             $table->id();
             $table->boolean('status')->default(0);
-            $table->string('phone_one');
-            $table->string('phone_two');
-            $table->text('seo_text');
+            $table->string('phone_one')->nullable();
+            $table->string('phone_two')->nullable();
+            $table->text('seo_text')->nullable();
             $table->foreignId('seo_block_id')->constrained('seo_block')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('bg_banner');
-            $table->integer('top_speed_banner');
-            $table->integer('news_speed_banner');
+            $table->string('bg_banner')->nullable();
+            $table->integer('top_speed_banner')->nullable();
+            $table->integer('news_speed_banner')->nullable();
             $table->timestamps();
         });
     }

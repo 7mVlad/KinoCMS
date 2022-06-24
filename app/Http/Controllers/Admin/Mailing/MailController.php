@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
-class IndexController extends Controller
+class MailController extends Controller
 {
     public function index()
     {
@@ -34,7 +34,7 @@ class IndexController extends Controller
         if (isset($data['html'])) {
 
             $htmlTitle = $data['html']->getClientOriginalName();
-            $htmlPath = Storage::put('/public/html', $data['html']);
+            $htmlPath = Storage::disk('public')->put('html', $data['html']);
             unset($data['html']);
 
             HtmlTemplate::create([
@@ -42,14 +42,14 @@ class IndexController extends Controller
                 'path' => $htmlPath,
             ]);
 
-            $htmlSend = Storage::get($htmlPath);
+            $htmlSend = Storage::disk('public')->get($htmlPath);
         } else {
-            $htmlSend = Storage::get($data['template']);
+            $htmlSend = Storage::disk('public')->get($data['template']);
         }
 
         MailingJob::dispatch($htmlSend, $usersSend);
 
-        $result = 'Все успешно отправлено';
+        $result = 'Письма успешно отправлены!';
         return view('admin.mailing.send', compact('result'));
     }
 
@@ -57,7 +57,7 @@ class IndexController extends Controller
     {
         $template = HtmlTemplate::find($template);
         $template->delete();
-        Storage::delete($template->path);
+        Storage::disk('public')->delete($template->path);
 
         $result = 'Шаблон успешно удален';
         return view('admin.mailing.send', compact('result'));

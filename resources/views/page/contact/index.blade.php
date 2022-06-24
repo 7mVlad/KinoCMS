@@ -14,7 +14,7 @@
                                         <h3>{{ $contact->getCinema->title }}</h3>
                                     </div>
                                     <div class="col-6">
-                                        <img src="{{ $contact->logo_image }}" style="width:100%; height:150px">
+                                        <img src="{{ Storage::url($contact->logo_image) }}" style="width:100%; height:150px">
                                     </div>
                                 </div>
                                 <div class="row">

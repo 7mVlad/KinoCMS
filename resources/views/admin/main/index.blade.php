@@ -10,6 +10,7 @@
 
                 <div class="row">
 
+                     {{-- Статистика Сеансы По Полу --}}
                     <div class="col-6 p-5 ml-auto">
                         <!-- PIE CHART -->
                         <div class="card card-danger ">
@@ -46,9 +47,10 @@
 
                 <!-- ./col -->
 
+                {{-- Статистика Сеансы --}}
                 <div class="row">
                     <div class="col-10 m-auto pb-5">
-                        <!-- PIE CHART -->
+
                         <div class="card card-primary">
                             <div class="card-header">
 
@@ -59,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <canvas id="line-chart" width="800" height="450"></canvas>
+                                <canvas id="line-chart" width="800" height="350"></canvas>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -68,31 +70,47 @@
 
                 </div>
 
-                <!-- /.row -->
-                {{-- <div class="row">
+            {{-- Статистика тип устройства --}}
+                <div class="row">
                     <div class="col-10 m-auto pb-5">
-                        <canvas id="line-chart" width="800" height="450"></canvas>
+
+                        <div class="card card-success">
+                            <div class="card-header">
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="line-chart-type" width="800" height="350"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+
                     </div>
-                </div> --}}
+
+                </div>
 
 
             </div>
-            <script>
-                `@foreach ($sessions as $key => $session) `, ` {{count($session)}} @endforeach`
-            </script>
         </section>
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
+
+        //  Статистика Сеансы По Полу
+
         new Chart(document.getElementById("pie-chart"), {
             type: 'pie',
             data: {
                 labels: ["Мужской", "Женский"],
                 datasets: [{
                     backgroundColor: ["rgb(80, 205, 122)", "rgb(236, 200, 90)"],
-                    data: [{{ $manUsers }}, {{ $womanUsers }}],
+                    data: ["{{ $manUsers ?? ''}}", "{{ $womanUsers ?? '' }}"],
                 }]
             },
             options: {
@@ -103,6 +121,8 @@
                 }
             }
         });
+
+        //  Статистика Сеансы
 
         new Chart(document.getElementById("line-chart"), {
             type: 'line',
@@ -123,5 +143,33 @@
                 }
             }
         });
+
+        //  Статистика тип устройства
+
+        new Chart(document.getElementById("line-chart-type"), {
+            type: 'line',
+            data: {
+                labels: [`@foreach ($dates as $key => $date) `, ` {{date('d.m.Y', strtotime($key))}} @endforeach`] ,
+                datasets: [{
+                    data: [`@foreach ($mobiles as $key => $mobile) `, ` {{count($mobile)}} @endforeach`],
+                    label: "Мобильные устройства",
+                    borderColor: "#f49d51",
+                    fill: true
+                },{
+                    data: [`@foreach ($desktops as $key => $desktop) `, ` {{count($desktop)}} @endforeach`],
+                    label: "Компьютер",
+                    borderColor: "#56f451",
+                    fill: true
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    fontSize: 22,
+                    text: 'Устройства'
+                }
+            }
+        });
     </script>
 @endsection
+

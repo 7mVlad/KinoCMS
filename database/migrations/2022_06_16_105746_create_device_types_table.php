@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSeoBlocksTable extends Migration
+class CreateDeviceTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSeoBlocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('seo_block', function (Blueprint $table) {
+        Schema::create('device_types', function (Blueprint $table) {
             $table->id();
-            $table->string('url');
-            $table->string('title');
-            $table->string('keywords');
-            $table->text('description');
+            $table->string('ip');
+            $table->string('type');
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSeoBlocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seo_block');
+        Schema::dropIfExists('device_types');
     }
 }

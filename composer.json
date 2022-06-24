@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "mobiledetect/mobiledetectlib": "^2.8",
         "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {

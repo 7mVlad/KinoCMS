@@ -62,7 +62,7 @@
                         <div class="carousel-inner">
                             @foreach ($cinemaImages as $key => $cinemaImage)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img class="d-block w-100" height="500" src="{{ $cinemaImage->path }}">
+                                    <img class="d-block w-100" height="500" src="{{ Storage::url($cinemaImage->path) }}">
                                 </div>
                             @endforeach
 

@@ -23,7 +23,7 @@ Route::group(['middleware' => 'verified'], function () {
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
-        Route::get('/', 'IndexController')->name('admin.main.index');
+        Route::get('/', 'MainController@index')->name('admin.main.index');
     });
 
     Route::group(['namespace' => 'Banner', 'prefix' => 'banners'], function () {
@@ -105,9 +105,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     });
 
     Route::group(['namespace' => 'Mailing', 'prefix' => 'mailings'], function () {
-        Route::get('/', 'IndexController@index')->name('admin.mailing.index');
-        Route::post('/send', 'IndexController@send')->name('admin.mailing.send');
-        Route::get('/{mailing}', 'IndexController@delete')->name('admin.mailing.delete');
+        Route::get('/', 'MailController@index')->name('admin.mailing.index');
+        Route::post('/send', 'MailController@send')->name('admin.mailing.send');
+        Route::get('/{mailing}', 'MailController@delete')->name('admin.mailing.delete');
     });
 
     Route::group(['namespace' => 'Schedule', 'prefix' => 'schedule'], function () {
@@ -124,7 +124,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 // end Admin
 
 Route::group(['namespace' => 'Main'], function () {
-    Route::get('/', 'IndexController')->name('main.index');
+    Route::get('/', 'MainController@index')->name('main.index');
     Route::patch('/personal', 'UserUpdateController')->name('user.update');
 });
 

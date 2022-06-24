@@ -14,7 +14,6 @@ class MainController extends Controller
     public function edit()
     {
         $mainPage = MainPage::first();
-        dd($mainPage);
         $seoBlock = SeoBlock::find($mainPage->seo_block_id);
 
         return view('admin.page.main.edit', compact('mainPage', 'seoBlock'));

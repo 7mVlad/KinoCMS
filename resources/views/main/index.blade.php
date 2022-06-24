@@ -16,6 +16,14 @@
 
 <body>
 
+    @php
+        if ($detect->isMobile()) {
+            $mainController->store($ip, 'mobile');
+        } else {
+            $mainController->store($ip, 'desktop');
+        }
+    @endphp
+
     @if (isset($mainPage->bg_banner))
         <div class="col-12"
             style="background-image: url('{{ Storage::url($mainPage->bg_banner) }}'); background-size: cover;  background-attachment: fixed;">
@@ -214,7 +222,8 @@
 
                         @foreach ($bannersBottom as $key => $banner)
                             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                <img class="d-block w-100" src="{{ Storage::url($banner->image)}}" style="height: 500px;">
+                                <img class="d-block w-100" src="{{ Storage::url($banner->image) }}"
+                                    style="height: 500px;">
                             </div>
                         @endforeach
 
